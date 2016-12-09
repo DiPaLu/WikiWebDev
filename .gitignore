@@ -1,0 +1,9 @@
+/vendor/
+app/config.php
+/phpDocumentor.phar
+*.log
+/docs
+composer.lock
+/nbproject/private/
+/nbproject/project.properties
+/nbproject/project.xml
