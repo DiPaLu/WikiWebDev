@@ -1,4 +1,7 @@
-<?php $this->layout('layout', ['title' => 'Accueil']) ?>
+<?php
+//hérite du fichier layout.php à la racine de app/Views/default/
+$this->layout('layoutBootstrap', ['title' => 'Login']);
+?>
 
 <?php $this->start('main_content') ?>
 	<h2>Let's code.</h2>
