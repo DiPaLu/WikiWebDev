@@ -4,4 +4,5 @@
 	<h2>Let's code.</h2>
 	<p>Vous avez atteint la page d'accueil. Bravo.</p>
 	<p>Et maintenant, RTFM dans <strong><a href="../docs/tuto/" title="Documentation de W">docs/tuto</a></strong>.</p>
+        <?php var_dump($w_user); ?>
 <?php $this->stop('main_content') ?>
