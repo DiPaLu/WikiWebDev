@@ -37,6 +37,6 @@ if(!pdoStatement->execute()){
 	$infoUser = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
 }
 
-?>
+
 
 */
