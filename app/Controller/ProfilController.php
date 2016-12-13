@@ -8,13 +8,28 @@ use \W\Security\AuthentificationModel;
 
 class ProfilController extends Controller{
     
-    public function config(){
+    public function parametre(){
         
-       $data = $this->getUser();
-       print_r($data);
+        $data = $this->getUser();
         
-        $this->show('profil/config', array(
+        $this->show('profil/parametre', array(
             'email' => $data['usr_email']
+        ));
+    }
+    
+    public function delete(){
+        $this->show('profil/delete');
+    }
+    
+    public function profil(){
+        
+        $data = $this->getUser();
+        
+        $this->show('profil/profil', array(
+            'pseudo' => $data['usr_pseudo'],
+            'email' => $data['usr_email'],
+            'date' => $data['usr_insert_date'],
+            'drnConnexion' => $data['usr_last_connected']
         ));
     }
     
