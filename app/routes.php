@@ -19,7 +19,6 @@
         ['GET|POST', '/profil/', 'Profil#config', 'profil_conf'],
 	    
 	// Page lexique global
-	['GET', '/lexique/', 'lexique#getTerms', 'lexique_getterms'],
-	// Page terms details
-	//['GET', '/lexique/', 'lexique#getTerms', 'lexique_getterms'],
+	['GET', '/terms/', 'terms#getTerms', 'terms_getterms'],
+			    
 	);
