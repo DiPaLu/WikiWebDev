@@ -7,7 +7,7 @@ $this->layout('layoutBootstrap', ['title' => 'Signup']);
 $this->start('main_content');
 ?>
 <div class="row">
-    <div class="col-md-12 col-sm-8 col-xs-12">
+    <div class="col-sm-12">
         <div class="page-header">
             <h1>Sign up</h1>
         </div>
@@ -25,6 +25,7 @@ $this->start('main_content');
         <?php endif; ?>
         <form action="" method="post">
             <fieldset>
+                <input type="text" class="form-control" name="pseudo" value="<?= $pseudo ?>" placeholder="Pseudo" /><br />
                 <input type="email" class="form-control" name="email" value="<?= $email ?>" placeholder="Email address" /><br />
                 <input type="password" class="form-control" name="password" value="" placeholder="Your password" /><br />
                 <input type="password" class="form-control" name="password2" value="" placeholder="Confirm your password" /><br />

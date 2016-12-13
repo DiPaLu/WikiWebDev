@@ -39,9 +39,11 @@ class UserController extends Controller {
             $errorList[] = 'Password de 8 caractères minimum<br>';
             $formOk = false;
         }
-        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            $errorList[] = 'Email invalide<br>';
-            $formOk = false;
+        if (strstr($email, '@')) {
+            if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                $errorList[] = 'Email invalide<br>';
+                $formOk = false;
+            }
         }
 
         if ($formOk) {
@@ -71,24 +73,30 @@ class UserController extends Controller {
         // Je passe les variables à vide (initialise)
         $this->show('user/signup', array(
             'errorList' => array(),
+            'pseudo' => '',
             'email' => '',
             'successList' => array()
         ));
     }
 
     public function signupPost() {
-        //debug($_POST);
+        debug($_POST);
         $errorList = array();
         $successList = array();
 
+        $pseudo = isset($_POST['pseudo']) ? trim(strip_tags($_POST['pseudo'])) : '';
         $email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
         $passwordConfirm = isset($_POST['password2']) ? trim($_POST['password2']) : '';
 
         // Validation des données
         $formOk = true;
+        if (empty($pseudo)) {
+            $errorList[] = 'Pseudo vide<br />';
+            $formOk = false;
+        }
         if (empty($email)) {
-            $errorList[] = 'Email vide<br>';
+            $errorList[] = 'Email vide<br />';
             $formOk = false;
         }
         if (strlen($password) < 8) {
@@ -109,11 +117,16 @@ class UserController extends Controller {
             // Vérifier email inexistant
             if ($usersModel->emailExists($email)) {
                 $errorList[] = 'L\'email existe déjà dans la base de données<br>';
+            }
+            if ($usersModel->getUserByUsernameOrEmail($pseudo)) {
+                echo $pseudo;
+                debug($usersModel);
+                $errorList[] = 'Pseudo déjà utilisé';
             } else {
                 // On peut insérer
                 $authentificationModel = new AuthentificationModel();
                 $userData = $usersModel->insert(array(
-                    'usr_pseudo' => '',
+                    'usr_pseudo' => $pseudo,
                     'usr_email' => $email,
                     'usr_password' => $authentificationModel->hashPassword($password),
                     'usr_role' => '0'
@@ -130,6 +143,7 @@ class UserController extends Controller {
         }
         $this->show('user/signup', array(
             'errorList' => $errorList,
+            'pseudo' => $pseudo,
             'email' => $email,
             'successList' => $successList
         ));
