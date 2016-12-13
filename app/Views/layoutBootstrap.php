@@ -34,7 +34,7 @@
 				   <li><a href="<?= $this->url('user_signup') ?>">Signup</a></li>
 			   <?php else : ?>
 				   <li><a href="<?= $this->url('user_logout') ?>">Logout</a></li>
-                                   <li><a href=<?= $this->url('profil_conf') ?>"">Profil</a></li>
+                                   <li><a href="<?= $this->url('profil_conf') ?>">Profil</a></li>
 			   <?php endif ?>
 			</ul>
 		   </div><!-- /.navbar-collapse -->
