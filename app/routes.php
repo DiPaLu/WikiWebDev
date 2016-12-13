@@ -10,7 +10,8 @@
 	['POST', '/signup/', 'User#signupPost', 'user_signup_post'],
 	// Logout
 	['GET', '/logout/', 'User#logout', 'user_logout'],
-	
+	//Profile
+        ['GET|POST', '/profil/', 'Profil#config', 'profil_conf'],
 	    
 	// Page lexique global
 	['GET', '/lexique/', 'lexique#getTerms', 'lexique_getterms'],
