@@ -7,7 +7,7 @@ $this->layout('layoutBootstrap', ['title' => 'Request password reset']);
 $this->start('main_content');
 ?>
 <div class="row">
-    <div class="col-md-12 col-sm-8 col-xs-12">
+    <div class="col-sm-12">
         <div class="page-header">
             <h1>Request Password Reset</h1>
         </div>

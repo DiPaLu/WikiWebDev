@@ -28,7 +28,7 @@
 		   <!-- Collect the nav links, forms, and other content for toggling -->
 		   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				   <li><a href="<?= $this->url('terms_getterms') ?>">Lexique</a></li>
+				   <li><a href="<?= $this->url('terms_get_terms') ?>">Lexique</a></li>
 			    <?php if (!isset($w_user)) : ?>
 				   <li><a href="<?= $this->url('user_login') ?>">Login</a></li>
 				   <li><a href="<?= $this->url('user_signup') ?>">Signup</a></li>
@@ -49,7 +49,7 @@
 	<div class="container">
 	   <footer>
 		<div class="panel panel-primary">
-		   <div class="panel-body text-center">&copy;Wiki Web Dev - Webforce3</div>
+		   <div class="panel-body text-center">&copy; Wiki Web Dev - Webforce3</div>
 		</div>
 	   </footer>
 	</div>

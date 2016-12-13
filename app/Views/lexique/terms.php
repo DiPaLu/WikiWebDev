@@ -9,12 +9,13 @@ $this->start('main_content');
 <div class="row">
     <div class="col-sm-12">
 	  <div class="page-header">
-		<p>Liste des mots :
-		<ul>
-		    <?php foreach ($resultList as $result) : ?>
-			    <li><?= $result['ter_name'] ?><br><?= $result['def_description'] ?></li><br>
-		    <?php endforeach; ?>
-		</ul>
+		<h3>Liste des mots :</h3>
+		<p>
+			<ul>
+			    <?php foreach ($resultList as $result) : ?>
+				    <li><?= $result['ter_name'] ?><br><?= $result['def_description'] ?></li><br>
+			    <?php endforeach; ?>
+			</ul>
 		</p>
 	  </div>
     </div>
