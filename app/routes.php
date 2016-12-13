@@ -10,6 +10,11 @@
 	['POST', '/signup/', 'User#signupPost', 'user_signup_post'],
 	// Logout
 	['GET', '/logout/', 'User#logout', 'user_logout'],
+        // Lost Password
+        ['GET', '/forgotpassword/', 'User#lostpwdemail', 'user_lostpwd_email'],
+        ['POST', '/forgotpassword/', 'User#lostpwdemailPost', 'user_lostpwd_post_email'],
+        ['GET', '/forgotpassword/[:toto]/', 'User#resetpwd', 'user_reset_pwd'],
+        ['POST', '/forgotpassword/[:toto]/', 'User#resetpwdPost', 'user_reset_pwd_post'],
 	//Profile
         ['GET|POST', '/profil/', 'Profil#config', 'profil_conf'],
 	    
@@ -17,6 +22,4 @@
 	['GET', '/lexique/', 'lexique#getTerms', 'lexique_getterms'],
 	// Page terms details
 	//['GET', '/lexique/', 'lexique#getTerms', 'lexique_getterms'],
-		    
-	    
 	);

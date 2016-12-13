@@ -7,6 +7,7 @@ use W\Controller\Controller;
 class ProfilController extends Controller{
     
     public function config(){
+        
         $this->show('profil/config');
     }
     
