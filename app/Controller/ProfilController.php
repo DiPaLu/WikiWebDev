@@ -2,12 +2,20 @@
 
 namespace Controller;
 
-use W\Controller\Controller;
+use \W\Controller\Controller;
+use \Model\UsersModel;
+use \W\Security\AuthentificationModel;
 
 class ProfilController extends Controller{
     
     public function config(){
-        $this->show('profil/config');
+        
+       $data = $this->getUser();
+       print_r($data);
+        
+        $this->show('profil/config', array(
+            'email' => $data['usr_email']
+        ));
     }
     
 }

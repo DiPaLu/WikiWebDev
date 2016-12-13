@@ -17,8 +17,10 @@ class UserController extends Controller {
     
     public function loginPost() {
         //debug($_POST);
+        
         $email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
+        $_SESSION['email'] = $email;
 
         // Validation des données
         $formOk = true;
