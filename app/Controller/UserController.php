@@ -12,10 +12,16 @@ class UserController extends Controller {
     // Méthodes pour le formulaire login
     public function login() {
         //Affiche le formulaire login en GET
-        $this->show('user/login');
+        $this->show('user/login', array(
+            'errorList' => array(),
+            'successList' => array()
+        ));
     }
     
     public function loginPost() {
+        $errorList = array();
+        $successList = array();
+        
         //debug($_POST);
         $email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
@@ -23,15 +29,15 @@ class UserController extends Controller {
         // Validation des données
         $formOk = true;
         if (empty($email)) {
-            echo 'Email vide<br>';
+            $errorList[] = 'Email vide<br>';
             $formOk = false;
         }
         if (strlen($password) < 8) {
-            echo 'Password de 8 caractères minimum<br>';
+            $errorList[] = 'Password de 8 caractères minimum<br>';
             $formOk = false;
         }
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            echo 'Email invalide<br>';
+            $errorList[] = 'Email invalide<br>';
             $formOk = false;
         }
 
@@ -49,9 +55,14 @@ class UserController extends Controller {
                 // On redirige vers la home
                 $this->redirectToRoute('default_home');
             } else {
-                echo 'Email/Mot de passe non reconnus<br>';
+                $errorList[] = 'Email/Mot de passe non reconnus<br>';
             }
         }
+        //var_dump($errorList);
+        $this->show('user/login', array(
+            'errorList' => $errorList,
+            'successList' => $successList
+        ));
     }
 
     public function signup() {
