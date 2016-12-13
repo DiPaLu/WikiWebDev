@@ -14,6 +14,7 @@ class UserController extends Controller {
         //Affiche le formulaire login en GET
         $this->show('user/login', array(
             'errorList' => array(),
+            'email' => '',
             'successList' => array()
         ));
     }
@@ -149,4 +150,61 @@ class UserController extends Controller {
         ));
     }
 
+    public function lostpwdemailPost() {
+        $errorList = array();
+        $successList = array();
+
+        $email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
+
+        $formOk = true;
+        if (empty($email)) {
+            $errorList[] = 'Email vide<br>';
+            $formOk = false;
+        }
+
+        if ($formOk) {
+            // Je vérifie l'email
+            $check = new UsersModel();
+            $userEmail = $check->emailExists($email);
+
+            // Si email existe
+            if ($userEmail > 0) {
+                $usersModel = new UsersModel();
+                $userData = $usersModel->getUserByUsernameOrEmail($email);
+                debug($userData);
+                // Je génère un token et je l'insert dans la db
+                $token = Security\StringUtils::randomString(32);
+                var_dump($token);
+                $authentificationModel = new AuthentificationModel();
+                $userData = $usersModel->update(
+                        [
+                    'usr_token' => $token,
+                        ], $userData['usr_id']
+                );
+                // Je crée un lien de reset avec le token
+                $resetUrl = $this->generateUrl('user_reset_pwd', [
+                    'token' => $token, // token entspricht [:token] in routes.php
+                ]);
+                // Texte HTML à envoyer par e-mail
+                $html = '<p>Une demande de reset de votre password nous a été demandée. Veuillez utiliser le lien suivant pour valider :<a href="' . 'http://localhost' . $resetUrl . '">Renew password</a></p>';
+                $successList[] = $html;
+
+                $subject = "Votre demande de changement mot de passe";
+
+                // J'envoie l'email
+                $this->envoieMail($html, $userData['usr_email'], $subject);
+                // J'affiche en message de réussite avec un lien pour retourner à la page d'acceuil
+                $successList[] = 'Un email contenant le lien pour le changement de votre mot de passe vous a été envoyé.<br />
+                    Retour à l\'<a href=' . $this->generateUrl('default_home') . '>acceuil</a>
+                    ';
+            } else {
+                $errorList[] = 'Email/Mot de passe inconnu(s)<br>';
+            }
+        }
+        $this->show('user/lostpwdemail', array(
+            'errorList' => $errorList,
+            'email' => '',
+            'successList' => $successList
+        ));
+    }
 }
