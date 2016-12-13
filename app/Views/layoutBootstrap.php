@@ -28,7 +28,7 @@
 		   <!-- Collect the nav links, forms, and other content for toggling -->
 		   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				   <li><a href="<?= $this->url('lexique_getterms') ?>">Lexique</a></li>
+				   <li><a href="<?= $this->url('terms_getterms') ?>">Lexique</a></li>
 			    <?php if (!isset($w_user)) : ?>
 				   <li><a href="<?= $this->url('user_login') ?>">Login</a></li>
 				   <li><a href="<?= $this->url('user_signup') ?>">Signup</a></li>
