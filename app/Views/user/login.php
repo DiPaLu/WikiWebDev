@@ -25,7 +25,7 @@ $this->start('main_content');
         <?php endif; ?>
         <form action="" method="post">
             <fieldset>
-                <input type="email" class="form-control" name="email" value="" placeholder="Email address" /><br />
+                <input type="text" class="form-control" name="email" value="" placeholder="Email address" /><br />
                 <input type="password" class="form-control" name="password" value="" placeholder="Your password" /><br />
                 <input type="submit" class="btn btn-success btn-block" value="Login" />
             </fieldset>

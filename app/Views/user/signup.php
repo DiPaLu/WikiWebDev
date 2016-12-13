@@ -25,6 +25,7 @@ $this->start('main_content');
         <?php endif; ?>
         <form action="" method="post">
             <fieldset>
+                <input type="text" class="form-control" name="pseudo" value="<?= $pseudo ?>" placeholder="Pseudo" /><br />
                 <input type="email" class="form-control" name="email" value="<?= $email ?>" placeholder="Email address" /><br />
                 <input type="password" class="form-control" name="password" value="" placeholder="Your password" /><br />
                 <input type="password" class="form-control" name="password2" value="" placeholder="Confirm your password" /><br />
