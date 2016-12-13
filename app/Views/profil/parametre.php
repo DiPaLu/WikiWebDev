@@ -10,17 +10,22 @@ $this->start('main_content');
     <li><a href="<?= $this->url('profil_profil') ?>">Profil</a></li>
     <li><a href="<?= $this->url('profil_parametre') ?>">Paramètres</a></li>
 </ul>
+<br/>
 <label>Votre email</label><br/>
-Adresse e-mail actuelle <input type="text" name="email" value="<?= $email; ?>"><br/>
-Nouvel e-mail <input type="text" name="" value=""><br/>
-<input class="btn" type="submit" value="Envoyer"/>
+Adresse e-mail actuelle <input type="text" name="email" class="form-control input-sm" value="<?= $email; ?>">
+Nouvel e-mail <input type="text" name="" class="form-control input-sm" value="">
+<input class="pull-right btn" type="submit" value="Envoyer"/>
 <br/>
 <br/>
 <label>Changer votre mot de passe</label><br/>
-Ancien mot de passe <input type="password" name="ancienPassword"><br/>
-Nouveau mot de passe <input type="password" name="password"><br/>
-Réécrire nouveau mot de passe <input type="password" name="ConfirmPassword"><br/>
-<input type="submit" class="btn" value="Envoyer" />
+Ancien mot de passe <input type="password" class="form-control input-sm" name="ancienPassword">
+Nouveau mot de passe <input type="password" class="form-control input-sm"name="password">
+Réécrire nouveau mot de passe <input type="password" class="form-control input-sm" name="ConfirmPassword">
+<input type="submit" class="pull-right btn" value="Envoyer" />
+<br/>
+<br/>
+<label>Message</label></br/>
+<input type="checkbox"> Recevoir la Newsletter de WikiWebDev
 <br/>
 <br/>
 <label>Supprimer votre compte</label><br/>

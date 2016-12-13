@@ -11,7 +11,7 @@ $this->start('main_content');
     <li><a href="<?= $this->url('profil_parametre') ?>">Paramètres</a></li>
 </ul>
 <button>Modifier</button>
-<h1><?= $email ?></h1>
+<h1><?= $pseudo ?></h1>
 <p>Pas de mots en rédaction</p>
 <p>Date d'inscription : <?= $date ?></p>
 <p>Dernière connexion: <?= $drnConnexion ?></p>
