@@ -60,7 +60,6 @@ class UserController extends Controller {
                 $errorList[] = 'Email/Mot de passe non reconnus<br>';
             }
         }
-        //var_dump($errorList);
         $this->show('user/login', array(
             'errorList' => $errorList,
             'successList' => $successList
