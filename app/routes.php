@@ -16,6 +16,8 @@
 	['GET', '/lexique/', 'lexique#getTerms', 'lexique_getterms'],
 	// Page terms details
 	//['GET', '/lexique/', 'lexique#getTerms', 'lexique_getterms'],
-		    
-	    
+	
+        // Page administrateur
+        ['GET', '/admin/', 'Admin#getAdmin', 'admin_getadmin']
+   
 	);
