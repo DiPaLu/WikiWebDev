@@ -31,7 +31,9 @@ $this->start('main_content');
             </fieldset>
         </form>
         <br />
+        <div class="center">
         <a href="<?= $this->url('user_lostpwd_email') ?>">Lost Password ?</a>
+        </div>
         <br /><br />
     </div>
 </div>
