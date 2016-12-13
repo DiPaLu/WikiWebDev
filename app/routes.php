@@ -16,7 +16,9 @@
         ['GET', '/forgotpassword/[:toto]/', 'User#resetpwd', 'user_reset_pwd'],
         ['POST', '/forgotpassword/[:toto]/', 'User#resetpwdPost', 'user_reset_pwd_post'],
 	//Profile
-        ['GET|POST', '/profil/', 'Profil#config', 'profil_conf'],
+        ['GET|POST', '/parametre/', 'Profil#parametre', 'profil_parametre'],
+        ['GET|POST', '/delete/', 'Profil#delete', 'profil_delete'],
+        ['GET|POST', '/profil/', 'Profil#profil', 'profil_profil'],
 	    
 	// Page lexique global
 	['GET', '/lexique/', 'lexique#getTerms', 'lexique_getterms'],
