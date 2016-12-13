@@ -11,7 +11,18 @@ $this->start('main_content');
         <div class="page-header">
             <h1>Login</h1>
         </div>
-
+        <?php if (sizeof($errorList) > 0) : ?>
+            <?php foreach ($errorList as $currentError) : ?>
+                <div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <?= $currentError ?></div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <?php if (sizeof($successList) > 0) : ?>
+            <?php foreach ($successList as $currentSuccess) : ?>
+                <div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <?= $currentSuccess ?></div>
+            <?php endforeach; ?>
+        <?php endif; ?>
         <form action="" method="post">
             <fieldset>
                 <input type="email" class="form-control" name="email" value="" placeholder="Email address" /><br />
@@ -20,6 +31,10 @@ $this->start('main_content');
             </fieldset>
         </form>
         <br />
+        <div class="center">
+        <a href="<?= $this->url('user_lostpwd_email') ?>">Lost Password ?</a>
+        </div>
+        <br /><br />
     </div>
 </div>
 <?php
