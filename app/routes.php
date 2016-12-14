@@ -17,11 +17,8 @@ $w_routes = array(
 	['POST', '/forgotpassword/[:toto]/', 'User#resetpwdPost', 'user_reset_pwd_post'],
 	//Profile
 	['GET|POST', '/profil/', 'Profil#config', 'profil_conf'],
-	// Page lexique global
-	['GET', '/terms/', 'terms#getTerms', 'terms_getterms'],
-            
-        ['GET', '/admin/', 'Admin#getAdmin', 'admin_get_admin']
-			    
-	);
+	// Page lexique global            
 	['GET', '/terms/', 'Terms#getTerms', 'terms_get_terms'],
+        // Page admin
+        ['GET', '/admin/', 'Admin#getAdmin', 'admin_get_admin'],
 );
