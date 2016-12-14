@@ -15,7 +15,7 @@ class TermsController extends Controller {
 
 	public function getTerms() {
 		$loggedUser = $this->getUser();
-		var_dump($loggedUser);
+		//var_dump($loggedUser);
 		
 		$defModel = new TermsModel();
 		$resultList = $defModel->getTerms();

@@ -7,7 +7,7 @@ $this->layout('layoutBootstrap', ['title' => 'Login']);
 $this->start('main_content');
 ?>
 <div class="row">
-    <div class="col-md-12 col-sm-8 col-xs-12">
+    <div class="col-sm-12">
         <div class="page-header">
             <h1>Login</h1>
         </div>
@@ -25,7 +25,7 @@ $this->start('main_content');
         <?php endif; ?>
         <form action="" method="post">
             <fieldset>
-                <input type="email" class="form-control" name="email" value="" placeholder="Email address" /><br />
+                <input type="text" class="form-control" name="email" value="" placeholder="Email address" /><br />
                 <input type="password" class="form-control" name="password" value="" placeholder="Your password" /><br />
                 <input type="submit" class="btn btn-success btn-block" value="Login" />
             </fieldset>
