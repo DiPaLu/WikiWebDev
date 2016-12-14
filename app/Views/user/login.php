@@ -9,7 +9,7 @@ $this->start('main_content');
 <div class="row">
     <div class="col-sm-12">
         <div class="page-header">
-            <h1>Login</h1>
+            <h1>S'identifier</h1>
         </div>
         <?php if (sizeof($errorList) > 0) : ?>
             <?php foreach ($errorList as $currentError) : ?>
@@ -25,14 +25,14 @@ $this->start('main_content');
         <?php endif; ?>
         <form action="" method="post">
             <fieldset>
-                <input type="text" class="form-control" name="email" value="" placeholder="Email address" /><br />
-                <input type="password" class="form-control" name="password" value="" placeholder="Your password" /><br />
+                <input type="text" class="form-control" name="email" value="" placeholder="Adresse e-mail" /><br />
+                <input type="password" class="form-control" name="password" value="" placeholder="Mot de passe" /><br />
                 <input type="submit" class="btn btn-success btn-block" value="Login" />
             </fieldset>
         </form>
         <br />
         <div class="text-right">
-        <a href="<?= $this->url('user_lostpwd_email') ?>">Lost Password ?</a>
+        <a href="<?= $this->url('user_lostpwd_email') ?>">Mot de passe oublié ?</a>
         </div>
         <br /><br />
     </div>
