@@ -45,34 +45,7 @@ class AdminController extends Controller {
 	$this->allowTo(['admin']);
 
 	//reste du code...
-    }
-    
-    public function teleport(){
-	//autorise l'accès à cette page aux utilisateurs ayant le rôle 'admin' ou 'superadmin'
-	//doit normalement être placé à la première ligne de chaque méthode à protéger
-	$this->allowTo(['magus']);
-
-	//reste du code...
-    }
-    public function getAllUser($userId){
-	
-	//$this->allowTo(['admin']);
-        $usersList = 
-        
-
-	//reste du code...
-    }
-    public function getTeam($divisionId) {
-        $divisionModel = new DivisionModel();
-        $divisionInfos = $divisionModel->find($divisionId);
-        $teamModel = new TeamModel();
-        $teamList = $teamModel->getAllByDivisionId($divisionId);
-        //debug($divisionInfos);
-        $this->show('team/division', array(
-            'divisionName' => $divisionInfos['div_name'],
-            'teamList' => $teamList
-        ));
-    }
+  }
 }
     
-}
+
