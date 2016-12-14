@@ -2,14 +2,13 @@
 
 namespace Model;
 
-use \W\Model\UsersModel;
 
 /**
  * Description of UsersModel
  *
  * @author Etudiant
  */
-class UsersModel extends UsersModel {
+class UsersModel extends \W\Model\UsersModel {
 
     // Je surcharge le constructeur pour définir le nom du champ PK
     public function __construct() {
