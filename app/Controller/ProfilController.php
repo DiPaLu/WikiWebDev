@@ -11,12 +11,7 @@ class ProfilController extends Controller{
     
     public function parametre(){
         
-        $data = $this->getUser();
-        
-        $this->show('profil/parametre', array(
-            'email' => $data['usr_email'],
-            'pseudo' => $data['usr_pseudo'],
-        ));
+        $this->show('profil/parametre');
     }
     
     public function delete(){
@@ -27,12 +22,7 @@ class ProfilController extends Controller{
         
         $data = $this->getUser();
         
-        $this->show('profil/profil', array(
-            'pseudo' => $data['usr_pseudo'],
-            'email' => $data['usr_email'],
-            'date' => $data['usr_insert_date'],
-            'drnConnexion' => $data['usr_last_connected']
-        ));
+        $this->show('profil/profil');
     }  
 }
 

@@ -10,8 +10,8 @@ $this->start('main_content');
 <p>Vous voulez vraiment nous quitter? WikiWebDev va être triste de ne plus vous voir</p>
 <label>Password</label><br/>
 <input type="text" name="" class="form-control" value=""><br/>
-<input type="submit" class="btn" value="Supprimer mon compte" /></br/>
-<input type="submit" class="btn" value="Annuler" />
+<input type="submit" class="btn pull-left" value="Supprimer" />
+<input type="submit" class="btn pull-right" value="Annuler" />
 <?php
 //fin du bloc
 $this->stop('main_content');

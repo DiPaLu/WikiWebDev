@@ -11,13 +11,13 @@ $this->start('main_content');
 </ul>
 <br/>
 <label>Pseudo</label><br/>
-Pseudo actuel<input type="text" class="form-control input-sm" value="<?= $pseudo; ?>"/>
+Pseudo actuel<input type="text" class="form-control input-sm" value="<?= $w_user['usr_pseudo']?>"/>
 Nouveau pseudo <input type="text" name="" class="form-control input-sm" value="">
 <input class="pull-right btn" type="submit" value="Envoyer"/>
 <br/>
 <br/>
 <label>Votre email</label><br/>
-Adresse e-mail actuelle <input type="text" name="email" class="form-control input-sm" value="<?= $email; ?>">
+Adresse e-mail actuelle <input type="text" name="email" class="form-control input-sm" value="<?= $w_user['usr_email']?>">
 Nouvel e-mail <input type="text" name="" class="form-control input-sm" value="">
 <input class="pull-right btn" type="submit" value="Envoyer"/>
 <br/>

@@ -9,12 +9,13 @@ $this->start('main_content');
 <ul class="list-unstyled list-inline">
     <li><a href="<?= $this->url('profil_parametre') ?>">Modifier</a></li>
 </ul>
-<h1><?= $pseudo ?></h1>
+<img class="img-rounded" src="<?= $this->assetUrl('img/avatar/avatar_defaut.png'); ?>"/>
+<h2><?= $w_user['usr_pseudo'] ?></h2>
 <div class="">
 <p>Pas de mots en rédaction</p>
 </div>
-<p>Date d'inscription : <?= $date ?></p>
-<p>Dernière connexion: <?= $drnConnexion ?></p>
+<p>Date d'inscription : <?= $w_user['usr_insert_date'] ?></p>
+<p>Dernière connexion: <?= $w_user['usr_last_connected'] ?></p>
 
 <?php
 //fin du bloc
