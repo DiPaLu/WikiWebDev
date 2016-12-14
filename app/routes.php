@@ -14,8 +14,8 @@ $w_routes = array(
 	// Lost Password
 	['GET', '/forgotpassword/', 'User#lostpwdemail', 'user_lostpwd_email'],
 	['POST', '/forgotpassword/', 'User#lostpwdemailPost', 'user_lostpwd_post_email'],
-	['GET', '/forgotpassword/[:changePwd]/', 'User#resetpwd', 'user_reset_pwd'],
-	['POST', '/forgotpassword/[:changePwd]/', 'User#resetpwdPost', 'user_reset_pwd_post'],
+	['GET', '/changepassword/[:token]/', 'User#resetpwd', 'user_reset_pwd'],
+	['POST', '/changepassword/[:token]/', 'User#resetpwdPost', 'user_reset_pwd_post'],
 	// Page lexique global            
 	['GET', '/terms/', 'Terms#getTerms', 'terms_get_terms'],
 	['GET', '/terms/[:id]/[:mot]/', 'Terms#getTermsDetails', 'terms_get_terms_details'],

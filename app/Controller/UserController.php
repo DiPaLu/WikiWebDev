@@ -201,7 +201,7 @@ class UserController extends Controller {
                 );
                 // Je crée un lien de reset avec le token
                 $resetUrl = $this->generateUrl('user_reset_pwd', [
-                    'changePwd' => $token, // changePwd => [:changePwd] in routes.php
+                    'token' => $token, // token => [:token] in routes.php
                 ]);
                 // Texte HTML à envoyer par e-mail
                 $html = '<p>Une demande de reset de votre password nous a été demandée. Veuillez utiliser le lien suivant pour valider :<a href="' . 'http://localhost' . $resetUrl . '">Renew password</a></p>';
@@ -222,6 +222,78 @@ class UserController extends Controller {
         $this->show('user/lostpwdemail', array(
             'errorList' => $errorList,
             'email' => '',
+            'successList' => $successList
+        ));
+    }
+    
+    public function resetpwd($token) {
+        $this->show('user/resetpwd', array(
+            'errorList' => array(),
+            'successList' => array()
+        ));
+    }
+    
+    public function resetpwdPost($token) {
+        echo $token;
+        // J'initialise les variables nécessaires à récupérer les messages que je veux afficher lors d'une erreur ou de la réussite
+        $errorList = array();
+        $successList = array();
+
+        // Je vérifie si $_POST n'est pas vide
+        $formOK = true;
+        if (!empty($_POST)) {
+            // Je récupère les mots de passes fournis
+            $password = isset($_POST['password']) ? trim($_POST['password']) : '';
+            $password2 = isset($_POST['password2']) ? trim($_POST['password2']) : '';
+
+            // Je vérifie les données
+            if ($password === '' || $password2 === '') {
+                $errorList[] = "Au moins un champ obligatoire est vide !";
+                $formOK = false;
+            }
+
+            if (strlen($password < 8 || $password2 < 8)) {
+                $errorList[] = "Au moins 8 caractères !";
+                $formOK = false;
+            }
+
+            if ($password2 != $password) {
+                $errorList[] = "Les mots de passes renseignés ne sont pas identiques";
+            }
+
+            if (!isset($token) || $token === FALSE) {
+                $formOK = false;
+            }
+
+            // Si formulaire ok
+            if ($formOK) {
+                // Je crée une nouvelle instance du UsersModel
+                $usersModel = new UsersModel();
+                // Je récupère les données correspondants au token
+                $userData = $usersModel->findByToken($token);
+                debug($userData);
+                // J'instancie un nouveau AuthentificationModel
+                $authentificationModel = new AuthentificationModel();
+                // Je mets à jour le mot de password de l'utilisateur dans la bd
+                $userData = $usersModel->update(
+                        array(
+                            'usr_password' => $authentificationModel->hashPassword($password2),
+                            'usr_token' => ''
+                        )
+                        , $userData['usr_id']
+                );
+
+                // Si la modification a réussie
+                if ($userData !== FALSE) {
+                    $successList[] = 'Votre mot de passe a été changé. Vous allez être rédirigé dans 2 secondes. Si la redirection automatique ne fonctionne pas, veuillez cliquer sur ce lien : <a href=' . $this->generateUrl('user_login') . '>Login</a>';
+//                    $this->redirectToRoute('user_login');
+                } else {
+                    $errorList[] = "Le changement du mot de passe a échoué. Veuillez recommencer.";
+                }
+            }
+        }
+        $this->show('user/resetpwd', array(
+            'errorList' => $errorList,
             'successList' => $successList
         ));
     }
