@@ -6,17 +6,27 @@ $this->layout('layoutBootstrap', ['title' => 'Profil']);
 // Début du bloc d'affichage
 $this->start('main_content');
 ?>
-<ul class="list-unstyled list-inline">
-    <li><a href="<?= $this->url('profil_parametre') ?>">Modifier</a></li>
-</ul>
-<img class="img-rounded" src="<?= $this->assetUrl('img/avatar/avatar_defaut.png'); ?>"/>
-<h2><?= $w_user['usr_pseudo'] ?></h2>
-<div class="">
-<p>Pas de mots en rédaction</p>
+<div class="container">
+    <div class="row">
+        <ul class="list-unstyled list-inline">
+            <li><a href="<?= $this->url('profil_parametre') ?>">Modifier</a></li>
+        </ul>  
+        <div class="col-lg-3">
+            <img class="img-circle" src="<?= $this->assetUrl('img/avatar/avatar_defaut.png'); ?>"/>
+        </div>
+        <div class="col-lg-9">
+       
+        <h2><?= $w_user['usr_pseudo'] ?></h2>
+        <div class="">
+            <p>Pas de mots en rédaction</p>
+        </div>
+        <p>Date d'inscription : <?= $w_user['usr_insert_date'] ?></p>
+        <p>Dernière connexion: <?= $w_user['usr_last_connected'] ?></p>
+        <br/>
+        </div>
+        <br/>
+    </div>
 </div>
-<p>Date d'inscription : <?= $w_user['usr_insert_date'] ?></p>
-<p>Dernière connexion: <?= $w_user['usr_last_connected'] ?></p>
-
 <?php
 //fin du bloc
 $this->stop('main_content');
