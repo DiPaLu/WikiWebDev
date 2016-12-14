@@ -15,10 +15,12 @@ $w_routes = array(
 	['POST', '/forgotpassword/', 'User#lostpwdemailPost', 'user_lostpwd_post_email'],
 	['GET', '/forgotpassword/[:toto]/', 'User#resetpwd', 'user_reset_pwd'],
 	['POST', '/forgotpassword/[:toto]/', 'User#resetpwdPost', 'user_reset_pwd_post'],
-	//Profile
-	['GET|POST', '/profil/', 'Profil#config', 'profil_conf'],
 	// Page lexique global            
 	['GET', '/terms/', 'Terms#getTerms', 'terms_get_terms'],
         // Page admin
         ['GET', '/admin/', 'Admin#getAdmin', 'admin_get_admin'],
+        //Profile
+	['GET|POST', '/parametre/', 'Profil#parametre', 'profil_parametre'],
+        ['GET|POST', '/delete/', 'Profil#delete', 'profil_delete'],
+        ['GET|POST', '/profil/', 'Profil#profil', 'profil_profil'],
 );
