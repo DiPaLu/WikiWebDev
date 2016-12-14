@@ -33,6 +33,10 @@ class ProfilController extends Controller{
         ));
     }
     
+    public function update() {
+        // votre code ici ...
+    }
+    
 }
 
 

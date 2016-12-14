@@ -24,5 +24,16 @@ class TermsController extends Controller {
 		    'resultList' => $resultList,
 		));
 	}
-
+        
+        public function getTermsDetails() {
+            // votre code ici ...
+        }
+        
+        public function getTermsAdd() {
+            // votre code ici ...
+        }
+        
+        public function getTermsAddPost() {
+            // votre code ici ...
+        }
 }
