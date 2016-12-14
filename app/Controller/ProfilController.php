@@ -26,7 +26,6 @@ class ProfilController extends Controller{
     public function profil(){
         
         $data = $this->getUser();
-        
         $this->show('profil/profil', array(
             'pseudo' => $data['usr_pseudo'],
             'email' => $data['usr_email'],
