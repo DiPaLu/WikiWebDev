@@ -18,7 +18,7 @@
 	//Profile
         ['GET|POST', '/profil/', 'Profil#config', 'profil_conf'],
 	// Page lexique global
-	['GET', '/terms/', 'Terms#getTerms', 'terms_get_terms'],
+	['GET', '/terms/', 'terms#getTerms', 'terms_getterms'],
             
         ['GET', '/admin/', 'Admin#getAdmin', 'admin_get_admin']
 			    

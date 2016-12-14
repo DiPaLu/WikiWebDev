@@ -4,16 +4,17 @@ namespace Controller;
 
 use \W\Controller\Controller;
 
+
 /**
  * Description of admin
  *
  * @author Etudiant
  */
-class Admin extends Controller {
+class AdminController extends Controller {
     //put your code here
     public function getAdmin() {
         $loggedUser = $this->getUser();
-        debug($loggedUser);
+        //debug($loggedUser);
         $this->show('admin/admin');
     }
     public function registerAdmin(){
@@ -53,5 +54,25 @@ class Admin extends Controller {
 
 	//reste du code...
     }
+    public function getAllUser($userId){
+	
+	//$this->allowTo(['admin']);
+        $usersList = 
+        
+
+	//reste du code...
+    }
+    public function getTeam($divisionId) {
+        $divisionModel = new DivisionModel();
+        $divisionInfos = $divisionModel->find($divisionId);
+        $teamModel = new TeamModel();
+        $teamList = $teamModel->getAllByDivisionId($divisionId);
+        //debug($divisionInfos);
+        $this->show('team/division', array(
+            'divisionName' => $divisionInfos['div_name'],
+            'teamList' => $teamList
+        ));
+    }
+}
     
 }
