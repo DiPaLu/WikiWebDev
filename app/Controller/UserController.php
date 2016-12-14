@@ -57,6 +57,10 @@ class UserController extends Controller {
                 $usersModel = new UsersModel();
                 $userData = $usersModel->find($userId);
                 $auth->logUserIn($userData);
+                // Insertion dans la db dernière connexion
+                $userData = $usersModel->update(array(
+                    'usr_last_connected' => date('Y-m-d H:i:s')
+                ), $userData['usr_id']);
                 // On redirige vers la home
                 $this->redirectToRoute('default_home');
             } else {
@@ -197,7 +201,7 @@ class UserController extends Controller {
                 );
                 // Je crée un lien de reset avec le token
                 $resetUrl = $this->generateUrl('user_reset_pwd', [
-                    'token' => $token, // token entspricht [:token] in routes.php
+                    'token' => $token, // token => [:token] in routes.php
                 ]);
                 // Texte HTML à envoyer par e-mail
                 $html = '<p>Une demande de reset de votre password nous a été demandée. Veuillez utiliser le lien suivant pour valider :<a href="' . 'http://localhost' . $resetUrl . '">Renew password</a></p>';
