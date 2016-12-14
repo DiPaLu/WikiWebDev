@@ -7,9 +7,14 @@ $this->layout('layoutBootstrap', ['title' => 'Profil']);
 $this->start('main_content');
 ?>
 <ul class="list-unstyled list-inline">
-    <li><a href="<?= $this->url('profil_profil') ?>">Profil</a></li>
-    <li><a href="<?= $this->url('profil_parametre') ?>">Paramètres</a></li>
+    <li><a href="<?= $this->url('profil_profil') ?>">Retour</a></li>
 </ul>
+<br/>
+<label>Pseudo</label><br/>
+Pseudo actuel<input type="text" class="form-control input-sm" value="<?= $pseudo; ?>"/>
+Nouveau pseudo <input type="text" name="" class="form-control input-sm" value="">
+<input class="pull-right btn" type="submit" value="Envoyer"/>
+<br/>
 <br/>
 <label>Votre email</label><br/>
 Adresse e-mail actuelle <input type="text" name="email" class="form-control input-sm" value="<?= $email; ?>">
@@ -22,10 +27,6 @@ Ancien mot de passe <input type="password" class="form-control input-sm" name="a
 Nouveau mot de passe <input type="password" class="form-control input-sm"name="password">
 Réécrire nouveau mot de passe <input type="password" class="form-control input-sm" name="ConfirmPassword">
 <input type="submit" class="pull-right btn" value="Envoyer" />
-<br/>
-<br/>
-<label>Message</label></br/>
-<input type="checkbox"> Recevoir la Newsletter de WikiWebDev
 <br/>
 <br/>
 <label>Supprimer votre compte</label><br/>

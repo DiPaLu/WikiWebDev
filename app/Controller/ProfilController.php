@@ -7,13 +7,15 @@ use \Model\UsersModel;
 use \W\Security\AuthentificationModel;
 
 class ProfilController extends Controller{
+ 
     
     public function parametre(){
         
         $data = $this->getUser();
         
         $this->show('profil/parametre', array(
-            'email' => $data['usr_email']
+            'email' => $data['usr_email'],
+            'pseudo' => $data['usr_pseudo'],
         ));
     }
     
@@ -31,12 +33,7 @@ class ProfilController extends Controller{
             'date' => $data['usr_insert_date'],
             'drnConnexion' => $data['usr_last_connected']
         ));
-    }
-    
-    public function update() {
-        // votre code ici ...
-    }
-    
+    }  
 }
 
 

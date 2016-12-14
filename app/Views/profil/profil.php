@@ -7,12 +7,12 @@ $this->layout('layoutBootstrap', ['title' => 'Profil']);
 $this->start('main_content');
 ?>
 <ul class="list-unstyled list-inline">
-    <li><a href="<?= $this->url('profil_profil') ?>">Profil</a></li>
-    <li><a href="<?= $this->url('profil_parametre') ?>">Paramètres</a></li>
+    <li><a href="<?= $this->url('profil_parametre') ?>">Modifier</a></li>
 </ul>
-<button>Modifier</button>
 <h1><?= $pseudo ?></h1>
+<div class="">
 <p>Pas de mots en rédaction</p>
+</div>
 <p>Date d'inscription : <?= $date ?></p>
 <p>Dernière connexion: <?= $drnConnexion ?></p>
 
