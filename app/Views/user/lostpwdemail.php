@@ -25,8 +25,8 @@ $this->start('main_content');
         <?php endif; ?>
         <form action="" method="post">
             <fieldset>
-                <input type="email" class="form-control" name="email" value="<?= $email ?>" placeholder="Email address" /><br />
-                <input type="submit" class="btn btn-success btn-block" value="Send reset link" />
+                <input type="email" class="form-control" name="email" value="<?= $email ?>" placeholder="Adresse e-mail" /><br />
+                <input type="submit" class="btn btn-success btn-block" value="M'envoyer un nouveau mot de passe" />
             </fieldset>
         </form>
     </div>

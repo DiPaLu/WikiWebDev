@@ -1,6 +1,6 @@
 <?php
 //hérite du fichier layout.php à la racine de app/Views/default/
-$this->layout('layoutBootstrap', ['title' => 'Signup']);
+$this->layout('layoutBootstrap', ['title' => 'Inscription']);
 ?>
 <?php
 // Début du bloc d'affichage
@@ -9,7 +9,7 @@ $this->start('main_content');
 <div class="row">
     <div class="col-sm-12">
         <div class="page-header">
-            <h1>Sign up</h1>
+            <h1>S'inscrire</h1>
         </div>
         <?php if (sizeof($errorList) > 0) : ?>
             <?php foreach ($errorList as $currentError) : ?>
@@ -26,10 +26,10 @@ $this->start('main_content');
         <form action="" method="post">
             <fieldset>
                 <input type="text" class="form-control" name="pseudo" value="<?= $pseudo ?>" placeholder="Pseudo" /><br />
-                <input type="email" class="form-control" name="email" value="<?= $email ?>" placeholder="Email address" /><br />
-                <input type="password" class="form-control" name="password" value="" placeholder="Your password" /><br />
-                <input type="password" class="form-control" name="password2" value="" placeholder="Confirm your password" /><br />
-                <input type="submit" class="btn btn-success btn-block" value="Sign up" />
+                <input type="email" class="form-control" name="email" value="<?= $email ?>" placeholder="Adresse e-mail" /><br />
+                <input type="password" class="form-control" name="password" value="" placeholder="Mot de passe" /><br />
+                <input type="password" class="form-control" name="password2" value="" placeholder="Confirmation mot de passe" /><br />
+                <input type="submit" class="btn btn-success btn-block" value="S'inscrire" />
             </fieldset>
         </form>
     </div>
