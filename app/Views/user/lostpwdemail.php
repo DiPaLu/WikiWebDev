@@ -1,6 +1,6 @@
 <?php
 //hérite du fichier layout.php à la racine de app/Views/default/
-$this->layout('layoutBootstrap', ['title' => 'Login']);
+$this->layout('layoutBootstrap', ['title' => 'Request password reset']);
 ?>
 <?php
 // Début du bloc d'affichage
@@ -9,7 +9,7 @@ $this->start('main_content');
 <div class="row">
     <div class="col-sm-12">
         <div class="page-header">
-            <h1>S'identifier</h1>
+            <h1>Request Password Reset</h1>
         </div>
         <?php if (sizeof($errorList) > 0) : ?>
             <?php foreach ($errorList as $currentError) : ?>
@@ -25,20 +25,16 @@ $this->start('main_content');
         <?php endif; ?>
         <form action="" method="post">
             <fieldset>
-                <input type="text" class="form-control" name="email" value="" placeholder="Adresse e-mail" /><br />
-                <input type="password" class="form-control" name="password" value="" placeholder="Mot de passe" /><br />
-                <input type="submit" class="btn btn-success btn-block" value="Login" />
+                <input type="email" class="form-control" name="email" value="<?= $email ?>" placeholder="Adresse e-mail" /><br />
+                <input type="submit" class="btn btn-success btn-block" value="M'envoyer un nouveau mot de passe" />
             </fieldset>
         </form>
-        <br />
-        <div class="text-right">
-        <a href="<?= $this->url('user_lostpwd_email') ?>">Mot de passe oublié ?</a>
-        </div>
-        <br /><br />
     </div>
+    <div class="col-md-2 col-sm-2 col-xs-0"></div>
 </div>
+<br /><br />
+
 <?php
 //fin du bloc
 $this->stop('main_content');
 ?>
-

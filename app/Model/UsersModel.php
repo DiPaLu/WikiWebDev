@@ -2,10 +2,11 @@
 
 namespace Model;
 
+
 /**
  * Description of UsersModel
  *
- * @author Etudiant
+ * @author Patrick
  */
 class UsersModel extends \W\Model\UsersModel {
 
