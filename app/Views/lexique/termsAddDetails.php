@@ -14,7 +14,7 @@ $this->start('main_content');
 		</div>
 		<div class="panel-body">
 		    <div class="tab-content">
-			  
+			  <!-- mettre code ici -->
 		    </div>
 		</div>
 	  </div>

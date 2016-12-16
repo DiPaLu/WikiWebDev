@@ -43,18 +43,15 @@ class TermsModel extends \W\Model\Model {
 	 * recupere un mot et ses définitions
 	 * @return boolean
 	*/
-	public function getTermsDetails($termsId, $terms) {
+	public function getTermsDetails($termsId) {
 
 		$sql = '
 		SELECT *
 		FROM ' . $this->table . '
 		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
+		WHERE terms.ter_id = :termsId
 		';
-		//WHERE terms.ter_id = :termsId
-		//GROUP BY :termsId
 		
-		//WHERE terms.ter_name = :terms
-
 		$stmt = $this->dbh->prepare($sql);
 		$stmt->bindValue(':termsId', $termsId);
 

@@ -16,7 +16,7 @@ $this->start('main_content');
 		    <div class="tab-content">
 			  <ul>
 				<?php foreach ($detailsTerms as $details) : ?>
-					<li><?= $details['ter_name'] ?><br><?= $details['def_description'] ?> <a href="<?= $this->url('terms_add_details') ?>" id='proposition'>Proposer une autre définition</a></li><br>
+					<li><?= $details['ter_name'] ?><br><?= $details['def_description'] ?> <a href="<?= $this->url('terms_add_details', array('termsId'=>$details['ter_id'])) ?>" id='proposition'>Proposer une autre définition</a></li><br>
 
 				<?php endforeach; ?>
 			  </ul>

@@ -24,7 +24,8 @@ class TermsController extends Controller {
 		$defModel = new TermsModel();
 		$resultList = $defModel->getTerms();
 		//debug($resultList);
-		
+		//
+		//j'instancie la class CategoryModel et lance la methode
 		$catModel = new CategoryModel();
 		$categoryList = $catModel->getCategory();
 		//j'initialise mes variables
@@ -42,10 +43,11 @@ class TermsController extends Controller {
 	/**
 	 * methode qui récupère un mot et ses définitions
 	 */
-	public function getTermsDetails() {
-		//j'instancie la class TermsModel et lance la methode getTerms
+	public function getTermsDetails($termsId) {
+		
+		//j'instancie la class TermsModel et lance la methode
 		$detModel = new TermsModel();
-		$detailsTerms = $detModel->getTermsDetails($termsId, $terms);
+		$detailsTerms = $detModel->getTermsDetails($termsId);
 		//debug($detailsTerms);
 		$this->show('lexique/termsDetails', array(
 		    'detailsTerms' => $detailsTerms,
@@ -54,8 +56,8 @@ class TermsController extends Controller {
 	/**
 	 * methode qui propose d'ajouter une définition au mot choisi
 	 */
-	public function getTermsAdd() {
-		$this->show('lexique/termsAddDetails');
+	public function getTermsAdd($termsId) {
+  		$this->show('lexique/termsAddDetails');
 	}
 	
 	/**
