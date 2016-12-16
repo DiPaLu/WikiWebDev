@@ -267,7 +267,7 @@ class UserController extends Controller {
                 $formOK = false;
             }
 
-            if (strlen($password < 8 || $password2 < 8)) {
+            if (strlen($password) < 8 || strlen($password2) < 8) {
                 $errorList[] = "Au moins 8 caractères !";
                 $formOK = false;
             }
