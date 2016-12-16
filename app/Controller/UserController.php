@@ -349,8 +349,7 @@ class UserController extends Controller {
         // Vérifie si le captcha est présent
         $captcha = isset($_POST['g-recaptcha-response']) ? trim(strip_tags($_POST['g-recaptcha-response'])) : '';
         // Cléf secrète Google
-        $secret = '6Lei_w4UAAAAAJhz4btBgG6boIs_8KNZ1PQjuNRR';
-//        $captcha = $_POST['g-recaptcha-response'];
+        $secret = getApp()->getConfig('google_key');
         // Recupère l'adresse IP du client
         $address = $_SERVER['REMOTE_ADDR'];
         // Envoie une requête de vérification chez GOOGLE
