@@ -13,7 +13,6 @@ use \Model\UsersModel;
  * @author Patrick
  */
 class UserController extends Controller {
-
     // Méthodes pour le formulaire login
     public function login() {
         //Affiche le formulaire login en GET
@@ -76,6 +75,8 @@ class UserController extends Controller {
     }
 
     public function signup() {
+        // J'appelle l'API Google-Captcha
+        //$this->googleCaptcha();
         // Je passe les variables à vide (initialise)
         $this->show('user/signup', array(
             'errorList' => array(),
@@ -93,7 +94,7 @@ class UserController extends Controller {
         $email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
         $passwordConfirm = isset($_POST['password2']) ? trim($_POST['password2']) : '';
-
+        
         // Validation des données
         $formOk = true;
         if (empty($pseudo)) {
@@ -115,9 +116,22 @@ class UserController extends Controller {
         if ($password != $passwordConfirm) {
             $errorList[] = 'Les mots de passe sont différents<br>';
             $formOk = false;
+        }    
+        if ($this->googleCaptcha()) {
+            debug($reply);
+            $successList[] = "Captcha ok";
+        } else {
+            $errorList[] = "Pas de spammeurs ou de robots !";
+            $this->show('user/signup', array(
+                'errorList' => $errorList,
+                'pseudo' => '',
+                'email' => '',
+                'successList' => array()
+            ));
         }
-
+        
         if ($formOk) {
+        // J'appelle l'API Google-Captcha
             $usersModel = new UsersModel();
             // Vérifier email inexistant
             if ($usersModel->emailExists($email)) {
@@ -200,7 +214,7 @@ class UserController extends Controller {
                 ));
                 // Texte HTML à envoyer par e-mail
                 $html = '<p>Une demande de reset de votre mot de passe nous a été demandée. Veuillez utiliser le lien suivant pour valider :<a href="' . 'http://localhost' . $resetUrl . '">Changer mot de passe</a></p>';
-                $successList[] = $html;
+                //$successList[] = $html;
 
                 $subject = "Votre demande de changement mot de passe";
 
@@ -311,6 +325,29 @@ class UserController extends Controller {
             return FALSE;
         } else {
             return TRUE;
+        }
+    }
+    
+    static function googleCaptcha() {
+        $errorList = array();
+        $successList = array();
+        $captcha = '';
+        
+        // Vérifie si le captcha est présent
+        $captcha = isset($_POST['g-recaptcha-response']) ? trim(strip_tags($_POST['g-recaptcha-response'])) : '';
+        // Cléf secrète Google
+        $secret = '6Lei_w4UAAAAAJhz4btBgG6boIs_8KNZ1PQjuNRR';
+//        $captcha = $_POST['g-recaptcha-response'];
+        // Recupère l'adresse IP du client
+        $address = $_SERVER['REMOTE_ADDR'];
+        // Envoie une requête de vérification chez GOOGLE
+        $answer = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha&remoteip=$address");
+        // Recupère la réponse
+        $reply = json_decode($answer, TRUE);
+        if ($reply['success']) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
