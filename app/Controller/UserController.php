@@ -297,4 +297,19 @@ class UserController extends Controller {
             'successList' => $successList
         ));
     }
+    /*
+    J'ai écrit cette methode ici puis je l'ai dupliqué dans AdminModel. Est-ce qu'on la laisse ici u on la supprime? Qulequ'un en a besoin?
+    Pareil dans le Controlleur.
+    */
+    /*
+    public function getUsersList() {
+        $usersModel = new UsersModel();
+        $usersList = $usersModel->getAllUsers();
+        
+        $this->show('admin/admin', array(
+            
+            'usersList' => $usersList
+        ));
+    }
+    */
 }

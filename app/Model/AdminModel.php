@@ -10,21 +10,19 @@ class AdminModel extends \W\Model\UsersModel {
         $this->setPrimaryKey('usr_id');
     }
     
-    public function findByRole ($role) {
-        
-        if (!isset($role)) {
-                return false;
-        }
-        
+    public function getAllUsers (){
         $sql = '
-            SELECT * 
+            SELECT *
             FROM users
+           
         ';
-        $sth = $this->dbh->prepare($sql);
-        //$sth->bindValue(':token', $token);
-        $sth->execute();
-        
-        return $sth->fetch();
-    }
- 
-}
+        $stmt = $this->dbh->prepare($sql);
+                
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        }
+        else {
+            return $stmt->fetchAll();
+        }
+        return false;
+    }     

@@ -36,5 +36,29 @@ class UsersModel extends \W\Model\UsersModel {
 
         return $sth->fetch();
     }
+    /*
+    J'ai écrit cette methode ici puis je l'ai dupliqué dans AdminModel. Est-ce qu'on la laisse ici u on la supprime? Qulequ'un en a besoin?
+    Pareil dans le  Controlleur.
+    */
+    /*
+    public function getAllUsers (){
+        $sql = '
+            SELECT *
+            FROM '.$this->table.'
+           
+        ';
+        $stmt = $this->dbh->prepare($sql);
+        
+        
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        }
+        else {
+            return $stmt->fetchAll();
+        }
+        
+        return false;
+    }
+    */
 
 }

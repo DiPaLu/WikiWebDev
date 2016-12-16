@@ -26,7 +26,8 @@ $w_routes = array(
         // Post pour ajout des mots et définitions dans les 2 cas de figure
 	['POST', '/terms/add/', 'Terms#getTermsAddPost', 'terms_get_terms_add_post'],
         // Page admin
-        ['GET', '/admin/', 'Admin#getAdmin', 'admin_get_admin'],
+        ['GET', '/admin/', 'Admin#getAdmin', 'admin_get_admin'],             
+    
         //Profil
 	['GET|POST', '/profil/parametre/', 'Profil#parametre', 'profil_parametre'],
         ['GET|POST', '/profil/delete/', 'Profil#delete', 'profil_delete'],
