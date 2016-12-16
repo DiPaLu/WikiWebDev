@@ -4,6 +4,7 @@ namespace Controller;
 
 use \W\Controller\Controller;
 use \Model\UsersModel;
+use \Model\TermsModel;
 
 /**
  * Description of admin
@@ -17,10 +18,12 @@ class AdminController extends Controller {
         $loggedUser = $this->getUser();
         $usersModel = new UsersModel();
         $usersList = $usersModel->getAllUsers();
-           
+        $termsModel = new TermsModel();
+        $resultsList = $termsModel->getTerms();
 
         $this->show('admin/admin', array(
             'usersList' => $usersList,
+            'resultsList' => $resultsList
         ));
         
     }
