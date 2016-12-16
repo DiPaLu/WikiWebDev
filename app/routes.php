@@ -33,7 +33,8 @@ $w_routes = array(
     // Page admin
     ['GET', '/admin/', 'Admin#getAdmin', 'admin_get_admin'],
     //Profil
-    ['GET|POST', '/profil/parametre/', 'Profil#parametre', 'profil_parametre'],
+    ['GET', '/profil/parametre/', 'Profil#parametre', 'profil_parametre'],
+    ['POST', '/profil/parametre/', 'Profil#parametrePost', 'profil_parametre_post'],
     ['GET|POST', '/profil/delete/', 'Profil#delete', 'profil_delete'],
     ['GET|POST', '/profil/[:pseudo]/', 'Profil#profil', 'profil_profil'],
 );
