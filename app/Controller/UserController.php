@@ -4,9 +4,14 @@ namespace Controller;
 
 use \W\Controller\Controller;
 use \W\Security\AuthentificationModel;
-use W\Security;
+use \W\Security;
 use \Model\UsersModel;
 
+/**
+ * Description of UserController
+ *
+ * @author Patrick
+ */
 class UserController extends Controller {
 
     // Méthodes pour le formulaire login
@@ -22,8 +27,6 @@ class UserController extends Controller {
     public function loginPost() {
         $errorList = array();
         $successList = array();
-        
-        //debug($_POST);
         
         $email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
@@ -50,7 +53,6 @@ class UserController extends Controller {
             // On vérifie email/password
             $auth = new AuthentificationModel();
             $userId = $auth->isValidLoginInfo($email, $password);
-            //debug($userId);
             // Si login ok
             if ($userId > 0) {
                 // Mise en session
@@ -84,7 +86,6 @@ class UserController extends Controller {
     }
 
     public function signupPost() {
-        debug($_POST);
         $errorList = array();
         $successList = array();
 
@@ -123,8 +124,6 @@ class UserController extends Controller {
                 $errorList[] = 'L\'email existe déjà dans la base de données<br>';
             }
             if ($usersModel->getUserByUsernameOrEmail($pseudo)) {
-                echo $pseudo;
-                debug($usersModel);
                 $errorList[] = 'Pseudo déjà utilisé';
             } else {
                 // On peut insérer
@@ -189,22 +188,18 @@ class UserController extends Controller {
             if ($userEmail > 0) {
                 $usersModel = new UsersModel();
                 $userData = $usersModel->getUserByUsernameOrEmail($email);
-                debug($userData);
                 // Je génère un token et je l'insert dans la db
                 $token = Security\StringUtils::randomString(32);
-                var_dump($token);
-                $authentificationModel = new AuthentificationModel();
-                $userData = $usersModel->update(
-                        [
-                    'usr_token' => $token,
-                        ], $userData['usr_id']
-                );
+                $userData = $usersModel->update(array(
+                    'usr_token' => $token
+                ), $userData['usr_id']);                
+                
                 // Je crée un lien de reset avec le token
-                $resetUrl = $this->generateUrl('user_reset_pwd', [
-                    'token' => $token, // token => [:token] in routes.php
-                ]);
+                $resetUrl = $this->generateUrl('user_reset_pwd', array(
+                    'token' => $token // token => [:token] in routes.php
+                ));
                 // Texte HTML à envoyer par e-mail
-                $html = '<p>Une demande de reset de votre password nous a été demandée. Veuillez utiliser le lien suivant pour valider :<a href="' . 'http://localhost' . $resetUrl . '">Renew password</a></p>';
+                $html = '<p>Une demande de reset de votre mot de passe nous a été demandée. Veuillez utiliser le lien suivant pour valider :<a href="' . 'http://localhost' . $resetUrl . '">Changer mot de passe</a></p>';
                 $successList[] = $html;
 
                 $subject = "Votre demande de changement mot de passe";
@@ -234,7 +229,6 @@ class UserController extends Controller {
     }
     
     public function resetpwdPost($token) {
-        echo $token;
         // J'initialise les variables nécessaires à récupérer les messages que je veux afficher lors d'une erreur ou de la réussite
         $errorList = array();
         $successList = array();
@@ -271,7 +265,6 @@ class UserController extends Controller {
                 $usersModel = new UsersModel();
                 // Je récupère les données correspondants au token
                 $userData = $usersModel->findByToken($token);
-                debug($userData);
                 // J'instancie un nouveau AuthentificationModel
                 $authentificationModel = new AuthentificationModel();
                 // Je mets à jour le mot de password de l'utilisateur dans la bd
@@ -279,13 +272,12 @@ class UserController extends Controller {
                         array(
                             'usr_password' => $authentificationModel->hashPassword($password2),
                             'usr_token' => ''
-                        )
-                        , $userData['usr_id']
+                        ), $userData['usr_id']
                 );
 
                 // Si la modification a réussie
                 if ($userData !== FALSE) {
-                    $successList[] = 'Votre mot de passe a été changé. Vous allez être rédirigé dans 2 secondes. Si la redirection automatique ne fonctionne pas, veuillez cliquer sur ce lien : <a href=' . $this->generateUrl('user_login') . '>Login</a>';
+                    $successList[] = 'Votre mot de passe a été changé. Retour à la page de connexion : <a href=' . $this->generateUrl('user_login') . '>Connexion</a>';
 //                    $this->redirectToRoute('user_login');
                 } else {
                     $errorList[] = "Le changement du mot de passe a échoué. Veuillez recommencer.";
@@ -297,19 +289,28 @@ class UserController extends Controller {
             'successList' => $successList
         ));
     }
-    /*
-    J'ai écrit cette methode ici puis je l'ai dupliqué dans AdminModel. Est-ce qu'on la laisse ici u on la supprime? Qulequ'un en a besoin?
-    Pareil dans le Controlleur.
-    */
-    /*
-    public function getUsersList() {
-        $usersModel = new UsersModel();
-        $usersList = $usersModel->getAllUsers();
-        
-        $this->show('admin/admin', array(
-            
-            'usersList' => $usersList
-        ));
+
+    
+    static function envoieMail($html, $emailAddress, $subject) {
+        $mail = new \PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'domaine smtp FAI';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'Login chez le FAI';
+        $mail->Password = 'Mot de passe chez le FAI';
+        $mail->SMTPSecure = 'ssl, tls, ... ?)';
+        $mail->Port = 'Le port du smtp FAI';
+        $mail->setFrom('Votre adresse emai', 'Votre nom');
+        $mail->addAddress($emailAddress);
+        $mail->addReplyTo('Votre adresse email', 'Sujet');
+        $mail->Subject = $subject;
+        $mail->Body = $html;
+        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        if (!$mail->send()) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
     }
-    */
 }

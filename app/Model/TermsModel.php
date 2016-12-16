@@ -2,6 +2,7 @@
 
 namespace Model;
 
+
 /**
  * Description of LexiqueModel
  *
