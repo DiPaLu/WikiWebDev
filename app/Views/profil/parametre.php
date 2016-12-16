@@ -6,6 +6,18 @@ $this->layout('layoutBootstrap', ['title' => 'Profil']);
 // Début du bloc d'affichage
 $this->start('main_content');
 ?>
+ <?php if (sizeof($errorList) > 0) : ?>
+            <?php foreach ($errorList as $currentError) : ?>
+                <div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <?= $currentError ?></div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <?php if (sizeof($successList) > 0) : ?>
+            <?php foreach ($successList as $currentSuccess) : ?>
+                <div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <?= $currentSuccess ?></div>
+            <?php endforeach; ?>
+        <?php endif; ?>
 <ul class="list-unstyled list-inline pull-right">
     <li><a href="<?= $this->url('profil_profil') ?>">Afficher</a></li>
 </ul>
@@ -19,7 +31,6 @@ $this->start('main_content');
     <form action="" method="post" enctype="multipart/form-data">
         <label>Pseudo</label><br/>
         Pseudo actuel<input type="text" class="form-control input-sm" name="pseudo" value="<?= $w_user['usr_pseudo'] ?>"/>
-        <input class="pull-right btn" type="submit" value="Modifier"/>
         <br/>
     </form>
     <br/>
@@ -27,7 +38,6 @@ $this->start('main_content');
     <form action="" method="post">
         <label>Votre email</label><br/>
         Adresse e-mail actuelle <input type="text" name="email" class="form-control input-sm" name="email" value="<?= $w_user['usr_email'] ?>">
-        <input class="pull-right btn" type="submit" value="Modifier"/>
     </form>
     <br/>
     <br/>
@@ -36,7 +46,7 @@ $this->start('main_content');
         Ancien mot de passe <input type="password" class="form-control input-sm" name="ancienPassword">
         Nouveau mot de passe <input type="password" class="form-control input-sm"name="password">
         Réécrire nouveau mot de passe <input type="password" class="form-control input-sm" name="ConfirmPassword">
-        <input type="submit" class="pull-right btn" value="Envoyer" />
+        <input type="submit" class="pull-right btn" value="Modifier" />
     </form>
     <br/>
     <br/>
