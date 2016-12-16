@@ -29,7 +29,7 @@ class UserController extends Controller {
         
         $email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
-        $_SESSION['email'] = $email;
+        //$_SESSION['email'] = $email;
 
         // Validation des données
         $formOk = true;
@@ -116,9 +116,10 @@ class UserController extends Controller {
         if ($password != $passwordConfirm) {
             $errorList[] = 'Les mots de passe sont différents<br>';
             $formOk = false;
-        }    
+        }
+        
+        // J'appelle l'API Google-Captcha
         if ($this->googleCaptcha()) {
-            debug($reply);
             $successList[] = "Captcha ok";
         } else {
             $errorList[] = "Pas de spammeurs ou de robots !";
@@ -131,7 +132,6 @@ class UserController extends Controller {
         }
         
         if ($formOk) {
-        // J'appelle l'API Google-Captcha
             $usersModel = new UsersModel();
             // Vérifier email inexistant
             if ($usersModel->emailExists($email)) {
@@ -150,7 +150,18 @@ class UserController extends Controller {
                 ));
                 // Si l'insertion a fonctionné
                 if ($userData !== false) {
-                    $authentificationModel->logUserIn($userData);
+                    $auth = $authentificationModel->logUserIn($userData);
+                    
+                    // J'envoie un email de bienvenue
+                    $subject = "Votre inscription sur WikiWebDev";
+                    $welcome = "Bonjour,<br /><br />Nous sommes ravis de vous compter parmis nos membres et nous vous souhaitons de bonnes fêtes de fin d'année !<br /><br />L'équipe WikiWebDev.";
+                    $this->envoieMail($welcome, $userData['usr_email'], $subject);
+                    
+                    // Insertion dans la db dernière connexion
+                    $userData = $usersModel->update(array(
+                        'usr_last_connected' => date('Y-m-d H:i:s')
+                    ), $userData['usr_id']);
+                
                     // On redirige vers la home
                     $this->redirectToRoute('default_home');
                 } else {
@@ -308,20 +319,22 @@ class UserController extends Controller {
     static function envoieMail($html, $emailAddress, $subject) {
         $mail = new \PHPMailer();
         $mail->isSMTP();
-        $mail->Host = 'domaine smtp FAI';
+        $mail->Host = getApp()->getConfig('email_smtp');
         $mail->SMTPAuth = true;
-        $mail->Username = 'Login chez le FAI';
-        $mail->Password = 'Mot de passe chez le FAI';
-        $mail->SMTPSecure = 'ssl, tls, ... ?)';
-        $mail->Port = 'Le port du smtp FAI';
-        $mail->setFrom('Votre adresse emai', 'Votre nom');
+        $mail->Username = getApp()->getConfig('email_username');
+        $mail->Password = getApp()->getConfig('email_pwd');
+        $mail->SMTPSecure = getApp()->getConfig('email_SMTPSecure');
+        $mail->Port = getApp()->getConfig('email_port');
+        $mail->setFrom(getApp()->getConfig('email_setFrom'));
         $mail->addAddress($emailAddress);
-        $mail->addReplyTo('Votre adresse email', 'Sujet');
+        $mail->addReplyTo(getApp()->getConfig('email_addReplyTo'));
         $mail->Subject = $subject;
         $mail->Body = $html;
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         if (!$mail->send()) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
             return FALSE;
         } else {
             return TRUE;
