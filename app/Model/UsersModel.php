@@ -37,14 +37,14 @@ class UsersModel extends \W\Model\UsersModel {
         return $sth->fetch();
     }
     /*
-    J'ai écrit cette methode ici puis je l'ai dupliqué dans AdminModel. Est-ce qu'on la laisse ici u on la supprime? Qulequ'un en a besoin?
-    Pareil dans le  Controlleur.
+    Remplacer par findAll: comment?
     */
-    /*
+    
     public function getAllUsers (){
         $sql = '
             SELECT *
             FROM '.$this->table.'
+            ORDER BY usr_pseudo
            
         ';
         $stmt = $this->dbh->prepare($sql);
@@ -59,6 +59,5 @@ class UsersModel extends \W\Model\UsersModel {
         
         return false;
     }
-    */
 
 }
