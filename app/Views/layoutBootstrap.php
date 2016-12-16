@@ -3,10 +3,9 @@
    <head lang="en">
 	<title><?= $this->e($title) ?></title>
 	<meta charset="utf-8">
-	<!-- Latest compiled and minified CSS 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/bootstrap.min.css') ?>">
+	<link rel="stylesheet" href="<?= $this->assetUrl('css/style.css') ?>">
 
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
@@ -27,14 +26,13 @@
 		   </div>
 		   <!-- Collect the nav links, forms, and other content for toggling -->
 		   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				   <li><a href="<?= $this->url('terms_get_terms') ?>">Lexique</a></li>
+			<ul class="nav navbar-nav navbar-right">
 			    <?php if (!isset($w_user)) : ?>
-				   <li><a href="<?= $this->url('user_login') ?>">Login</a></li>
-				   <li><a href="<?= $this->url('user_signup') ?>">Signup</a></li>
+				   <li><a href="<?= $this->url('user_login') ?>">Se connecter</a></li>
+				   <li><a href="<?= $this->url('user_signup') ?>">S'incrire</a></li>
 			   <?php else : ?>
-				   <li><a href="<?= $this->url('user_logout') ?>">Logout</a></li>
-                                   <li><a href="<?= $this->url('profil_profil') ?>">Profil</a></li>
+				   <li><a href="<?= $this->url('profil_profil') ?>">Espace Membre</a></li>
+				   <li><a href="<?= $this->url('user_logout') ?>">Se déconnecter</a></li>
 			   <?php endif ?>
 			</ul>
 		   </div><!-- /.navbar-collapse -->

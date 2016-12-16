@@ -8,34 +8,62 @@ namespace Model;
  *
  * @author Paul
  */
-class TermsModel extends \W\Model\Model{
-	// Je surcharge le constructeur pour définir le nom du champ PK
-    public function __construct() {
-        parent::__construct();
-        $this->setPrimaryKey('ter_id');
-    }
+class TermsModel extends \W\Model\Model {
 
-    /**
-     * 
-     * @param type $termsId
-     * @return boolean
-     */
-    public function getTerms() {
-        $sql = '
-            SELECT *
-            FROM '.$this->table.'
-            INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
-            ';
-        
-        $stmt = $this->dbh->prepare($sql);
-        
-        if ($stmt->execute() === false) {
-            debug($stmt->errorInfo());
-        }
-        else {
-            return $stmt->fetchAll();
-        }
-        
-        return false;
-    }
+	// Je surcharge le constructeur pour définir le nom du champ PK
+	public function __construct() {
+		parent::__construct();
+		$this->setPrimaryKey('ter_id');
+	}
+
+	/**
+	 * recupere tous les mots
+	 * @return boolean
+	*/
+	public function getTerms() {
+		$sql = '
+		SELECT *
+		FROM ' . $this->table . '
+		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
+		GROUP BY terms.ter_id
+		ORDER BY terms.ter_name
+		';
+
+		$stmt = $this->dbh->query($sql);
+
+		if ($stmt->execute() === false) {
+			debug($stmt->errorInfo());
+		} else {
+			return $stmt->fetchAll();
+		}
+		return false;
+	}
+	
+	/**
+	 * recupere un mot et ses définitions
+	 * @return boolean
+	*/
+	public function getTermsDetails($termsId, $terms) {
+
+		$sql = '
+		SELECT *
+		FROM ' . $this->table . '
+		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
+		';
+		//WHERE terms.ter_id = :termsId
+		//GROUP BY :termsId
+		
+		//WHERE terms.ter_name = :terms
+
+		$stmt = $this->dbh->prepare($sql);
+		$stmt->bindValue(':termsId', $termsId);
+
+		if ($stmt->execute() === false) {
+			debug($stmt->errorInfo());
+		} else {
+			return $stmt->fetchAll();
+		}
+		return false;
+	}
+	
 }
