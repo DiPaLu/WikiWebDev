@@ -10,8 +10,30 @@ class ProfilController extends Controller{
  
     
     public function parametre(){
-        
         $this->show('profil/parametre');
+    }
+    
+    public function parametrePost(){
+        $errorList = array();
+        $successList = array();
+        
+        $pseudo = isset($_POST['pseudo']) ? trim(strip_tags($_POST['pseudo'])) : '';
+        $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+        $formOk = true;
+        
+        if(empty($pseudo)){
+            $errorList[] = 'Pseudo vide<br/>';
+            $formOk = false;
+        }
+        
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            $errorList[] = 'Email invalide<br>';
+            $formOk = false;
+        }
+        if(empty($email)){
+            $errorList[] = 'Email vide<br/>';
+            $formOk = false;
+        }
     }
     
     public function delete(){

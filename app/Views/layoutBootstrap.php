@@ -31,7 +31,7 @@
 				   <li><a href="<?= $this->url('user_login') ?>">Se connecter</a></li>
 				   <li><a href="<?= $this->url('user_signup') ?>">S'incrire</a></li>
 			   <?php else : ?>
-				   <li><a href="<?= $this->url('profil_profil') ?>">Espace Membre</a></li>
+				   <li><a href="<?= $this->url('profil_parametre') ?>">Espace Membre</a></li>
 				   <li><a href="<?= $this->url('user_logout') ?>">Se déconnecter</a></li>
 			   <?php endif ?>
 			</ul>

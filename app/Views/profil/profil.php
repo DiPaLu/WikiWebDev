@@ -8,7 +8,7 @@ $this->start('main_content');
 ?>
 <div class="container">
     <div class="row">
-        <ul class="list-unstyled list-inline">
+        <ul class="list-unstyled list-inline pull-right">
             <li><a href="<?= $this->url('profil_parametre') ?>">Modifier</a></li>
         </ul>  
         <div class="col-lg-3">

@@ -6,18 +6,21 @@ $this->layout('layoutBootstrap', ['title' => 'Profil']);
 // Début du bloc d'affichage
 $this->start('main_content');
 ?>
-<ul class="list-unstyled list-inline">
-    <li><a href="<?= $this->url('profil_profil') ?>">Retour</a></li>
+<ul class="list-unstyled list-inline pull-right">
+    <li><a href="<?= $this->url('profil_profil') ?>">Afficher</a></li>
 </ul>
 <div class="col-lg-3">
+    <label>Avatar</label><br/>
+        <input type="file" name="file"/>
+        <br/>
 <img class="img-circle" src="<?= $this->assetUrl('img/avatar/avatar_defaut.png'); ?>"/>
 </div>
 <div class="col-lg-9">
     <form action="" method="post" enctype="multipart/form-data">
         <label>Pseudo</label><br/>
         Pseudo actuel<input type="text" class="form-control input-sm" name="pseudo" value="<?= $w_user['usr_pseudo'] ?>"/>
-        Modifier avatar<input type="file" name="file"/>
         <input class="pull-right btn" type="submit" value="Modifier"/>
+        <br/>
     </form>
     <br/>
     <br/>
