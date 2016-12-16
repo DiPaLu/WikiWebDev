@@ -29,8 +29,7 @@ class UserController extends Controller {
         
         $email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
-        //$_SESSION['email'] = $email;
-
+        
         // Validation des données
         $formOk = true;
         if (empty($email)) {
@@ -75,8 +74,6 @@ class UserController extends Controller {
     }
 
     public function signup() {
-        // J'appelle l'API Google-Captcha
-        //$this->googleCaptcha();
         // Je passe les variables à vide (initialise)
         $this->show('user/signup', array(
             'errorList' => array(),
@@ -117,7 +114,6 @@ class UserController extends Controller {
             $errorList[] = 'Les mots de passe sont différents<br>';
             $formOk = false;
         }
-        
         // J'appelle l'API Google-Captcha
         if ($this->googleCaptcha()) {
             $successList[] = "Captcha ok";
