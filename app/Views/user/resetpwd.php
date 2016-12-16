@@ -1,6 +1,6 @@
 <?php
 //hérite du fichier layout.php à la racine de app/Views/default/
-$this->layout('layoutBootsrap', ['title' => 'Change password']);
+$this->layout('layoutBootstrap', ['title' => 'Change password']);
 ?>
 <?php
 // Début du bloc d'affichage
