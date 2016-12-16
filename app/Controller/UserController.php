@@ -13,49 +13,6 @@ use \Model\UsersModel;
  * @author Patrick
  */
 class UserController extends Controller {
-    
-    private function googleCaptcha() {
-        $errorList = array();
-        $successList = array();
-        //$formOK = true;
-        
-        // Vérifie si le captcha est présent
-        $captcha = isset($_POST['g-recaptcha-response']) ? trim(strip_tags($_POST['g-recaptcha-response'])) : '';
-        //var_dump($captcha);
-        
-//        if (empty($captcha)) {
-//            $errorList[] = 'Pas de spammeurs ou de robots !<br>';
-//            //$formOk = false;
-//            
-//        }
-        
-        
-            //var_dump($formOk); exit;
-        
-        // Cléf secrète Google
-        $secret = '6LcF-A4UAAAAANYs33HxPpyC9mgc5CGZ3UkEXolq';
-        // Recupère le hash
-        $captcha = $_POST['g-recaptcha-response'];
-        // Recupère l'adresse IP du client
-        $address = $_SERVER['REMOTE_ADDR'];
-        // Envoie une requête de vérification chez GOOGLE
-        $answer = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha&remoteip=$address");
-        // Recupère la réponse
-        $reply = json_decode($answer, TRUE);
-        // Affichage de la réponse
-        if ($reply['success']) {
-            $successList[] = "Captcha ok";
-        } else {
-            $errorList[] = "Pas de spammeurs ou de robots !";
-            $this->show('user/signup', array(
-                'errorList' => $errorList
-            ));
-        }
-        
-        
-    }
-    
-
     // Méthodes pour le formulaire login
     public function login() {
         //Affiche le formulaire login en GET
@@ -118,6 +75,8 @@ class UserController extends Controller {
     }
 
     public function signup() {
+        // J'appelle l'API Google-Captcha
+        //$this->googleCaptcha();
         // Je passe les variables à vide (initialise)
         $this->show('user/signup', array(
             'errorList' => array(),
@@ -157,13 +116,22 @@ class UserController extends Controller {
         if ($password != $passwordConfirm) {
             $errorList[] = 'Les mots de passe sont différents<br>';
             $formOk = false;
+        }    
+        if ($this->googleCaptcha()) {
+            debug($reply);
+            $successList[] = "Captcha ok";
+        } else {
+            $errorList[] = "Pas de spammeurs ou de robots !";
+            $this->show('user/signup', array(
+                'errorList' => $errorList,
+                'pseudo' => '',
+                'email' => '',
+                'successList' => array()
+            ));
         }
         
-            
         if ($formOk) {
-            // J'appelle l'API Google-Captcha
-            $this->googleCaptcha();
-            
+        // J'appelle l'API Google-Captcha
             $usersModel = new UsersModel();
             // Vérifier email inexistant
             if ($usersModel->emailExists($email)) {
@@ -356,6 +324,29 @@ class UserController extends Controller {
             return FALSE;
         } else {
             return TRUE;
+        }
+    }
+    
+    static function googleCaptcha() {
+        $errorList = array();
+        $successList = array();
+        $captcha = '';
+        
+        // Vérifie si le captcha est présent
+        $captcha = isset($_POST['g-recaptcha-response']) ? trim(strip_tags($_POST['g-recaptcha-response'])) : '';
+        // Cléf secrète Google
+        $secret = '6Lei_w4UAAAAAJhz4btBgG6boIs_8KNZ1PQjuNRR';
+//        $captcha = $_POST['g-recaptcha-response'];
+        // Recupère l'adresse IP du client
+        $address = $_SERVER['REMOTE_ADDR'];
+        // Envoie une requête de vérification chez GOOGLE
+        $answer = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha&remoteip=$address");
+        // Recupère la réponse
+        $reply = json_decode($answer, TRUE);
+        if ($reply['success']) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
