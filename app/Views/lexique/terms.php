@@ -50,7 +50,7 @@ $this->start('main_content');
 			  <h3>Liste des mots :</h3>
 			  <ul>
 				<?php foreach ($resultList as $result) : ?>
-					<li><a href="<?= $this->url('terms_get_terms_details') ?>"><?= $result['ter_name'] ?></a><br><?= $result['def_description'] ?></li><br>
+					<li><a href="<?= $this->url('terms_get_terms_details', array('termsId'=>$result['ter_id'], 'terms'=>$result['ter_name'])) ?>"><?= $result['ter_name'] ?></a><br><?= $result['def_description'] ?></li><br>
 				<?php endforeach; ?>
 			  </ul>
 		    </div>
