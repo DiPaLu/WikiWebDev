@@ -32,6 +32,7 @@
 				   <li><a href="<?= $this->url('user_signup') ?>">S'incrire</a></li>
 			   <?php else : ?>
 				   <li><a href="<?= $this->url('profil_profil') ?>">Espace Membre</a></li>
+				   <li><a href="<?= $this->url('admin_get_admin') ?>">Espace Admin</a></li>
 				   <li><a href="<?= $this->url('user_logout') ?>">Se déconnecter</a></li>
 			   <?php endif ?>
 			</ul>
@@ -56,6 +57,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<?= $this->assetUrl('js/front.js') ?>"></script>
+	<script type="text/javascript" src="<?= $this->assetUrl('js/choixPageParCategory.js') ?>"></script>
    </body>
 </html>
