@@ -3,6 +3,7 @@
 namespace Controller;
 
 use \W\Controller\Controller;
+use \Model\AdminModel;
 
 
 /**
@@ -12,12 +13,43 @@ use \W\Controller\Controller;
  */
 class AdminController extends Controller {
     //put your code here
+       
     public function getAdmin() {
-        $loggedUser = $this->getUser();
-        //debug($loggedUser);
-        $this->show('admin/admin');
+          //$loggedUser = $this->getUser();
+          $adminModel = new AdminModel();
+          $usersList = $adminModel->getAllUsers();
+          $usersListUtilisateur = $adminModel->getUsersByRoleUtilisateur();
+          $usersListModerateur = $adminModel->getUsersByRoleModerateur();
+          $usersListAdmin = $adminModel->getUsersByRoleAdmin();
+
+          $this->show('admin/admin', array(
+
+              'usersList' => $usersList,
+              'usersListUtilisateur' => $usersListUtilisateur,
+              'usersListModerateur' => $usersListModerateur,
+              'usersListAdmin' => $usersListAdmin
+          ));
     }
-    public function registerAdmin(){
+    public function getTermsList() {
+          $adminModel = new AdminModel();
+          $termsList = $adminModel->getAllTerms();
+
+          $this->show('admin/admin', array(
+
+              'termsList' => $termsList
+          ));
+    }
+    public function getCategoriesList() {
+          $adminModel = new AdminModel();
+          $categoriesList = $adminModel->getAllCategories();
+
+          $this->show('admin/admin', array(
+
+              'categoriesList' => $categoriesList
+          ));
+    }
+    /*
+     * public function registerAdmin(){
 	//autorise l'accès à cette page seulement aux 'superadmin'
 	//le tableau n'est pas nécessaire lorsqu'il n'y a qu'un rôle à spécifier
 	$this->allowTo('admin');
@@ -45,7 +77,6 @@ class AdminController extends Controller {
 	$this->allowTo(['admin']);
 
 	//reste du code...
-  }
+    }
+    */
 }
-    
-
