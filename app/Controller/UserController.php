@@ -150,7 +150,7 @@ class UserController extends Controller {
                     
                     // J'envoie un email de bienvenue
                     $subject = "Votre inscription sur WikiWebDev";
-                    $welcome = "Bonjour,<br /><br />Nous sommes ravis de vous compter parmis nos membres et nous vous souhaitons de bonnes fêtes de fin d'année !<br /><br />L'équipe WikiWebDev.";
+                    $welcome = "Bonjour,<br /><br />Nous sommes ravis de vous compter parmis nos membres et nous vous souhaitons de bonnes f&ecirc;tes de fin d'ann&eacute;e !<br /><br />L'&eacute;quipe WikiWebDev.";
                     $this->envoieMail($welcome, $userData['usr_email'], $subject);
                     
                     // Insertion dans la db dernière connexion
@@ -220,7 +220,7 @@ class UserController extends Controller {
                     'token' => $token // token => [:token] in routes.php
                 ));
                 // Texte HTML à envoyer par e-mail
-                $html = '<p>Une demande de reset de votre mot de passe nous a été demandée. Veuillez utiliser le lien suivant pour valider :<a href="' . 'http://localhost' . $resetUrl . '">Changer mot de passe</a></p>';
+                $html = '<p>Une demande de reset de votre mot de passe nous a &eacute;t&eacute; demand&eacute;e. Veuillez utiliser le lien suivant pour valider :<a href="' . 'http://localhost' . $resetUrl . '">Changer mot de passe</a></p>';
                 //$successList[] = $html;
 
                 $subject = "Votre demande de changement mot de passe";
@@ -267,7 +267,7 @@ class UserController extends Controller {
                 $formOK = false;
             }
 
-            if (strlen($password < 8 || $password2 < 8)) {
+            if (strlen($password) < 8 || strlen($password2) < 8) {
                 $errorList[] = "Au moins 8 caractères !";
                 $formOK = false;
             }
