@@ -54,10 +54,16 @@ class TermsController extends Controller {
 		));
 	}
 	/**
+	 * Methode qui tri les mots par category
+	 */
+	public function getTermsByCategory(){
+		$this->show('lexique/terms');
+	}
+	/**
 	 * methode qui propose d'ajouter une définition au mot choisi
 	 */
 	public function getTermsAdd($termsId) {
-  		$this->show('lexique/termsAddDetails');
+   		$this->show('lexique/termsAddDetails');
 	}
 	
 	/**
