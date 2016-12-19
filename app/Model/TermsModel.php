@@ -40,7 +40,7 @@ class TermsModel extends \W\Model\Model {
 	}
 	
 	/**
-	 * recupere un mot et ses définitions
+	 * recupere un mot en detail et ses définitions
 	 * @return boolean
 	*/
 	public function getTermsDetails($termsId) {
@@ -50,10 +50,12 @@ class TermsModel extends \W\Model\Model {
 		FROM ' . $this->table . '
 		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
 		WHERE terms.ter_id = :termsId
+		AND definition.def_status = :Validated
 		';
 		
 		$stmt = $this->dbh->prepare($sql);
 		$stmt->bindValue(':termsId', $termsId);
+		$stmt->bindValue(':Validated', 'Validated');
 
 		if ($stmt->execute() === false) {
 			debug($stmt->errorInfo());
@@ -85,6 +87,31 @@ class TermsModel extends \W\Model\Model {
 			debug($stmt->errorInfo());
 		} else {
 			return $stmt->fetchAll();
+		}
+		return false;
+	}
+	
+	/**
+	 * recupere le resultat du select category
+	 * @return boolean
+	*/
+	public function getTermsByCategory($catId) {
+		
+		$sql = '
+		SELECT *
+		FROM ' . $this->table . '
+		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
+		WHERE category_cat_id = :catId
+		';
+		//INNER JOIN terms.category_cat_id = catergory.cat_id
+		
+		$stmt = $this->dbh->prepare($sql);
+		$stmt->bindValue(':catId', $catId);
+
+		if ($stmt->execute() === false) {
+			debug($stmt->errorInfo());
+		} else {
+			return( $stmt->fetchAll());
 		}
 		return false;
 	}

@@ -1,6 +1,6 @@
 <?php
 //hérite du fichier layout.php à la racine de app/Views/default/
-$this->layout('layoutBootstrap', ['title' => 'Liste des mots']);
+$this->layout('layoutBootstrap', ['title' => 'Résultat de la recherche']);
 ?>
 <?php
 // Début du bloc d'affichage
@@ -20,7 +20,8 @@ $this->start('main_content');
 			  <h3>Liste des mots :</h3>
 			  <ul>
 				<?php foreach ($searchResult as $result) : ?>
-					<li><a href="<?= $this->url('terms_get_terms_details')?>"><?= $result['ter_name'] ?></a><br><?= $result['def_description'] ?></li><br>
+					<li><a href="<?= $this->url('terms_get_terms_details', array('termsId' => $result['ter_id'], 'terms' => $result['ter_name'])) ?>"><?= $result['ter_name'] ?></a><br><?= $result['def_description'] ?></li><?php if ($result['ter_tags']): ?>Tags: <?= $result['ter_tags'] ?></li>
+						<?php endif; ?><br><br>
 				<?php endforeach; ?>
 			  </ul>
 		    </div>
