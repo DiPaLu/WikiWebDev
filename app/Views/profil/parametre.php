@@ -38,6 +38,7 @@ $this->start('main_content');
     <form action="" method="post">
         <label>Votre email</label><br/>
         Adresse e-mail actuelle <input type="text" name="email" class="form-control input-sm" name="email" value="<?= $w_user['usr_email'] ?>">
+        <a href="parametre.php"></a>
     </form>
     <br/>
     <br/>

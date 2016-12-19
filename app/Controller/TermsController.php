@@ -53,6 +53,7 @@ class TermsController extends Controller {
 		    'detailsTerms' => $detailsTerms,
 		));
 	}
+        
 	/**
 	 * Methode qui tri les mots par category
 	 */
@@ -63,7 +64,16 @@ class TermsController extends Controller {
 	 * methode qui propose d'ajouter une définition au mot choisi
 	 */
 	public function getTermsAdd($termsId) {
-   		$this->show('lexique/termsAddDetails');
+                $defModel = new TermsModel();
+		$resultList = $defModel->getTermsDetails($termsId);
+                if($resultList[0]['ter_name']){
+                    $nom = $resultList[0]['ter_name'];  
+                } else {
+                    $this->showNotFound() ;
+                }
+   		$this->show('lexique/termsAddDetails', array(
+                    'nom' => $nom
+                ));
 	}
 	
 	/**
