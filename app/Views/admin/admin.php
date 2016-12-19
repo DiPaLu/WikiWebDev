@@ -70,49 +70,43 @@ $this->layout('layoutBootstrap', ['title' => 'Admin']);
     </div>
     <div class="panel-body">
         <div class="tab-content">
-            <div class="row">
 
+            <?php foreach ($resultsList as $result) : ?>
 
-                <!-- je shoppe le code de Paul pour afficher la liste des termes -->
-                <ul>
-                    <?php foreach ($resultsList as $result) : ?>
+                <?php if ($result['ter_status'] == 'Pending') : ?>
 
-                        <?php if ($result['ter_status'] == 'Pending') : ?>
-
-                            <li>
-                                <div class="col-sm-2">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <ul>
+                                <li>
                                     <?= $result['ter_name'] ?>
-                                </div>
-                                <div class="col-sm-8">  
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-6">  
+                            <ul>
+                                <li>
                                     <?= $result['def_description'] ?>
-                                </div>
-                                <div class="col-sm-2">
-                                    <form>
-                                        <div class="col-sm-2">
-                                            <label class="radio">
-                                                <input type="radio" name="optradio">Valider
-                                            </label>
-                                            <label class="radio">
-                                                <input type="radio" name="optradio">Modifier
-                                            </label>
-                                            <label class="radio">
-                                                <input type="radio" name="optradio">Refuser
-                                            </label>
-                                            <label class="radio">
-                                                <input type="radio" name="optradio">Garder: envoyer en bass de la liste
-                                            </label>
-                                            <button button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">Confirmer</span></button>
-                                        </div>
-                                    </form>
-                                </div>    
-                            </li>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </ul>                       
-            </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-4">
+                            
+                            <button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">OK</span></button>
+                            <button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">Edit</span></button>
+                            <button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">Wait</span></button>
+                            <button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">Delete</span></button>
+                        </div>
+                    </div>
+
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+            
         </div>
     </div>
-</div>
 </div>
 
 
