@@ -5,8 +5,7 @@ namespace Controller;
 use \W\Controller\Controller;
 use \Model\TermsModel;
 use \Model\CategoryModel;
-use \Model\UsersModel;
-
+use \W\Model\Model;
 
 /**
  * Description of LexiqueController
@@ -98,23 +97,61 @@ class TermsController extends Controller {
 	 * methode qui propose d'ajouter une définition au mot choisi
 	 */
 	public function getTermsAdd($termsId) {
-                $defModel = new TermsModel();
-		$resultList = $defModel->getTermsDetails($termsId);
-                if($resultList[0]['ter_name']){
-                    $nom = $resultList[0]['ter_name'];  
-                } else {
-                    $this->showNotFound() ;
-                }
-   		$this->show('lexique/termsAddDetails', array(
-                    'nom' => $nom
-                ));
+            $defModel = new TermsModel();
+            $resultList = $defModel->getTermsDetails($termsId);
+            if($resultList[0]['ter_name']){
+                $nom = $resultList[0]['ter_name'];  
+            } else {
+                $this->showNotFound() ;
+            }
+            $this->show('lexique/termsAddDetails', array(
+                'nom' => $nom,
+                'errorList' => array(),
+                'successList' => array()
+            ));
 	}
 	
 	/**
-	 * methode qui propose un mot ou une définition
+	 * methode qui propose une définition
 	 */
-	public function getTermsAddPost() {
-		$this->show('lexique/termsAdd');
+	public function getTermsAddPost($termsId) {
+            $errorList = array();
+            $successList = array();
+            
+            $definition = isset($_POST['definition']) ? trim($_POST['definition']) : '';
+            $formOk = true;
+            
+            if(empty($definition)){
+                $errorList[] = 'Definition vide<br/>';
+                $formOk = false;
+            }
+            
+             $defModel = new TermsModel();
+             $resultList = $defModel->getTermsDetails($termsId);
+            if($resultList[0]['ter_name']){
+                $nom = $resultList[0]['ter_name'];  
+            } else {
+                $this->showNotFound() ;
+            }
+            
+            if($formOk){
+                $modelTerm = new \Model\DefinitionModel();
+                $connectedAdmin = $this->getUser();
+                $modelTerm->insert(array(
+                   'def_status' => 'Pending',
+                    'def_description' => $definition,
+                    'terms_ter_id' => $resultList[0]['ter_id'],
+                    'users_usr_id' => $connectedAdmin['usr_id']
+                ));
+                $successList[] = 'La définition sera ajouté après vérification de l\'admin';
+            }
+            
+            $this->show('lexique/termsAddDetails', array(
+                'nom' => $nom,
+                'errorList' => $errorList,
+                'successList' => $successList
+            ));
+            
 	}
 
 }

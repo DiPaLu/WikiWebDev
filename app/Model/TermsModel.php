@@ -62,6 +62,9 @@ class TermsModel extends \W\Model\Model {
 		}
 		return false;
 	}
+        
+        
+
 	
 	/**
 	 * recupere le resultat de la recherche

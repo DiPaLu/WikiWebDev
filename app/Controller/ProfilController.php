@@ -63,7 +63,7 @@ class ProfilController extends Controller{
         }
         
         $this->show('profil/parametre', array(
-            'errorList' => $errorList,
+            'errorList' => $$errorList,
             'pseudo' => $pseudo,
             'email' => $email,
             'successList' => $successList
