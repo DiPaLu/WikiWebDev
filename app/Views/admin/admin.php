@@ -70,40 +70,41 @@ $this->layout('layoutBootstrap', ['title' => 'Admin']);
     </div>
     <div class="panel-body">
         <div class="tab-content">
-            <div class="row">
 
+            <?php foreach ($resultsList as $result) : ?>
 
-                <?php foreach ($resultsList as $result) : ?>
+                <?php if ($result['ter_status'] == 'Pending') : ?>
 
-                    <?php if ($result['ter_status'] == 'Validated') : ?>
-
-                        <ul>
-                            <li>
-
-                                <div class="col-sm-2">
-
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <ul>
+                                <li>
                                     <?= $result['ter_name'] ?>
+                                </li>
+                            </ul>
+                        </div>
 
-                                </div>
-
-                                <div class="col-sm-6">  
+                        <div class="col-sm-6">  
+                            <ul>
+                                <li>
                                     <?= $result['def_description'] ?>
-                                </div>
+                                </li>
+                            </ul>
+                        </div>
 
-                                <div class="col-sm-4">
+                        <div class="col-sm-4">
+                            
+                            <button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">OK</span></button>
+                            <button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">Edit</span></button>
+                            <button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">Wait</span></button>
+                            <button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">Delete</span></button>
+                        </div>
+                    </div>
 
-                                    <button button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">Accepter</span></button>
-                                    <button button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">Refuser</span></button>
-                                </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
 
-
-
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </li>
-                </ul>
-
-            </div>
+            
         </div>
     </div>
 </div>
