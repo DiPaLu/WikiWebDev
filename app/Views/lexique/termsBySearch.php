@@ -6,19 +6,21 @@ $this->layout('layoutBootstrap', ['title' => 'Liste des mots']);
 // Début du bloc d'affichage
 $this->start('main_content');
 ?>
+<div class="col-xs-2"></div>
+<br>
 <div class="row">
     <div class="col-xs-12">
 	  <div class="panel panel-primary">
 		<div class="panel-heading">
-		    <h3 class="panel-title">Lexique pour développeur</h3>
+		    <h3 class="panel-title">Resultats de la recherche</h3>
 		</div>
 		<div class="panel-body">
 		    <div class="tab-content">
+			 
+			  <h3>Liste des mots :</h3>
 			  <ul>
-				<?php foreach ($detailsTerms as $details) : ?>
-				<li><span class="termsFont"><?= $details['ter_name'] ?></span><br><?= $details['def_description'] ?> <a href="<?= $this->url('terms_add_details', array('termsId'=>$details['ter_id'])) ?>" id='proposition'>Proposer une autre définition</a></li><?php if ($details['ter_tags']): ?>Tags: <?= $details['ter_tags'] ?></li>
-					<?php endif; ?><br><br>
-
+				<?php foreach ($searchResult as $result) : ?>
+					<li><a href="<?= $this->url('terms_get_terms_details')?>"><?= $result['ter_name'] ?></a><br><?= $result['def_description'] ?></li><br>
 				<?php endforeach; ?>
 			  </ul>
 		    </div>
