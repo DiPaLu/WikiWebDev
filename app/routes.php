@@ -24,7 +24,7 @@ $w_routes = array(
     // Page Terms detail
     ['GET', '/terms/[:termsId]/[:terms]/', 'Terms#getTermsDetails', 'terms_get_terms_details'],
     // Page ajout de mot et définition
-    ['GET', '/terms/add/', 'Terms#getTermsAdd', 'terms_get_terms_add'],
+    ['GET', '/terms/add/[:termsId]', 'Terms#getTermsAdd', 'terms_get_terms_add'],
     // Post pour ajout des mots et définitions dans les 2 cas de figure
     ['POST', '/terms/add/', 'Terms#getTermsAddPost', 'terms_get_terms_add_post'],
     // Page Terms global par category           
