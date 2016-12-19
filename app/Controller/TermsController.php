@@ -20,12 +20,12 @@ class TermsController extends Controller {
 	public function getTerms() {
 		//$loggedUser = $this->getUser();
 		//var_dump($loggedUser);
-		//j'instancie la class TermsModel et lance la methode getTerms
+		//je récupère tous les mots + définitions dans la bdd
 		$defModel = new TermsModel();
 		$resultList = $defModel->getTerms();
 		//debug($resultList);
 		//
-		//j'instancie la class CategoryModel et lance la methode
+		//je récupère toutes les categories dans la bdd
 		$catModel = new CategoryModel();
 		$categoryList = $catModel->getCategory();
 		//j'initialise mes variables
@@ -44,7 +44,7 @@ class TermsController extends Controller {
 	 * methode qui récupère un mot et ses définitions
 	 */
 	public function getTermsDetails($termsId) {
-		//j'instancie la class TermsModel et lance la methode
+		//Je récupère un mot et ses définitions dans la bdd
 		$detModel = new TermsModel();
 		$detailsTerms = $detModel->getTermsDetails($termsId);
 		//debug($detailsTerms);
@@ -66,7 +66,7 @@ class TermsController extends Controller {
 	 */
 	public function getTermsBySearchPost() {
 		
-		// recuperation du champ de recherche
+		// je recupere le contenu du champ de recherche
 		$searchform = isset($_POST['search']) ? strip_tags($_POST['search']) : '';
 		
 		// Validation des données
@@ -76,7 +76,7 @@ class TermsController extends Controller {
 			$formOk = false;
             }
 		if ($formOk) {
-		//j'instancie la class TermsModel et lance la methode
+		// Je récupère le resultat de la recherche dans la bdd
 		$termsModel = new TermsModel();
 		$searchResult = $termsModel->getTermsBySearch($searchform);
 		//debug($searchResult);
@@ -89,8 +89,27 @@ class TermsController extends Controller {
 	/**
 	 * Methode qui tri les mots par category
 	 */
-	public function getTermsByCategory(){
-		$this->show('lexique/terms');
+	public function getTermsByCategory($catId){
+
+		//je récupère les catégories dans la bdd
+		$catModel = new CategoryModel();
+		$categoryList = $catModel->getCategory();
+		//debug($categoryList);
+		
+		//Je récupère les mots d'une categorie dans la bdd
+		$defModel = new TermsModel();
+		$resultList = $defModel->getTermsByCategory($catId);
+		//debug($resultList);
+		//j'initialise mes variables
+		$currentId = 0;
+		//debug($categoryList);
+
+		//je defini des variables pour la vue
+		$this->show('lexique/termsByCategory', array(
+		    'resultList' => $resultList,
+		    'categoryList' => $categoryList,
+		    'currentId' => $currentId
+		));
 	}
 	
 	/**

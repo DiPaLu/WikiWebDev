@@ -1,6 +1,6 @@
 <?php
 //hérite du fichier layout.php à la racine de app/Views/default/
-$this->layout('layoutBootstrap', ['title' => 'Liste des mots']);
+$this->layout('layoutBootstrap', ['title' => 'Détail d\'un mot et ses définitions']);
 ?>
 <?php
 // Début du bloc d'affichage
@@ -16,10 +16,11 @@ $this->start('main_content');
 		    <div class="tab-content">
 			  <ul>
 				<?php foreach ($detailsTerms as $details) : ?>
-				<li><span class="termsFont"><?= $details['ter_name'] ?></span><br><?= $details['def_description'] ?> <a href="<?= $this->url('terms_add_details', array('termsId'=>$details['ter_id'])) ?>" id='proposition'>Proposer une autre définition</a></li><?php if ($details['ter_tags']): ?>Tags: <?= $details['ter_tags'] ?></li>
+				<li><span class="termsFont"><?= $details['ter_name'] ?></span><br><?= $details['def_description'] ?> </li><?php if ($details['ter_tags']): ?>Tags: <?= $details['ter_tags'] ?></li>
 					<?php endif; ?><br><br>
 
 				<?php endforeach; ?>
+				<a href="<?= $this->url('terms_add_details', array('termsId'=>$details['ter_id'])) ?>" id='proposition'>Proposer une autre définition</a>
 			  </ul>
 		    </div>
 		</div>
@@ -30,4 +31,3 @@ $this->start('main_content');
 //fin du bloc
 $this->stop('main_content');
 ?>
-
