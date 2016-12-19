@@ -12,20 +12,29 @@ use \Model\TermsModel;
  * @author Etudiant
  */
 class AdminController extends Controller {
-
-    //put your code   
-    public function getAdmin() {
-        $loggedUser = $this->getUser();
+    
+    public function getAdmin() {             
+        $loggedUser = $this->getUser();        
+        //debug($loggedUser);
         $usersModel = new UsersModel();
         $usersList = $usersModel->getAllUsers();
         $termsModel = new TermsModel();
         $resultsList = $termsModel->getTerms();
-
+        
+        $this->allowTo(array('1','2'));
+                      
+        /*
+        if ($loggedUser['usr_role'] >0) {
+         * */
         $this->show('admin/admin', array(
             'usersList' => $usersList,
             'resultsList' => $resultsList
         ));
-        
+        /*
+        } else {
+            $this->show('/default/home'); // changer a erreur 403: vous n'avez pas acces
+        }
+         */
     }
-
 }
+
