@@ -12,7 +12,7 @@
    </head>
    <body>
 	<div class="container">
-	   <nav class="navbar navbar-default navbar-inverse">
+	   <nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 		   <!-- Brand and toggle get grouped for better mobile display -->
 		   <div class="navbar-header">
@@ -31,7 +31,7 @@
 				   <li><a href="<?= $this->url('user_login') ?>">Se connecter</a></li>
 				   <li><a href="<?= $this->url('user_signup') ?>">S'incrire</a></li>
 			   <?php else : ?>
-				   <li><a href="<?= $this->url('profil_parametre') ?>">Espace Membre</a></li>
+				   <li><a href="<?= $this->url('profil_profil') ?>">Espace Membre</a></li>				     <li><a href="<?= $this->url('admin_get_admin') ?>">Espace Admin</a></li>
 				   <li><a href="<?= $this->url('user_logout') ?>">Se déconnecter</a></li>
 			   <?php endif ?>
 			</ul>

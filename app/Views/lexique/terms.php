@@ -9,7 +9,7 @@ $this->start('main_content');
 <!-- Barre de recherche -->
 <div class="col-xs-2"></div>
 <div class="col-xs-8">
-    <form role="form">
+    <form role="form" method="post" action="<?= $this->url('terms_get_terms_by_search') ?>">
 	  <div class="row">
 		<h1 class="text-center">Barre de recherche</h1>
 		<div class="form-group">
@@ -34,25 +34,31 @@ $this->start('main_content');
 		</div>
 		<div class="panel-body">
 		    <div class="tab-content">
-			  <form action="" method="post">
-				<div class="form-group">
-				    <select name="selCat">
-					  <option value="0">Catégories</option>
-					  <!-- je remplis le menu déroulant des catégories -->
-					  <?php foreach ($categoryList as $catList) : ?>
-						  <option value="<?php echo $catList['cat_id']; ?>"<?php echo $currentId == $catList['cat_id'] ? ' selected="selected"' : ''; ?>><?php echo $catList['cat_name']; ?>
-						  </option>
+			  <div class="row">
+				<div class="col-xs-8">
+				    <form action="" method="get" id="selectForm">
+					  <div class="form-group">
+						<select name="selCat" id="selCat">
+						    <option value="0">Catégories</option>
+						    <!-- je remplis le menu déroulant des catégories -->
+						    <?php foreach ($categoryList as $catList) : ?>
+							    <option value="<?php echo $catList['cat_id']; ?>"<?php echo $currentId == $catList['cat_id'] ? ' selected="selected"' : ''; ?>><?php echo $catList['cat_name']; ?>
+							    </option>
+						    <?php endforeach; ?>
+						</select>
+					  </div>
+				    </form>
+				    <h3>Liste des mots :</h3>
+				    <ul>
+					  <?php foreach ($resultList as $result) : ?>
+						  <li><a href="<?= $this->url('terms_get_terms_details', array('termsId' => $result['ter_id'], 'terms' => $result['ter_name'])) ?>" class="termsFont"><?= $result['ter_name'] ?></a><br><?= $result['def_description'] ?><br>
+							<?php if ($result['ter_tags']): ?>Tags: <?= $result['ter_tags'] ?></li>
+						  <?php endif; ?><br>
 					  <?php endforeach; ?>
-				    </select>
-				    <input type="submit" class="btn btn-primary" value="Go"/>
+				    </ul>
 				</div>
-			  </form>
-			  <h3>Liste des mots :</h3>
-			  <ul>
-				<?php foreach ($resultList as $result) : ?>
-					<li><a href="<?= $this->url('terms_get_terms_details', array('termsId'=>$result['ter_id'], 'terms'=>$result['ter_name'])) ?>"><?= $result['ter_name'] ?></a><br><?= $result['def_description'] ?></li><br>
-				<?php endforeach; ?>
-			  </ul>
+				<div class="col-xs-4"></div>
+			  </div>
 		    </div>
 		</div>
 	  </div>
@@ -62,4 +68,6 @@ $this->start('main_content');
 //fin du bloc
 $this->stop('main_content');
 ?>
-
+<?php $this->start('js') ?>
+	<script type="text/javascript" src="<?= $this->assetUrl('js/choixPageParCategory.js') ?>"></script>
+<?php $this->stop('js') ?>

@@ -1,12 +1,22 @@
+body{
+    margin-top: 100px;
+}
 
+.termsFont{
+    font-size: 16px;
+    color: white;
+}
 a {
 	text-decoration: none;
 }
-
+li{
+    list-style: none;
+}
 a:hover {
 	color: #3278B5;
 	text-decoration: none;
 }
+/*couleur lien proposition page details*/
 #proposition{
     float: right;
     color: #3278B5;
@@ -14,7 +24,8 @@ a:hover {
 #proposition:hover{
     color: #C8C8C8;
 }
-/*Panel tabs*/
+
+/*Panel tabs pour toutes les pages*/
 .panel-tabs {
     position: relative;
     bottom: 30px;

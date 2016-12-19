@@ -26,9 +26,12 @@ $w_routes = array(
     // Post pour ajout des mots et définitions dans les 2 cas de figure
     ['POST', '/terms/add/', 'Terms#getTermsAddPost', 'terms_get_terms_add_post'],
     // Page Terms global par category           
-    ['GET', '/terms/', 'Terms#getTermsByCategory', 'terms_get_terms_by_category'],
+    ['GET', '/terms/[:category]', 'Terms#getTermsByCategory', 'terms_get_terms_by_category'],
     // Page Terms global            
     ['GET', '/terms/', 'Terms#getTerms', 'terms_get_terms'],
+    // Page de recherche
+    ['GET', '/terms/searchResult/', 'Terms#getTermsBySearch', 'terms_get_terms_by_search'],
+    ['POST', '/terms/searchResult/', 'Terms#getTermsBySearchPost', 'terms_get_terms_by_search_post'],
     
     // Page admin
     ['GET', '/admin/', 'Admin#getAdmin', 'admin_get_admin'],
