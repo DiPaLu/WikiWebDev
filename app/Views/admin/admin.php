@@ -7,73 +7,92 @@ $this->layout('layoutBootstrap', ['title' => 'Admin']);
 
 <?php
 // pour permettre d'afficher le code suivant (la liste des utilisatuers) uniqeument a l'utilisateur avec role ADMIN
-if ($w_user['usr_role'] == 2) : ?>
+if ($w_user['usr_role'] == 2) :
+    ?>
 
-<h2>Welcome: Admin</h2>
+    <h2>Welcome: Admin</h2>
 
-<p><i>Espace administrateur</i></p>
-<!-- affiche la liste des utilisateurs (clickable) dans troi colonnes, par role: utilsateur, moderateur, admin -->
+    <p><i>Espace administrateur</i></p>
+    <!-- affiche la liste des utilisateurs (clickable) dans troi colonnes, par role: utilsateur, moderateur, admin -->
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3 class="panel-title">Liste des utiisateurs</h3>
-    </div>
-    <div class="panel-body">
-        <div class="tab-content">
-            <div class="row">
-                <div class="col-sm-4">
-                    <h4>Utilisateurs</h4>
-                    <ul>
-                        <?php foreach ($usersList as $currentUser) : ?>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Liste des utiisateurs</h3>
+        </div>
+        <div class="panel-body">
+            <div class="tab-content">
+                <div class="row">
+                    
+                    <!-- la liste des utilisateurs par role: utilsateurs simples-->
+                    
+                    <div class="col-sm-4">                                
+                        <h4>Utilisateurs</h4>
+                        <ul id="sortable1" class="connectedSortable">
+                            <?php foreach ($usersList as $currentUser) : ?>
 
-                            <?php if ($currentUser['usr_role'] == 0) : ?>
+                                <?php if ($currentUser['usr_role'] == 0) : ?>
 
-                                <li><a href="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a></li>
+                                    <li class="ui-state-default"><a href="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a></li>
 
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-                <div class="col-sm-4">
-                    <h4>Moderateurs</h4>
-                    <ul>
-                        <?php foreach ($usersList as $currentUser) : ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    
+                    <!-- la liste des utilisateurs par role: Modérateurs-->
+                    
+                    <div class="col-sm-4">
+                        <h4>Moderateurs</h4>
+                        <ul id="sortable2" class="connectedSortable">
+                            <?php foreach ($usersList as $currentUser) : ?>
 
-                            <?php if ($currentUser['usr_role'] == 1) : ?>
+                                <?php if ($currentUser['usr_role'] == 1) : ?>
 
-                                <li><a href="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a></li>
+                                    <li class="ui-state-default"><a href="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a></li>
 
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-                <div class="col-sm-4">
-                    <h4>Admins</h4>
-                    <ul>
-                        <?php foreach ($usersList as $currentUser) : ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
 
-                            <?php if ($currentUser['usr_role'] == 2) : ?>
+                    <script>
+                        $(function () {
+                            $("#sortable1, #sortable2").sortable({
+                                connectWith: ".connectedSortable"
+                            }).disableSelection();
+                        });
+                    </script>
+                    
+                    <!-- la liste des utilisateurs par role: administrateurs-->
 
-                                <li><a href="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a></li>
+                    <div class="col-sm-4">
+                        <h4>Admins</h4>
+                        <ul>
+                            <?php foreach ($usersList as $currentUser) : ?>
 
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </ul>
+                                <?php if ($currentUser['usr_role'] == 2) : ?>
+
+                                    <li><a href="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a></li>
+
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 <?php endif; ?>
 
 <?php
 // pour permettre d'afficher le code suivant (la liste des utilisatuers) uniqeument a l'utilisateur avec role ADMIN
-if ($w_user['usr_role'] == 1) : ?>
+if ($w_user['usr_role'] == 1) :
+    ?>
 
-<h2>Welcome: Moderator</h2>
+    <h2>Welcome: Moderator</h2>
 
-<p><i>Espace moderateur</i></p>
+    <p><i>Espace moderateur</i></p>
 
 <?php endif; ?>
 
@@ -84,22 +103,22 @@ if ($w_user['usr_role'] == 1) : ?>
     <div class="panel-heading">
         <h3 class="panel-title">Termes & définitions en attente de validation</h3>        
     </div>
-                  
-    
+
+
     <div class="panel-body">
         <div class="tab-content">
-            
-             <div class="row">
-                        <div class="col-sm-8">
-                            <h4 class="panel-title">Terme et définition à ajouter</h4>
-                        </div>
-                        <div class="col-sm-2"> 
-                            Demandé le
-                        </div>
-                        <div class="col-sm-2">
-                            Action
-                        </div>
-                    </div>
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <h4 class="panel-title">Terme et définition à ajouter</h4>
+                </div>
+                <div class="col-sm-2"> 
+                    Demandé le
+                </div>
+                <div class="col-sm-2">
+                    Action
+                </div>
+            </div>
 
 
 
@@ -107,7 +126,7 @@ if ($w_user['usr_role'] == 1) : ?>
 
                 <?php if ($result['ter_status'] == 'Pending') : ?>
 
-                   
+
                     <div class="row">
                         <div class="col-sm-8">
                             <ul>
@@ -126,11 +145,9 @@ if ($w_user['usr_role'] == 1) : ?>
                             </ul>
                         </div>
 
-
                         <div class="col-sm-2"><br />  
-
-                            <button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">Oui</span></button>                            
-                            <button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">Non</span></button>
+                            <button type="button" class="btn btn-primary btn-sm" type="submit">Valider</button>                            
+                            <button type="button" class="btn btn-primary btn-sm" type="submit">Refuser</button>
                         </div>
                     </div>
 
@@ -141,6 +158,8 @@ if ($w_user['usr_role'] == 1) : ?>
         </div>
     </div>
 </div>
+
+
 
 
 
