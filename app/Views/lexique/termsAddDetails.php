@@ -7,11 +7,23 @@ $this->layout('layoutBootstrap', ['title' => 'Liste des mots']);
 $this->start('main_content');
 ?>
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12"> 
 	  <div class="panel panel-primary">
 		<div class="panel-heading">
 		    <h3 class="panel-title">Proposer une autre définition</h3>
 		</div>
+              <?php if (sizeof($errorList) > 0) : ?>
+                  <?php foreach ($errorList as $currentError) : ?>
+                      <div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <?= $currentError ?></div>
+                  <?php endforeach; ?>
+              <?php endif; ?>
+              <?php if (sizeof($successList) > 0) : ?>
+                  <?php foreach ($successList as $currentSuccess) : ?>
+                      <div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <?= $currentSuccess ?></div>
+                  <?php endforeach; ?>
+              <?php endif; ?>
 		<div class="panel-body">
 		    <div class="tab-content">
                         <form action="" method="post">

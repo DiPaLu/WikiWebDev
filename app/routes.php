@@ -16,15 +16,14 @@ $w_routes = array(
     ['POST', '/forgotpassword/', 'User#lostpwdemailPost', 'user_lostpwd_post_email'],
     ['GET', '/changepassword/[:token]/', 'User#resetpwd', 'user_reset_pwd'],
     ['POST', '/changepassword/[:token]/', 'User#resetpwdPost', 'user_reset_pwd_post'],
-    
     // Page ajout sur un mot défini
     ['GET', '/terms/add/[:termsId]/', 'Terms#getTermsAdd', 'terms_add_details'],
+    ['POST', '/terms/add/[:termsId]/', 'Terms#getTermsAddPost', 'terms_get_terms_add_post'],
     // Page Terms detail
     ['GET', '/terms/[:termsId]/[:terms]/', 'Terms#getTermsDetails', 'terms_get_terms_details'],
     // Page ajout de mot et définition
-    ['GET', '/terms/add/[:termsId]', 'Terms#getTermsAdd', 'terms_get_terms_add'],
     // Post pour ajout des mots et définitions dans les 2 cas de figure
-    ['POST', '/terms/add/', 'Terms#getTermsAddPost', 'terms_get_terms_add_post'],
+   
     // Page Terms global par category           
     ['GET', '/terms/[:category]', 'Terms#getTermsByCategory', 'terms_get_terms_by_category'],
     // Page Terms global            
