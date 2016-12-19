@@ -73,46 +73,39 @@ $this->layout('layoutBootstrap', ['title' => 'Admin']);
             <div class="row">
 
 
-                <!-- je shoppe le code de Paul pour afficher la liste des termes -->
-                <ul>
-                    <?php foreach ($resultsList as $result) : ?>
+                <?php foreach ($resultsList as $result) : ?>
 
-                        <?php if ($result['ter_status'] == 'Pending') : ?>
+                    <?php if ($result['ter_status'] == 'Validated') : ?>
 
+                        <ul>
                             <li>
+
                                 <div class="col-sm-2">
+
                                     <?= $result['ter_name'] ?>
+
                                 </div>
-                                <div class="col-sm-8">  
+
+                                <div class="col-sm-6">  
                                     <?= $result['def_description'] ?>
                                 </div>
-                                <div class="col-sm-2">
-                                    <form>
-                                        <div class="col-sm-2">
-                                            <label class="radio">
-                                                <input type="radio" name="optradio">Valider
-                                            </label>
-                                            <label class="radio">
-                                                <input type="radio" name="optradio">Modifier
-                                            </label>
-                                            <label class="radio">
-                                                <input type="radio" name="optradio">Refuser
-                                            </label>
-                                            <label class="radio">
-                                                <input type="radio" name="optradio">Garder: envoyer en bass de la liste
-                                            </label>
-                                            <button button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">Confirmer</span></button>
-                                        </div>
-                                    </form>
-                                </div>    
-                            </li>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </ul>                       
+
+                                <div class="col-sm-4">
+
+                                    <button button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">Accepter</span></button>
+                                    <button button type="button" class="btn btn-primary btn-sm" type="submit"><span aria-hidden="true">Refuser</span></button>
+                                </div>
+
+
+
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </li>
+                </ul>
+
             </div>
         </div>
     </div>
-</div>
 </div>
 
 
