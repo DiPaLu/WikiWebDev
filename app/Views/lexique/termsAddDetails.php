@@ -14,7 +14,16 @@ $this->start('main_content');
 		</div>
 		<div class="panel-body">
 		    <div class="tab-content">
-			  <!-- mettre code ici -->
+                        <form action="" method="post">
+                            <label>Pseudo</label><br/>
+                            <?= $w_user['usr_pseudo'] ?><br/><br/>
+                            <label>Mot à définir</label><br/>
+                            <?= $nom ?><br/><br/>
+                            <label>Définition</label><br/>
+                            <textarea name="definition" class="form-control" rows="4"></textarea>
+                            <br/>
+                            <input type="submit" class="btn" value="Envoyer"/>
+                        </form>
 		    </div>
 		</div>
 	  </div>
