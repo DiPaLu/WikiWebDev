@@ -3,7 +3,39 @@
 $this->layout('layoutBootstrap', ['title' => 'Admin']);
 ?>
 
+
+
 <?php $this->start('main_content') ?>
+
+
+
+<style>
+  #sortable1, #sortable2 {
+    border: 1px solid #eee;
+    width: 142px;
+    min-height: 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+    float: left;
+    margin-right: 10px;
+  }
+  #sortable1 li, #sortable2 li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 1.2em;
+    width: 120px;
+  }
+  </style>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+                        $(function () {
+                            $("#sortable1, #sortable2").sortable({
+                                connectWith: ".connectedSortable"
+                            }).disableSelection();
+                        });
+                    </script>
 
 <?php
 // pour permettre d'afficher le code suivant (la liste des utilisatuers) uniqeument a l'utilisateur avec role ADMIN
@@ -32,7 +64,12 @@ if ($w_user['usr_role'] == 2) :
 
                                 <?php if ($currentUser['usr_role'] == 0) : ?>
 
-                                    <li class="ui-state-default"><a href="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a></li>
+                                    <li class="ui-state-default">
+                                        <!--
+                                        <a href="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a>
+                                        -->
+                                    <?= $currentUser['usr_pseudo'] ?>
+                                    </li>
 
                                 <?php endif; ?>
                             <?php endforeach; ?>
@@ -48,20 +85,18 @@ if ($w_user['usr_role'] == 2) :
 
                                 <?php if ($currentUser['usr_role'] == 1) : ?>
 
-                                    <li class="ui-state-default"><a href="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a></li>
+                                    <li class="ui-state-highlight">
+                                    <!--    
+                                        <a href="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a> -->
+                                    <?= $currentUser['usr_pseudo'] ?>
+                                    </li>
 
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </ul>
                     </div>
 
-                    <script>
-                        $(function () {
-                            $("#sortable1, #sortable2").sortable({
-                                connectWith: ".connectedSortable"
-                            }).disableSelection();
-                        });
-                    </script>
+                    
                     
                     <!-- la liste des utilisateurs par role: administrateurs-->
 
