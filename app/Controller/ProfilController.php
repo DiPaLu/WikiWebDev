@@ -24,12 +24,12 @@ class ProfilController extends Controller{
         $email = isset($_POST['email']) ? trim($_POST['email']) : '';
         $formOk = true;
 
-        if(empty($pseudo)){
+        if(!empty($pseudo)){
             $errorList[] = 'Pseudo vide<br/>';
             $formOk = false;
         }
 
-        if(empty($email)){
+        if(!empty($email)){
             $errorList[] = 'Email vide<br/>';
             $formOk = false;
         }
@@ -66,7 +66,7 @@ class ProfilController extends Controller{
         }
         
         $this->show('profil/parametre', array(
-            'errorList' => $$errorList,
+            'errorList' => $errorList,
             'pseudo' => $pseudo,
             'email' => $email,
             'successList' => $successList
