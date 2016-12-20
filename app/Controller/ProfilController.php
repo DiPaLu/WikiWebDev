@@ -10,7 +10,10 @@ class ProfilController extends Controller{
 
 
     public function parametre(){
-        $this->show('profil/parametre');
+        $this->show('profil/parametre', array(
+            'errorList' => array(),
+            'successList' => array()
+        ));
     }
 
     public function parametrePost(){
