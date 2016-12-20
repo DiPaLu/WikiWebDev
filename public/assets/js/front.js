@@ -11,16 +11,8 @@ $(document).ready(function () {
     
     // Fonction de vérification des mots de passe
     function check(){
-        var pseudo = $("input[name='pseudo']").val();
-        var email = $("input[name='email']").val();
         var pwd = $("#password").val();
         var pwd2 = $("#password2").val();
-        
-        if (pseudo === ""){
-            alert("BBBBBBB");
-        } else if (email === "") {
-            alert("VIDE");
-        }
         
         if (pwd2 !== pwd){
             $("#password2").css("border", "3px solid red");
@@ -34,6 +26,13 @@ $(document).ready(function () {
     
     // Fait le check sur le formulaire d'inscription
     $("#signup").submit(function (event) {
+        if (check() === true) {
+            event.preventDefault();
+        }
+    });
+    
+    // Fait le check sur le formulaire de changement mot de passe
+    $("#changepwd").submit(function (event) {
         if (check() === true) {
             event.preventDefault();
         }

@@ -23,7 +23,7 @@ $this->start('main_content');
                     <?= $currentSuccess ?></div>
             <?php endforeach; ?>
         <?php endif; ?>
-        <form action="" method="post">
+        <form id="changepwd" action="" method="post">
             <fieldset>
                 <input type="password" class="form-control" name="password" value="" placeholder="Your new password" /><br />
                 <input type="password" class="form-control" name="password2" value="" placeholder="Confirm your new password" /><br />
