@@ -31,3 +31,17 @@ a:hover {
     clear:both;
     border-bottom: 1px solid transparent;
 }
+
+#returnOnTop {
+    background: url('../img/return_on_top.png') no-repeat;
+    bottom: 1%;
+    cursor: pointer;
+    display: none;
+    filter: alpha(opacity = 50);
+    height: 48px;
+    opacity: 0.5;
+    position: fixed;
+    right: 1%;
+    width: 48px;
+    z-index: 1;
+}
