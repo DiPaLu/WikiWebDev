@@ -23,7 +23,7 @@ $this->start('main_content');
                     <?= $currentSuccess ?></div>
             <?php endforeach; ?>
         <?php endif; ?>
-        <form action="" method="post">
+        <form id="signup" action="" method="post">
             <fieldset>
                 <input type="text" class="form-control" name="pseudo" value="<?= $pseudo ?>" placeholder="Pseudo" /><br />
                 <input type="email" class="form-control" name="email" value="<?= $email ?>" placeholder="Adresse e-mail" /><br />

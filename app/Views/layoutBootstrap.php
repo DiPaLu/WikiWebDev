@@ -34,7 +34,6 @@
 					    <li><a href="<?= $this->url('profil_profil') ?>">Espace Membre</a></li>				     
                                             <li><a href="<?= $this->url('admin_get_admin') ?>">Espace Admin</a></li>
 					    <li><a href="<?= $this->url('terms_get_terms_add_post') ?>">Proposer une définition</a></li>
-					    <li><a href="<?= $this->url('profil_profil') ?>">Espace Membre</a></li>						 <li><a href="<?= $this->url('admin_get_admin') ?>">Espace Admin</a></li>
 					    <li><a href="<?= $this->url('user_logout') ?>">Se déconnecter</a></li>
 				    <?php endif ?>
 				</ul>
