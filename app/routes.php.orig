@@ -17,35 +17,36 @@ $w_routes = array(
     ['GET', '/changepassword/[:token]/', 'User#resetpwd', 'user_reset_pwd'],
     ['POST', '/changepassword/[:token]/', 'User#resetpwdPost', 'user_reset_pwd_post'],
     
-    // Page ajout sur un mot défini
 <<<<<<< HEAD
+    // Page ajout sur un mot défini
+    
     ['GET', '/terms/add/[:termsId]/', 'Terms#getTermsAdd', 'terms_add_details'],
     ['POST', '/terms/add/[:termsId]/', 'Terms#getTermsAddPost', 'terms_get_terms_add_post'],
-    // Post pour ajout des mots et définitions
+    
+    
 =======
-    
     ['GET', '/terms/add/[:termsId]/', 'Terms#getTermsAdd', 'terms_add_details'],
     ['POST', '/terms/add/[:termsId]/', 'Terms#getTermsAddPost', 'terms_get_terms_add_post'],
     
-    
->>>>>>> goidel
+>>>>>>> neby56
     // Page Terms global            
     ['GET', '/terms/', 'Terms#getTerms', 'terms_get_terms'],
     // Page Terms detail
     ['GET', '/terms/[:termsId]/[:terms]/', 'Terms#getTermsDetails', 'terms_get_terms_details'],
     
 <<<<<<< HEAD
-   
-=======
-    // Page ajout sur un mot défini
     /*
-    ['GET', '/terms/add/[:termsId]/', 'Terms#getTermsAdd', 'terms_add_details'],
-    ['POST', '/terms/add/[:termsId]/', 'Terms#getTermsAddPost', 'terms_get_terms_add_post'],
-    // Post pour ajout des mots et définitions dans les 2 cas de figure
     */
     
     
->>>>>>> goidel
+=======
+    
+    
+    // Page ajout sur un mot défini
+    
+    // Post pour ajout des mots et définitions dans les 2 cas de figure
+   
+>>>>>>> neby56
     // Page Terms global par category           
     ['GET', '/terms/[:category]/', 'Terms#getTermsByCategory', 'terms_get_terms_by_category'],
     // Page de recherche
@@ -57,6 +58,7 @@ $w_routes = array(
     //Profil
     ['GET', '/profil/parametre/', 'Profil#parametre', 'profil_parametre'],
     ['POST', '/profil/parametre/', 'Profil#parametrePost', 'profil_parametre_post'],
-    ['GET|POST', '/profil/delete/', 'Profil#delete', 'profil_delete'],
+    ['GET', '/profil/delete/', 'Profil#delete', 'profil_delete'],
+    ['POST', '/profil/delete/', 'Profil#deletePost', 'profil_delete_post'],
     ['GET|POST', '/profil/[:pseudo]/', 'Profil#profil', 'profil_profil'],
 );
