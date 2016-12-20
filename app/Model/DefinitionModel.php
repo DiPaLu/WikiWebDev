@@ -24,6 +24,7 @@ class DefinitionModel extends \W\Model\Model {
 		$sql = '
 		SELECT *
 		FROM ' . $this->table . '
+                INNER JOIN terms ON terms.ter_id = definitions.terms_ter_id
 		ORDER BY def_id ASC
 		';
 
