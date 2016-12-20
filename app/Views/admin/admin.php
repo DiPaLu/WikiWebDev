@@ -193,8 +193,8 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
                         </div>
 
                         <div class="col-sm-2"><br />  
-                            <button type="button" class="btn btn-primary btn-sm" type="submit">Valider</button>                            
-                            <button type="button" class="btn btn-primary btn-sm" type="submit">Refuser</button>
+                            <button type="button" class="btn btn-primary btn-sm" type="submit" id="button-validate-term">Valider</button>                            
+                            <button type="button" class="btn btn-primary btn-sm" type="submit" id="button-refuse-term">Refuser</button>
                         </div>
                     </div>
 
@@ -265,8 +265,8 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
                         </div>
 
                         <div class="col-sm-2"><br />  
-                            <button type="button" class="btn btn-primary btn-sm" type="submit">Valider</button>                            
-                            <button type="button" class="btn btn-primary btn-sm" type="submit">Refuser</button>
+                            <button type="button" class="btn btn-primary btn-sm" id="button-validate-definition">Valider</button>                            
+                            <button type="button" class="btn btn-primary btn-sm" id="button-refuse-definition">Refuser</button>
                         </div>
                     </div>
 

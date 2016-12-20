@@ -31,13 +31,14 @@ $(document).ready(function () {
         }
     });
     
+<<<<<<< HEAD
     // Fait le check sur le formulaire de changement mot de passe
     $("#changepwd").submit(function (event) {
         if (check() === true) {
             event.preventDefault();
         }
     });
-    
+=======
     /* l'appel AJAX pour valider un terme*/
     
     $("#button-validate-term").click(function(){
@@ -109,5 +110,6 @@ $(document).ready(function () {
         
     
     
+>>>>>>> dev
     
 }); // FIN JQUERY !!!!!
