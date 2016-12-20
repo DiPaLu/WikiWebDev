@@ -19,12 +19,12 @@ $w_routes = array(
     
     // Page Terms global            
     ['GET', '/terms/', 'Terms#getTerms', 'terms_get_terms'],
+    // Page Terms detail
+    ['GET', '/terms/[:termsId]/[:terms]/', 'Terms#getTermsDetails', 'terms_get_terms_details'],
+    
     // Page ajout sur un mot défini
     ['GET', '/terms/add/[:termsId]/', 'Terms#getTermsAdd', 'terms_add_details'],
     ['POST', '/terms/add/[:termsId]/', 'Terms#getTermsAddPost', 'terms_get_terms_add_post'],
-    // Page Terms detail
-    ['GET', '/terms/[:termsId]/[:terms]/', 'Terms#getTermsDetails', 'terms_get_terms_details'],
-    // Page ajout de mot et définition
     // Post pour ajout des mots et définitions dans les 2 cas de figure
    
     // Page Terms global par category           
