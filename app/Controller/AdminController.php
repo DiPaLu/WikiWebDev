@@ -19,7 +19,8 @@ class AdminController extends Controller {
         $usersModel = new UsersModel();
         $usersList = $usersModel->getAllUsers();
         $termsModel = new TermsModel();
-        $resultsList = $termsModel->getTerms();
+        $termsList = $termsModel->getTerms();
+        $definitionsList = $termsModel->getTerms();
         
         $this->allowTo(array('1','2'));
                       
@@ -28,7 +29,8 @@ class AdminController extends Controller {
          * */
         $this->show('admin/admin', array(
             'usersList' => $usersList,
-            'resultsList' => $resultsList
+            'termsList' => $termsList,
+            'definitionsList' => $definitionsList
         ));
         /*
         } else {
