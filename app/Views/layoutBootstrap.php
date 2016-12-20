@@ -33,6 +33,8 @@
 				    <?php else : ?>
 					    <li><a href="<?= $this->url('profil_profil') ?>">Espace Membre</a></li>				     
                                             <li><a href="<?= $this->url('admin_get_admin') ?>">Espace Admin</a></li>
+					    <li><a href="<?= $this->url('terms_get_terms_add_post') ?>">Proposer une définition</a></li>
+					    <li><a href="<?= $this->url('profil_profil') ?>">Espace Membre</a></li>						 <li><a href="<?= $this->url('admin_get_admin') ?>">Espace Admin</a></li>
 					    <li><a href="<?= $this->url('user_logout') ?>">Se déconnecter</a></li>
 				    <?php endif ?>
 				</ul>
@@ -43,8 +45,7 @@
 
 	  <div class="container">
 		<!-- CONTENU SPÉCIFIQUE À CHAQUE PAGE ICI -->
-		<?= $this->section('main_content') ?>
-	  </div>
+		<?= $this->section('main_content') ?></div>
 	  <div class="container">
 		<footer>
 		    <div class="panel panel-primary">
@@ -54,10 +55,13 @@
 	  </div>
 
 	  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	  <!-- Latest compiled and minified JavaScript -->
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	  <script src='https://www.google.com/recaptcha/api.js'></script>
+          <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+		
 	  <script type="text/javascript" src="<?= $this->assetUrl('js/choixPageParCategory.js') ?>"></script>
+	  <script type="text/javascript" src="<?= $this->assetUrl('js/front.js') ?>"></script>
     </body>
 </html>

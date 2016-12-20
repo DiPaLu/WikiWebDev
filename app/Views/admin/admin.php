@@ -87,7 +87,7 @@ if ($w_user['usr_role'] == 2) :
 
 <?php
 // pour permettre d'afficher le code suivant (la liste des utilisatuers) uniqeument a l'utilisateur avec role ADMIN
-if ($w_user['usr_role'] == 1) :
+if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
     ?>
 
     <h2>Welcome: Moderator</h2>
@@ -101,7 +101,7 @@ if ($w_user['usr_role'] == 1) :
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">Termes & définitions en attente de validation</h3>        
+        <h3 class="panel-title">Nouveau termes</h3>        
     </div>
 
 
@@ -110,37 +110,49 @@ if ($w_user['usr_role'] == 1) :
 
             <div class="row">
                 <div class="col-sm-8">
-                    <h4 class="panel-title">Terme et définition à ajouter</h4>
+                    <h4 class="panel-title"><i>Terme et définition</i></h4>
                 </div>
-                <div class="col-sm-2"> 
-                    Demandé le
+                <div class="col-sm-1"> 
+                    <i>membre</i>                  
                 </div>
+                <div class="col-sm-1">
+                    <i>date</i>
+                </div>
+                
                 <div class="col-sm-2">
-                    Action
+                    <i>Action</i>
                 </div>
             </div>
 
 
 
-            <?php foreach ($resultsList as $result) : ?>
+            <?php foreach ($termsList as $term) : ?>
 
-                <?php if ($result['ter_status'] == 'Pending') : ?>
+                <?php if ($term['ter_status'] == 'Pending') : ?>
 
 
                     <div class="row">
                         <div class="col-sm-8">
                             <ul>
                                 <li>
-                                    <b><?= $result['ter_name'] ?></b><br />
-                                    <?= $result['def_description'] ?>
+                                    <b><?= $term['ter_name'] ?></b><br />
+                                    <?= $term['def_description'] ?>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="col-sm-1">  
+                            <ul>
+                                <li><br />
+                                    pseudo
                                 </li>
                             </ul>
                         </div>
 
-                        <div class="col-sm-2">  
+                        <div class="col-sm-1">  
                             <ul>
                                 <li><br />
-                                    <?= $result['ter_add_date'] ?>
+                                    <?= $term['ter_add_date'] ?>
                                 </li>
                             </ul>
                         </div>
@@ -157,6 +169,78 @@ if ($w_user['usr_role'] == 1) :
 
         </div>
     </div>
+</div>
+    
+    <!-- Afficher la liste des demande d'ajouts de définitions supplémentaires pour termes éxistants -->
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Nouvelles définitions (pour termes existant): </h3>        
+    </div>
+        
+    <div class="panel-body">
+        <div class="tab-content">
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <h4 class="panel-title"><i>Définition</i></h4>
+                </div>
+                <div class="col-sm-1">
+                    <i>membre</i>                  
+                </div>
+                <div class="col-sm-1">
+                    <i>date</i>
+                </div>
+                <div class="col-sm-2">
+                    <i> Action</i>
+                </div>
+            </div>
+
+
+
+            <?php foreach ($definitionsList as $definition) : ?>
+
+                <?php if ($definition['def_status'] == 'Pending') : ?>
+
+
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <ul>
+                                <li>
+                                    <b>Pour terme: <?= $definition['ter_name'] ?></b><br />
+                                    <?= $definition['def_description'] ?>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="col-sm-1">  
+                            <ul>
+                                <li><br />
+                                    <?= $definition['usr_pseudo'] ?>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-1">  
+                            <ul>
+                                <li><br />
+                                    <?= $definition['ter_add_date'] // changer!!! ajouter en BDD champe def_add_date?>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-2"><br />  
+                            <button type="button" class="btn btn-primary btn-sm" type="submit">Valider</button>                            
+                            <button type="button" class="btn btn-primary btn-sm" type="submit">Refuser</button>
+                        </div>
+                    </div>
+
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+        </div>
+    </div>
+   
 </div>
 
 
