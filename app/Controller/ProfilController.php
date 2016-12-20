@@ -74,8 +74,28 @@ class ProfilController extends Controller{
         $this->show('profil/delete');
     }
 
-    public function profil(){
-        $data = $this->getUser();
-        $this->show('profil/profil');
+    public function profil($pseudo){
+        if($pseudo != '[:pseudo]'){
+            $profModel = new UsersModel();
+            $prof=$profModel->getUserByUsernameOrEmail($pseudo);
+            $pseudo = $prof['usr_pseudo'];
+            $dateInscription = $prof['usr_insert_date'];
+            $dateDerniereConnection = $prof['usr_last_connected'];
+            $avatar = $prof['usr_avatar'];
+        } else {
+            $connected = $this->getUser();
+            $pseudo = $connected['usr_pseudo'];
+            $dateInscription = $connected['usr_insert_date'];
+            $dateDerniereConnection = $connected['usr_last_connected'];
+            $avatar = $connected['usr_avatar'];
+        }
+        
+        $this->show('profil/profil', array(
+            'pseudo' => $pseudo,
+            'dateInscription' => $dateInscription,
+            'dateDerniereConnection' => $dateDerniereConnection,
+            'avatar' => $avatar,
+            'pseudoUtilisateur' => ''
+        ));
     }
 }

@@ -59,5 +59,37 @@ class UsersModel extends \W\Model\UsersModel {
         
         return false;
     }
+    
+    public function getProfil() {
+        $sql = '
+        SELECT *
+        FROM ' . $this->table . '
+        ORDER BY usr_id ASC
+        ';
+
+        $stmt = $this->dbh->prepare($sql);
+
+        if ($stmt->execute() === false) {
+                debug($stmt->errorInfo());
+        } else {
+                return $stmt->fetchAll();
+        }
+        return false;
+    }
+    
+    public function getId($pseudo){
+        $sql = 'SELECT usr_id FROM '.$this->table.' WHERE usr_pseudo = '.$pseudo;
+        debug($sql);
+        $stmt = $this->dbh->prepare($sql);
+
+        if ($stmt->execute() === false) {
+                debug($stmt->errorInfo());
+        } else {
+                return $stmt->fetchAll();
+                debug($stmt);
+        }
+        return false;
+           
+    }
 
 }
