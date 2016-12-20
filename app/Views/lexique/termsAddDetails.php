@@ -1,6 +1,6 @@
 <?php
 //hérite du fichier layout.php à la racine de app/Views/default/
-$this->layout('layoutBootstrap', ['title' => 'Liste des mots']);
+$this->layout('layoutBootstrap', ['title' => 'Proposer une définition']);
 ?>
 <?php
 // Début du bloc d'affichage
