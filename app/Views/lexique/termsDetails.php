@@ -18,9 +18,10 @@ $this->start('main_content');
 				<?php foreach ($detailsTerms as $details) : ?>
 				<li><span class="termsFont"><?= $details['ter_name'] ?></span><br><?= $details['def_description'] ?> </li><?php if ($details['ter_tags']): ?>Tags: <?= $details['ter_tags'] ?></li>
 					<?php endif; ?><br><br>
-
-				<?php endforeach; ?>
+                                <?php endforeach; ?>
 				<a href="<?= $this->url('terms_add_details', array('termsId'=>$details['ter_id'])) ?>" id='proposition'>Proposer une autre définition</a>
+                                
+                                
 			  </ul>
 		    </div>
 		</div>
