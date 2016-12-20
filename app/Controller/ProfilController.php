@@ -24,12 +24,12 @@ class ProfilController extends Controller{
         $email = isset($_POST['email']) ? trim($_POST['email']) : '';
         $formOk = true;
 
-        if(!empty($pseudo)){
+        if(empty($pseudo)){
             $errorList[] = 'Pseudo vide<br/>';
             $formOk = false;
         }
 
-        if(!empty($email)){
+        if(empty($email)){
             $errorList[] = 'Email vide<br/>';
             $formOk = false;
         }
@@ -74,6 +74,37 @@ class ProfilController extends Controller{
     }
 
     public function delete(){
+        $this->show('profil/delete', array(
+            'errorList' => array(),
+            'successList' => array()
+        ));
+    }
+    
+    public function deletePost(){
+        echo "malika";
+        $loggedUser = $this->getUser();
+        $email = $loggedUser['usr_email'];
+        $password = isset($_POST['password']) ? trim(strip_tags($_POST['password'])) : '';
+        $formOk = true;
+        
+        if (empty($password)) {
+            $errorList[] = 'Password vide<br>';
+            $formOk = false;
+        }
+        
+        if($formOk){
+            $auth = new AuthentificationModel();
+            $userId = $auth->isValidLoginInfo($email, $password);
+            if($userId > 0){
+                $usersModel = new UsersModel();
+                $usersModel->delete($userId);
+                $sucessList[] = 'Votre compte a été supprimé';
+                $this->redirect('default_home');
+            }else{
+                $errorList[] = 'Mot de passe incorrect<br/>';
+            }
+        }
+        
         $this->show('profil/delete');
     }
 
