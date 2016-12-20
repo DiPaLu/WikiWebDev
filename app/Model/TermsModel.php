@@ -26,12 +26,14 @@ class TermsModel extends \W\Model\Model {
 		FROM ' . $this->table . '
 		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
 		INNER JOIN users ON terms.users_usr_id = users.usr_id
+		WHERE definition.def_status = :Validated
 		GROUP BY terms.ter_id
 		ORDER BY terms.ter_name
 		';
 
-		$stmt = $this->dbh->query($sql);
-
+		$stmt = $this->dbh->prepare($sql);
+		$stmt->bindValue(':Validated', 'Validated');
+		
 		if ($stmt->execute() === false) {
 			debug($stmt->errorInfo());
 		} else {
@@ -50,6 +52,7 @@ class TermsModel extends \W\Model\Model {
 		SELECT *
 		FROM ' . $this->table . '
 		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
+		INNER JOIN users ON terms.users_usr_id = users.usr_id
 		WHERE terms.ter_id = :termsId
 		AND definition.def_status = :Validated
 		';
@@ -105,12 +108,17 @@ class TermsModel extends \W\Model\Model {
 		SELECT *
 		FROM ' . $this->table . '
 		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
+		INNER JOIN users ON terms.users_usr_id = users.usr_id
 		WHERE category_cat_id = :catId
+		AND definition.def_status = :Validated
+		GROUP BY terms.ter_id
+		ORDER BY terms.ter_name
 		';
 		//INNER JOIN terms.category_cat_id = catergory.cat_id
 		
 		$stmt = $this->dbh->prepare($sql);
 		$stmt->bindValue(':catId', $catId);
+		$stmt->bindValue(':Validated', 'Validated');
 
 		if ($stmt->execute() === false) {
 			debug($stmt->errorInfo());

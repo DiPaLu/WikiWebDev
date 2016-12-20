@@ -16,8 +16,8 @@ $this->start('main_content');
 		    <div class="tab-content">
 			  <ul>
 				<?php foreach ($detailsTerms as $details) : ?>
-				<li><span class="termsFont"><?= $details['ter_name'] ?></span><br><?= $details['def_description'] ?> </li><?php if ($details['ter_tags']): ?>Tags: <?= $details['ter_tags'] ?></li>
-					<?php endif; ?><br><br>
+				<li><span class="termsFont"><?= $details['ter_name'] ?></span><br><?= $details['def_description'] ?><br>Proposé par <a href="<?= $this->url('profil_profil', ['pseudo' => $details['usr_pseudo']]) ?>"><?= $details['usr_pseudo'] ?></a> le <?= $details['ter_add_date'] ?><br> </li><?php if ($details['ter_tags']): ?>Tags: <?= $details['ter_tags'] ?></li>
+					<?php endif; ?><br>
 
 				<?php endforeach; ?>
 					<?php if (isset($w_user)) : ?>
