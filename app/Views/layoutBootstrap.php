@@ -45,6 +45,7 @@
 		<!-- CONTENU SPÉCIFIQUE À CHAQUE PAGE ICI -->
 		<?= $this->section('main_content') ?></div>
 	  <div class="container">
+		<div id="returnOnTop" title="Retour en haut"><img src="<?= $this->assetUrl('img/return_on_top.png')?>" alt=""></div>
 		<footer>
 		    <div class="panel panel-primary">
 			  <div class="panel-body text-center">&copy; Wiki Web Dev - Webforce3</div>
@@ -58,5 +59,6 @@
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	  <script src='https://www.google.com/recaptcha/api.js'></script>
 	  <script type="text/javascript" src="<?= $this->assetUrl('js/choixPageParCategory.js') ?>"></script>
+	  <script type="text/javascript" src="<?= $this->assetUrl('js/retourhaut.js') ?>"></script>
     </body>
 </html>

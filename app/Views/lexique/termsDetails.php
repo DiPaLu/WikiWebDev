@@ -20,7 +20,9 @@ $this->start('main_content');
 					<?php endif; ?><br><br>
 
 				<?php endforeach; ?>
+					<?php if (isset($w_user)) : ?>
 				<a href="<?= $this->url('terms_add_details', array('termsId'=>$details['ter_id'])) ?>" id='proposition'>Proposer une autre définition</a>
+				    <?php endif ?>
 			  </ul>
 		    </div>
 		</div>

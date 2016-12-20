@@ -6,7 +6,7 @@ use \W\Controller\Controller;
 use \Model\TermsModel;
 use \Model\CategoryModel;
 use \W\Model\Model;
-
+use \Model\UsersModel;
 /**
  * Description of LexiqueController
  *
@@ -36,7 +36,7 @@ class TermsController extends Controller {
 		$this->show('lexique/terms', array(
 		    'resultList' => $resultList,
 		    'categoryList' => $categoryList,
-		    'currentId' => $currentId
+		    'currentId' => $currentId,
 		));
 	}
 

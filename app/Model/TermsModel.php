@@ -25,6 +25,7 @@ class TermsModel extends \W\Model\Model {
 		SELECT *
 		FROM ' . $this->table . '
 		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
+		INNER JOIN users ON terms.users_usr_id = users.usr_id
 		GROUP BY terms.ter_id
 		ORDER BY terms.ter_name
 		';
