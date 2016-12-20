@@ -127,7 +127,7 @@ class TermsController extends Controller {
                 'nom' => $nom,
                 'errorList' => array(),
                 'successList' => array()
-            ));
+            ));    
 	}
 	
 	/**

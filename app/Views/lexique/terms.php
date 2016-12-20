@@ -51,8 +51,6 @@ $this->start('main_content');
 				    <h3>Liste des mots :</h3>
 				    <ul>
 					<?php foreach ($resultList as $result) : ?>
-					  <li><a href="<?= $this->url('terms_get_terms_details', array('termsId' => $result['ter_id'], 'terms' => $result['ter_name'])) ?>" class="termsFont"><?= $result['ter_name'] ?></a><br><?= $result['def_description'] ?><br>Proposé par <a href="<?= $this->url('profil_profil', ['pseudo' => $result['usr_pseudo']]) ?>"><?= $result['usr_pseudo'] ?></a> le <?= $result['ter_add_date'] ?><br>
-						    
 						    <?php if ($result['ter_tags']): ?>Tags: <?= $result['ter_tags'] ?></li>
 						<?php endif; ?><br>
 					<?php endforeach; ?>
