@@ -27,8 +27,9 @@ $this->start('main_content');
             <fieldset>
                 <input type="text" class="form-control" name="pseudo" value="<?= $pseudo ?>" placeholder="Pseudo" /><br />
                 <input type="email" class="form-control" name="email" value="<?= $email ?>" placeholder="Adresse e-mail" /><br />
-                <input type="password" class="form-control" name="password" value="" placeholder="Mot de passe" /><br />
-                <input type="password" class="form-control" name="password2" value="" placeholder="Confirmation mot de passe" /><br />
+                <input id="password" type="password" class="form-control" name="password" value="" placeholder="Mot de passe" /><br />
+                <input id="password2" type="password" class="form-control" name="password2" value="" placeholder="Confirmation mot de passe" /><br />
+                <input type="checkbox" class="form-control" id="showpwd" />
                 <div class="g-recaptcha" data-sitekey="6Lei_w4UAAAAAPACrDqaebbGTJ6rZsigw03lCVog" data-theme="dark"></div><br />
                 <input type="submit" class="btn btn-success btn-block" value="S'inscrire" />
             </fieldset>
