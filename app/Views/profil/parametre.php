@@ -31,6 +31,7 @@ $this->start('main_content');
     <form action="" method="post" enctype="multipart/form-data">
         <label>Pseudo</label><br/>
         Pseudo actuel<input type="text" class="form-control input-sm" name="pseudo" value="<?= $w_user['usr_pseudo'] ?>"/>
+        <input type="submit" class="pull-right btn" value="Modifier" />
         <br/>
     </form>
     <br/>
@@ -38,7 +39,7 @@ $this->start('main_content');
     <form action="" method="post">
         <label>Votre email</label><br/>
         Adresse e-mail actuelle <input type="text" name="email" class="form-control input-sm" name="email" value="<?= $w_user['usr_email'] ?>">
-        <a href="parametre.php"></a>
+        <input type="submit" class="pull-right btn" value="Modifier" />
     </form>
     <br/>
     <br/>
