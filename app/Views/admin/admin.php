@@ -185,8 +185,11 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
                 <div class="col-sm-8">
                     <h4 class="panel-title"><i>Définition</i></h4>
                 </div>
-                <div class="col-sm-2"> 
-                    <i>Demandé le</i>
+                <div class="col-sm-1">
+                    <i>membre</i>                  
+                </div>
+                <div class="col-sm-1">
+                    <i>date</i>
                 </div>
                 <div class="col-sm-2">
                     <i> Action</i>
@@ -204,16 +207,24 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
                         <div class="col-sm-8">
                             <ul>
                                 <li>
-                                    <b>Def Id: <?= $definition['def_id'] ?></b><br />
+                                    <b>Pour terme: <?= $definition['ter_name'] ?></b><br />
                                     <?= $definition['def_description'] ?>
                                 </li>
                             </ul>
                         </div>
-
-                        <div class="col-sm-2">  
+                        
+                        <div class="col-sm-1">  
                             <ul>
                                 <li><br />
-                                    à faire: ajouter champ def_date_inséré dans bdd<?php// $result['ter_add_date'] ?>
+                                    <?= $definition['usr_pseudo'] ?>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-1">  
+                            <ul>
+                                <li><br />
+                                    <?= $definition['ter_add_date'] // changer!!! ajouter en BDD champe def_add_date?>
                                 </li>
                             </ul>
                         </div>
@@ -227,10 +238,9 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
                 <?php endif; ?>
             <?php endforeach; ?>
 
-
         </div>
     </div>
-    
+   
 </div>
 
 

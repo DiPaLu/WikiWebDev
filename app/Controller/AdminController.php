@@ -5,6 +5,7 @@ namespace Controller;
 use \W\Controller\Controller;
 use \Model\UsersModel;
 use \Model\TermsModel;
+use \Model\DefinitionModel;
 
 /**
  * Description of admin
@@ -20,7 +21,8 @@ class AdminController extends Controller {
         $usersList = $usersModel->getAllUsers();
         $termsModel = new TermsModel();
         $termsList = $termsModel->getTerms();
-        $definitionsList = $termsModel->getTerms();
+        $definitionModel = new DefinitionModel();
+        $definitionsList = $definitionModel->getDefinition();
         
         $this->allowTo(array('1','2'));
                       
