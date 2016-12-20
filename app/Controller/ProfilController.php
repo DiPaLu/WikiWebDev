@@ -82,12 +82,14 @@ class ProfilController extends Controller{
             $dateInscription = $prof['usr_insert_date'];
             $dateDerniereConnection = $prof['usr_last_connected'];
             $avatar = $prof['usr_avatar'];
+            $pseudoUtilisateur = 'no';
         } else {
             $connected = $this->getUser();
             $pseudo = $connected['usr_pseudo'];
             $dateInscription = $connected['usr_insert_date'];
             $dateDerniereConnection = $connected['usr_last_connected'];
             $avatar = $connected['usr_avatar'];
+            $pseudoUtilisateur = 'yes';
         }
         
         $this->show('profil/profil', array(
@@ -95,7 +97,7 @@ class ProfilController extends Controller{
             'dateInscription' => $dateInscription,
             'dateDerniereConnection' => $dateDerniereConnection,
             'avatar' => $avatar,
-            'pseudoUtilisateur' => ''
+            'pseudoUtilisateur' => $pseudoUtilisateur
         ));
     }
 }

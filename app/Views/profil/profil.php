@@ -8,10 +8,11 @@ $this->start('main_content');
 ?>
 <div class="container">
     <div class="row">
+        <?php if($pseudoUtilisateur == 'yes') : ?>
         <ul class="list-unstyled list-inline pull-right">
             <li><a href="<?= $this->url('profil_parametre') ?>">Modifier</a></li>
         </ul> 
-        
+        <?php endif; ?>
         <div class="col-lg-3">
             <img class="img-circle" src="<?= $this->assetUrl($avatar) ?>"/>
         </div>
