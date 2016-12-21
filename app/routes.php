@@ -24,7 +24,7 @@ $w_routes = array(
     //page d'ajout de mot
     ['GET', '/terms/add/', 'Terms#addTerms', 'terms_add_terms'],
     ['POST', '/terms/add/', 'Terms#addTermsPost', 'terms_add_terms_post'],
-    
+       
     // Page Terms global            
     ['GET', '/terms/', 'Terms#getTerms', 'terms_get_terms'],
     // Page Terms detail
