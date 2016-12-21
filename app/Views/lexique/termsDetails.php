@@ -16,13 +16,13 @@ $this->start('main_content');
 		    <div class="tab-content">
 			  <ul>
 				<?php foreach ($detailsTerms as $details) : ?>
-				<li><span class="termsFont"><?= $details['ter_name'] ?></span><br><?= $details['def_description'] ?><br>Proposé par <a href="<?= $this->url('profil_profil', ['pseudo' => $details['usr_pseudo']]) ?>"><?= $details['usr_pseudo'] ?></a> le <?= $details['ter_add_date'] ?><br> </li><?php if ($details['ter_tags']): ?>Tags: <?= $details['ter_tags'] ?></li>
+				<li><span class="termsFont"><?= $details['ter_name'] ?></span><br><?= $details['def_description'] ?><br>Proposé par <a href="<?= $this->url('profil_profil', ['pseudo' => $details['usr_pseudo']]) ?>"><?= $details['usr_pseudo'] ?></a> le <?= $details['ter_add_date'] ?><br> </li><?php if ($details['ter_tags']): ?>Tags: <?= $details['ter_tags'] ?></li><br>
 					<?php endif; ?><br>
 				<?php endforeach; ?>
 
 					<?php if (isset($w_user)) : ?>
-				<a href="<?= $this->url('terms_add_details', array('termsId'=>$details['ter_id'])) ?>" id='proposition'>Proposer une autre définition</a>
-				    <?php endif ?>
+				<a href="<?= $this->url('terms_get_terms_add', array('termsId'=>$details['ter_id'])) ?>" id='proposition'>Proposer une autre définition</a>
+					<?php endif ?>
 			  </ul>
 		    </div>
 		</div>

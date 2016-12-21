@@ -27,6 +27,7 @@ class TermsModel extends \W\Model\Model {
 		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
 		INNER JOIN users ON terms.users_usr_id = users.usr_id
 		WHERE definition.def_status = :Validated
+		AND terms.ter_status = :Validated
 		GROUP BY terms.ter_id
 		ORDER BY terms.ter_name
 		';
@@ -55,6 +56,7 @@ class TermsModel extends \W\Model\Model {
 		INNER JOIN users ON terms.users_usr_id = users.usr_id
 		WHERE terms.ter_id = :termsId
 		AND definition.def_status = :Validated
+		AND terms.ter_status = :Validated
 		';
 		
 		$stmt = $this->dbh->prepare($sql);
@@ -111,6 +113,7 @@ class TermsModel extends \W\Model\Model {
 		INNER JOIN users ON terms.users_usr_id = users.usr_id
 		WHERE category_cat_id = :catId
 		AND definition.def_status = :Validated
+		AND terms.ter_status = :Validated
 		GROUP BY terms.ter_id
 		ORDER BY terms.ter_name
 		';
@@ -124,6 +127,26 @@ class TermsModel extends \W\Model\Model {
 			debug($stmt->errorInfo());
 		} else {
 			return( $stmt->fetchAll());
+		}
+		return false;
+	}
+        
+        public function getMot() {
+
+		$sql = '
+		SELECT *
+		FROM ' . $this->table . '
+                INNER JOIN category ON terms.category_cat_id = category.cat_id
+                INNER JOIN users ON terms.users_usr_id = users.usr_id
+		ORDER BY ter_id ASC
+		';
+
+		$stmt = $this->dbh->prepare($sql);
+
+		if ($stmt->execute() === false) {
+			debug($stmt->errorInfo());
+		} else {
+			return $stmt->fetchAll();
 		}
 		return false;
 	}

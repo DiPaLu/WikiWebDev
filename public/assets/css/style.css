@@ -31,7 +31,9 @@ a:hover {
     clear:both;
     border-bottom: 1px solid transparent;
 }
-
+.panel-body {
+    padding: 30px;
+}
 #returnOnTop {
     background: url('../img/return_on_top.png') no-repeat;
     bottom: 1%;
