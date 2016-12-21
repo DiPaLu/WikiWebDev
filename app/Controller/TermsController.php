@@ -181,6 +181,11 @@ class TermsController extends Controller {
         }
         
         public function addTermsPost(){
+            $errorList = array();
+            $successList = array();
+
+
+            
             $this->show('lexique/addTerms');
         }
 
