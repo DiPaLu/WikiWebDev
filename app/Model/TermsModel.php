@@ -130,5 +130,25 @@ class TermsModel extends \W\Model\Model {
 		}
 		return false;
 	}
+        
+        public function getMot() {
+
+		$sql = '
+		SELECT *
+		FROM ' . $this->table . '
+                INNER JOIN category ON terms.category_cat_id = category.cat_id
+                INNER JOIN users ON terms.users_usr_id = users.usr_id
+		ORDER BY ter_id ASC
+		';
+
+		$stmt = $this->dbh->prepare($sql);
+
+		if ($stmt->execute() === false) {
+			debug($stmt->errorInfo());
+		} else {
+			return $stmt->fetchAll();
+		}
+		return false;
+	}
 	
 }

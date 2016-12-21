@@ -5,7 +5,7 @@ namespace Model;
 /**
  * Description of CategoryModel
  *
- * @author Paul
+ * 
  */
 class DefinitionModel extends \W\Model\Model {
 

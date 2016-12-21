@@ -29,12 +29,17 @@ $this->start('main_content');
 			  <ul class="list-unstyled list-inline pull-right">
 				<li><a href="<?= $this->url('profil_profil') ?>">Afficher</a></li>
 			  </ul>
-			  <label>Avatar</label><br/>
-			  <input type="file" name="file"/>
-			  <br/>
-			  <img class="img-circle" src="<?= $this->assetUrl('img/avatar/avatar_defaut.png'); ?>"/>
 
-			  <form action="" method="post" enctype="multipart/form-data">
+
+    <form action="" method="post" enctype="multipart/form-data"/>
+        <label>Avatar</label><br/>
+			  <input type="file" name="file"/>
+        <input type="hidden" name="MAX_FILE_SIZE" value="1"/>
+        <p class="help-block">extentions autorisées: .png, .jpeg, .jpg </p>
+    <br/>
+    <img class="img-circle" src="<?= $this->assetUrl('img/avatar/avatar_defaut.png'); ?>"/>
+
+    <form action="" method="post">
 				<label>Pseudo</label><br/>
 				Pseudo actuel<input type="text" class="form-control input-sm" name="pseudo" value="<?= $w_user['usr_pseudo'] ?>"/>
 				<input type="submit" class="pull-right btn" value="Modifier" />
