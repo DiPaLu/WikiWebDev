@@ -18,7 +18,7 @@ $w_routes = array(
     ['POST', '/changepassword/[:token]/', 'User#resetpwdPost', 'user_reset_pwd_post'],
     
     // Page ajout sur un mot défini
-    ['GET', '/terms/add/[:termsId]/', 'Terms#getTermsAdd', 'terms_add_details'],
+    ['GET', '/terms/add/[:termsId]/', 'Terms#getTermsAdd', 'terms_get_terms_add'],
     ['POST', '/terms/add/[:termsId]/', 'Terms#getTermsAddPost', 'terms_get_terms_add_post'],
     
     //page d'ajout de mot
