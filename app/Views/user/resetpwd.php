@@ -10,13 +10,10 @@ $this->start('main_content');
     <div class="col-xs-12">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Lexique pour développeur</h3>
+                <h3 class="panel-title">Changement mot de passe</h3>
             </div>
             <div class="panel-body">
                 <div class="tab-content">
-                    <div class="page-header">
-                        <h1>Change password</h1>
-                    </div>
                     <?php if (sizeof($errorList) > 0) : ?>
                         <?php foreach ($errorList as $currentError) : ?>
                             <div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -34,6 +31,7 @@ $this->start('main_content');
                             <input id="password" type="password" class="form-control" name="password" value="" placeholder="Your new password" /><br />
                             <input id="password2" type="password" class="form-control" name="password2" value="" placeholder="Confirm your new password" /><br />
                             <label style="display: block; text-align: center" >Afficher / Cacher mot de passe<input type="checkbox" class="form-control" id="showpwd" /></label>
+                            <div class="g-recaptcha" data-sitekey="6Lei_w4UAAAAAPACrDqaebbGTJ6rZsigw03lCVog" data-theme="dark"></div><br />
                             <input type="submit" class="btn btn-success btn-block" value="Changer mot de passe" />
                         </fieldset>
                     </form>
