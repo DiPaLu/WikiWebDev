@@ -28,12 +28,14 @@ $this->start('main_content');
 		    <div class="tab-content">
                         <form action="" method="post">
                             <label>Pseudo</label><br/>
-                            <?= $w_user['usr_pseudo'] ?><br/><br/>
+                            <?= $w_user['usr_pseudo'] ?><br/><br/> 
                             <label>Mot à définir</label><br/>
                             <input name="mot" class="form_control"/><br/><br/>
+                            <label>Tags</label><br/>
+                            <input name="tags" class="form_control"/><br/><br/>
                             <label>Définition</label><br/>
                             <textarea name="definition" class="form-control" rows="4"></textarea>
-                            <br/>
+                            <br/>   
                             <input type="submit" class="btn" value="Envoyer"/>
                         </form>
 		    </div>
