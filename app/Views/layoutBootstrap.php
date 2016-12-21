@@ -5,6 +5,7 @@
 	  <meta charset="utf-8">
 	  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 	  <link rel="stylesheet" href="<?= $this->assetUrl('css/bootstrap.min.css') ?>">
+	  <link rel="stylesheet" href="<?= $this->assetUrl('css/cat.css') ?>">
 	  <link rel="stylesheet" href="<?= $this->assetUrl('css/style.css') ?>">
 
 	  <!-- Optional theme -->
