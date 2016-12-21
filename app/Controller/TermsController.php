@@ -174,11 +174,14 @@ class TermsController extends Controller {
 	}
         
         public function addTerms(){
-            $this->show('lexique/termsAdd');
+            $this->show('lexique/addTerms', array(
+                'errorList' => array(),
+                'successList' => array()
+            ));
         }
         
         public function addTermsPost(){
-            $this->show('lexique/termsAdd');
+            $this->show('lexique/addTerms');
         }
 
 }
