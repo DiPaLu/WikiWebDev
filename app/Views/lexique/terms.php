@@ -16,9 +16,9 @@ $this->start('main_content');
 		    <div class="input-group">
 			  <input class="form-control" type="text" name="search" placeholder="Rechercher" required/>
 			  <span class="input-group-btn">
-				<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"><span style="margin-left:10px;">Search</span></button>
+				<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span><span style="margin-left:10px;">Search</span></button>
 			  </span>
-			  </span>
+			  
 		    </div>
 		</div>
 	  </div>
@@ -42,7 +42,7 @@ $this->start('main_content');
 						    <option value="0">Catégories</option>
 						    <!-- je remplis le menu déroulant des catégories -->
 						    <?php foreach ($categoryList as $catList) : ?>
-							    <option value="<?php echo $catList['cat_id']; ?>"<?php echo $currentId == $catList['cat_id'] ? ' selected="selected"' : ''; ?>><?php echo $catList['cat_name']; ?>
+							    <option value="<?php echo $catList['cat_id']; ?>"<?php echo $currentId = $catList['cat_id'] ? ' selected="selected"' : ''; ?>><?php echo $catList['cat_name']; ?>
 							    </option>
 						    <?php endforeach; ?>
 						</select>
