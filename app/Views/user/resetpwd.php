@@ -27,7 +27,7 @@ $this->start('main_content');
             <fieldset>
                 <input id="password" type="password" class="form-control" name="password" value="" placeholder="Your new password" /><br />
                 <input id="password2" type="password" class="form-control" name="password2" value="" placeholder="Confirm your new password" /><br />
-                Afficher / Cacher mot de passe<input type="checkbox" class="form-control" id="showpwd" />
+                <label class="form-control" >Afficher / Cacher mot de passe<input type="checkbox" class="form-control" id="showpwd" /></label>
                 <input type="submit" class="btn btn-success btn-block" value="Changer mot de passe" />
             </fieldset>
         </form>
