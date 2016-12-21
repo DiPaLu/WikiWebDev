@@ -172,5 +172,13 @@ class TermsController extends Controller {
             ));
             
 	}
+        
+        public function addTerms(){
+            $this->show('lexique/termsAdd');
+        }
+        
+        public function addTermsPost(){
+            $this->show('lexique/termsAdd');
+        }
 
 }
