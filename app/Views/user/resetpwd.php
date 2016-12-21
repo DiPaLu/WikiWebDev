@@ -25,9 +25,10 @@ $this->start('main_content');
         <?php endif; ?>
         <form id="changepwd" action="" method="post">
             <fieldset>
-                <input type="password" class="form-control" name="password" value="" placeholder="Your new password" /><br />
-                <input type="password" class="form-control" name="password2" value="" placeholder="Confirm your new password" /><br />
-                <input type="submit" class="btn btn-success btn-block" value="Change password" />
+                <input id="password" type="password" class="form-control" name="password" value="" placeholder="Your new password" /><br />
+                <input id="password2" type="password" class="form-control" name="password2" value="" placeholder="Confirm your new password" /><br />
+                Afficher / Cacher mot de passe<input type="checkbox" class="form-control" id="showpwd" />
+                <input type="submit" class="btn btn-success btn-block" value="Changer mot de passe" />
             </fieldset>
         </form>
     </div>
