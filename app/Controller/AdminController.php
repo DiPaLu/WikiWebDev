@@ -17,6 +17,9 @@ class AdminController extends Controller {
     public $terID;
 
     public function getAdmin() {
+        
+        $this->allowTo(array('1', '2'));
+        
         $loggedUser = $this->getUser();
         //debug($loggedUser);
         $usersModel = new UsersModel();
@@ -25,11 +28,9 @@ class AdminController extends Controller {
         $termsList = $termsModel->getAllTerms();
         //debug($termsList);
         $definitionModel = new DefinitionModel();
-        $definitionsList = $definitionModel->getPendingDefinition();    
+        $definitionsList = $definitionModel->getPendingDefinition();
  
-        $this->allowTo(array('1', '2'));
-
-
+        
         $this->show('admin/admin', array(
             'usersList' => $usersList,
             'termsList' => $termsList,
@@ -39,11 +40,8 @@ class AdminController extends Controller {
     
     public function getAdminPost() { 
         
-        $this->allowTo(array('1', '2'));
-        
-        debug($_POST);
-        //exit;
-        
+        $this->allowTo(array('1', '2'));       
+                
         $loggedUser = $this->getUser();
         //debug($loggedUser);
         $usersModel = new UsersModel();
@@ -82,48 +80,15 @@ class AdminController extends Controller {
         //Supprimer definition
         $defId = $_POST['def-id'];
         $deleteDefinition = $definitionModel->deleteDefinition($defId);             
-        }
-        
-        
-        /*
-         * methodes pour les requetes AJAX * 
-        */
-        /*
-        if (!empty($_POST[''])) {
-        
-        //move to moderator
-        $userId = $_POST[''];
-        
-        $moveToModerator = $usersModel->moveModerator($userId);
-               
-        }
-        
-        if (!empty($_POST[''])) {
-        
-        //move to moderator
-        $userId = $_POST[''];
-        $moveToAdmin = $usersModel->moveAdmin($userId);
-               
-        }
-        
-        if (!empty($_POST[''])) {
-        
-        //move to user
-        $userId = $_POST[''];
-        $moveToUser = $usersModel->moveUser($userId);
-               
-        }
-        */         
-              
-
+        }              
+            
         $this->show('admin/admin', array(
             'usersList' => $usersList,
             'termsList' => $termsList,
             'definitionsList' => $definitionsList,
             //'validateTerm' => $validateTerm,
             //'deleteTerm' => $deleteTerm
-        )); 
-        
+        ));       
     }   
     
     public function moveToUser(){

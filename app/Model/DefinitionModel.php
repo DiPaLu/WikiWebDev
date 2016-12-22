@@ -13,35 +13,7 @@ class DefinitionModel extends \W\Model\Model {
 	public function __construct() {
 		parent::__construct();
 		$this->setPrimaryKey('def_id');
-	}
-
-	/**
-	 * 
-	 * @return boolean
-	 */
-        /*
-	public function getDefinition() {
-                                
-		$sql = '
-		SELECT *
-		FROM ' . $this->table . '
-                INNER JOIN terms ON terms.ter_id = definition.terms_ter_id
-                INNER JOIN users ON definition.users_usr_id = users.usr_id
-		ORDER BY def_add_date DESC
-		';
-
-		$stmt = $this->dbh->prepare($sql);
-
-		if ($stmt->execute() === false) {
-			debug($stmt->errorInfo());
-		} else {
-			return $stmt->fetchAll();
-		}
-		return false;
-	}
-        
-        */
-              
+	}          
         
         public function getPendingDefinition() {
                                 
@@ -51,7 +23,7 @@ class DefinitionModel extends \W\Model\Model {
                 INNER JOIN terms ON terms.ter_id = definition.terms_ter_id
                 INNER JOIN users ON definition.users_usr_id = users.usr_id
                 WHERE def_status = 2
-		ORDER BY def_id ASC
+		ORDER BY def_add_date DESC
 		';
 
 		$stmt = $this->dbh->prepare($sql);
