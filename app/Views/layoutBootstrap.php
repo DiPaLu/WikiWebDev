@@ -5,6 +5,7 @@
 	  <meta charset="utf-8">
 	  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 	  <link rel="stylesheet" href="<?= $this->assetUrl('css/bootstrap.min.css') ?>">
+	  <link rel="stylesheet" href="<?= $this->assetUrl('css/cat.css') ?>">
 	  <link rel="stylesheet" href="<?= $this->assetUrl('css/style.css') ?>">
 
 	  <!-- Optional theme -->
@@ -31,7 +32,7 @@
 					    <li><a href="<?= $this->url('user_login') ?>">Se connecter</a></li>
 					    <li><a href="<?= $this->url('user_signup') ?>">S'incrire</a></li>
 				    <?php else : ?>
-					    <li><a href="<?= $this->url('terms_add_details') ?>">Proposer une définition</a></li>
+					    <li><a href="<?= $this->url('terms_add_terms') ?>">Proposer un mot</a></li>
 					    <li><a href="<?= $this->url('profil_profil') ?>">Espace Membre</a></li>
 					    <li><a href="<?= $this->url('admin_get_admin') ?>">Espace Admin</a></li>
 					    <li><a href="<?= $this->url('user_logout') ?>">Se déconnecter</a></li>

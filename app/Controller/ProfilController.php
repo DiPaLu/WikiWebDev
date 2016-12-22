@@ -37,6 +37,28 @@ class ProfilController extends Controller{
             $errorList[] = 'Email invalide<br>';
             $formOk = false;
         }
+        
+        if(sizeof($_FILES['file'])){
+            $file = $_FILES['file'];
+            $extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
+           
+            $extension_upload = strtolower(substr(strrchr($file['name'], '.') ,1));
+            //strrchr renvoie l'extension avec le point '.'
+            //substr(chaine, 1) ignore le premier caractère de chaine, cest a dire le point
+            //strotolower met l'extension en minuscules
+            if(!in_array($extension_upload, $extensions_valides)){
+                $formOk = false;
+                $errorList[] = 'Extension incorrecte';
+            }
+            debug($file);
+            
+            if(!move_uploaded_file($file['tmp_name'], 'img/avatar' .$extension_upload)){
+                $formOk = false;
+                $errorList[] = 'erreur lors du transfert';
+            } else if($file['size'] > $maxsize){
+                $errorList[] = 'fichier est trop gros';
+            }
+        }
 
         $usersModel = new UsersModel();
 

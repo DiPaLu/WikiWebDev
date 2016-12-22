@@ -32,14 +32,12 @@
 					    <li><a href="<?= $this->url('user_signup') ?>">S'incrire</a></li>
 				    <?php else : ?>
 <<<<<<< HEAD
-					    <li><a href="<?= $this->url('profil_profil') ?>">Espace Membre</a></li>				     
-                                            <li><a href="<?= $this->url('admin_get_admin') ?>">Espace Admin</a></li>
-					    <li><a href="<?= $this->url('terms_get_terms_add_post') ?>">Proposer une définition</a></li>
+					    <li><a href="<?= $this->url('terms_add_terms') ?>">Proposer un mot</a></li>
 =======
-					    <li><a href="<?= $this->url('terms_add_details') ?>">Proposer une définition</a></li>
+					    <li><a href="<?= $this->url('terms_add_terms') ?>">Proposer une définition</a></li>
+>>>>>>> pm352
 					    <li><a href="<?= $this->url('profil_profil') ?>">Espace Membre</a></li>
 					    <li><a href="<?= $this->url('admin_get_admin') ?>">Espace Admin</a></li>
->>>>>>> dev
 					    <li><a href="<?= $this->url('user_logout') ?>">Se déconnecter</a></li>
 				    <?php endif ?>
 				</ul>

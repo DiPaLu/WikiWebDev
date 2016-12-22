@@ -28,6 +28,7 @@ $(document).ready(function () {
     $("#signup").submit(function (event) {
         if (check() === true) {
             event.preventDefault();
+            alert("Les mots de passe doivent être identiques !");
         }
     });
 
@@ -35,6 +36,7 @@ $(document).ready(function () {
     $("#changepwd").submit(function (event) {
         if (check() === true) {
             event.preventDefault();
+            alert("Les mots de passe doivent être identiques !");
         }
     });
 
