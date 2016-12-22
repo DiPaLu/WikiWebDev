@@ -42,7 +42,7 @@ $this->start('main_content');
 						    <option value="0">Catégories</option>
 						    <!-- je remplis le menu déroulant des catégories -->
 						    <?php foreach ($categoryList as $catList) : ?>
-							    <option value="<?php echo $catList['cat_id']; ?>"<?php echo $currentId == $catList['cat_id'] ? ' selected="selected"' : ''; ?>><?php echo $catList['cat_name']; ?>
+							    <option value="<?php echo $catList['cat_id']; ?>"<?php echo $currentId = $catList['cat_id'] ? ' selected="selected"' : ''; ?>><?php echo $catList['cat_name']; ?>
 							    </option>
 						    <?php endforeach; ?>
 						</select>

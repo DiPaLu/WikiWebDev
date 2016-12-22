@@ -245,6 +245,8 @@ class UserController extends Controller {
     public function resetpwd($token) {
         $this->show('user/resetpwd', array(
             'errorList' => array(),
+            'password' => '',
+            'password2' => '',
             'successList' => array()
         ));
     }
@@ -278,6 +280,19 @@ class UserController extends Controller {
 
             if (!isset($token) || $token === FALSE) {
                 $formOK = false;
+            }
+            
+            // J'appelle l'API Google-Captcha
+            if ($this->googleCaptcha()) {
+                $successList[] = "Captcha ok";
+            } else {
+                $errorList[] = "Pas de spammeurs ou de robots !";
+                $this->show('user/resetpwd', array(
+                    'errorList' => $errorList,
+                    'password' => '',
+                    'password2' => '',
+                    'successList' => array()
+                ));
             }
 
             // Si formulaire ok

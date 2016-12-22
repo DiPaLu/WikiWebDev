@@ -16,9 +16,9 @@ $this->start('main_content');
 		    <div class="input-group">
 			  <input class="form-control" type="text" name="search" placeholder="Rechercher" required/>
 			  <span class="input-group-btn">
-				<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"><span style="margin-left:10px;">Search</span></button>
+				<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span><span style="margin-left:10px;">Search</span></button>
 			  </span>
-			  </span>
+			  
 		    </div>
 		</div>
 	  </div>
@@ -42,7 +42,7 @@ $this->start('main_content');
 						    <option value="0">Catégories</option>
 						    <!-- je remplis le menu déroulant des catégories -->
 						    <?php foreach ($categoryList as $catList) : ?>
-							    <option value="<?php echo $catList['cat_id']; ?>"<?php echo $currentId == $catList['cat_id'] ? ' selected="selected"' : ''; ?>><?php echo $catList['cat_name']; ?>
+							    <option value="<?php echo $catList['cat_id']; ?>"<?php echo $currentId = $catList['cat_id'] ? ' selected="selected"' : ''; ?>><?php echo $catList['cat_name']; ?>
 							    </option>
 						    <?php endforeach; ?>
 						</select>
@@ -51,11 +51,11 @@ $this->start('main_content');
 				    <h3>Liste des mots :</h3>
 				    <ul>
 					<?php foreach ($resultList as $result) : ?>
-                                            <li><a href="<?= $this->url('terms_get_terms_details', array('termsId' => $result['ter_id'], 'terms' => $result['ter_name'])) ?>" class="termsFont"><?= $result['ter_name'] ?></a><br><?= $result['def_description'] ?><br>Proposé par <a href="<?= $this->url('profil_profil', ['pseudo' => $result['usr_pseudo']]) ?>"><?= $result['usr_pseudo'] ?></a> le <?= $result['ter_add_date'] ?><br>
+					<li><a href="<?= $this->url('terms_get_terms_details', array('termsId' => $result['ter_id'], 'terms' => $result['ter_name'])) ?>" class="termsFont"><?= $result['ter_name'] ?></a><br><?= $result['def_description'] ?><br>Proposé par <a href="<?= $this->url('profil_profil', ['pseudo' => $result['usr_pseudo']]) ?>"><?= $result['usr_pseudo'] ?></a> le <?= $result['ter_add_date'] ?><br>
 
-                                            <?php if ($result['ter_tags']): ?>Tags: <?= $result['ter_tags'] ?></li>
-                                            <?php endif; ?><br>
-                                        <?php endforeach; ?>
+					<?php if ($result['ter_tags']): ?>Tags: <?= $result['ter_tags'] ?></li>
+					<?php endif; ?><br>
+					<?php endforeach; ?>
 				    </ul>
 				</div>
 				<div class="col-xs-2"></div>
