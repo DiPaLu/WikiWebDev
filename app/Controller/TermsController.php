@@ -186,46 +186,36 @@ class TermsController extends Controller {
             
             $mot = isset($_POST['mot']) ? trim($_POST['mot']) : '';
             $definition = isset($_POST['definition']) ? trim($_POST['definition']) : '';
-            $tags = isset($_POST['tags']) ? trim($_POST['tags']) : '';
+            $tags = '';
             $formOk = true;
             
             if(empty($mot)){
-                $errorList[] = 'Mot vide<br/>';
+                $errorList[] = 'mot vide<br/>';
                 $formOk = false;
             }
-            
-            if(empty($definition)){
-                $errorList[] = 'Definition vide<br/>';
-                $formOk = false;
-            }
-            if(empty($tags)){
-                $errorList[] = 'Tags vide<br/>';
-                $formOk = false;
-            }
-            
+              
             if($formOk){
                 $model = new TermsModel();
                 $connect = $this->getUser();
-                $lastId = $model->insert(array(
-                    'ter_name' => $mot,
-                    'ter_add_date' => date('Y-m-d H:i:s'),
-                    'ter_status' => 'Pending',
-                    'category_cat_id' => 6,
-                    'users_usr_id' => $connect['usr_id'],
-                    'ter_tags' => $tags
-                ));
-                
-                
+                    $lastId = $model->insert(array(
+                        'ter_name' => $mot,
+                        'ter_add_date' => date('Y-m-d H:i:s'),
+                        'ter_status' => 'Pending',
+                        'category_cat_id' => 6,
+                        'users_usr_id' => $connect['usr_id'],
+                        'ter_tags' => $tags
+                    ));
                 
                 $modelDef = new \Model\DefinitionModel();
-                
-                $modelDef->insert(array(
-                    'def_status' => 'Pending',
-                    'def_description' => $definition,
-                    'def_add_date' => date('Y-m-d H:i:s'),
-                    'terms_ter_id' => $lastId['ter_id'],
-                    'users_usr_id' => $connect['usr_id']
-                ));
+                if($definition != ''){
+                    $modelDef->insert(array(
+                        'def_status' => 'Pending',
+                        'def_description' => $definition,
+                        'def_add_date' => date('Y-m-d H:i:s'),
+                        'terms_ter_id' => $lastId['ter_id'],
+                        'users_usr_id' => $connect['usr_id']
+                    ));
+                }
                 $successList[] = 'Le mot a bien été ajouté dans la base de données';     
          }
             
