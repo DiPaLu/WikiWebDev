@@ -283,7 +283,7 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
 
 
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <ul>
                                 <li>
                                     <strong>Terme: <?= $definition['ter_name'] ?></strong><br />
@@ -301,7 +301,7 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
                             </ul>
                         </div>
 
-                        <div class="col-sm-1" name="date">  
+                        <div class="col-sm-2" name="date">  
                             <ul>
                                 <li><br />
                                     <?= $definition['def_add_date'] // changer!!! ajouter en BDD champe def_add_date?>
