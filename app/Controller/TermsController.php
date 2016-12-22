@@ -48,6 +48,7 @@ class TermsController extends Controller {
 		$detModel = new TermsModel();
 		$detailsTerms = $detModel->getTermsDetails($termsId);
 		//debug($detailsTerms);
+	
 		$this->show('lexique/termsDetails', array(
 		    'detailsTerms' => $detailsTerms,
 		));
@@ -101,14 +102,14 @@ class TermsController extends Controller {
 		$resultList = $defModel->getTermsByCategory($catId);
 		//debug($resultList);
 		//j'initialise mes variables
-		$currentId = 0;
+		//$currentId = 0;
 		//debug($categoryList);
 
 		//je defini des variables pour la vue
 		$this->show('lexique/termsByCategory', array(
 		    'resultList' => $resultList,
 		    'categoryList' => $categoryList,
-		    'currentId' => $currentId
+		    'currentId' => $catId
 		));
 	}
 	
