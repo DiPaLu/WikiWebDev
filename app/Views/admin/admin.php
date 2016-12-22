@@ -55,9 +55,7 @@ if ($w_user['usr_role'] == 2) :
                                 <?php if ($currentUser['usr_role'] == 1) : ?>
 
                                     <li class="ui-widget-content">
-                                        <!--    
-                                            <a href="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a> -->
-                                        <?= $currentUser['usr_pseudo'] ?>
+                                        <a herf="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a>                                        
                                     </li>
 
                                 <?php endif; ?>
@@ -166,7 +164,7 @@ if ($w_user['usr_role'] == 2) :
             }
         });
         
-        $("#move-to-mod").click(function () {
+        $("#move-to-admin").click(function () {
                                    
             if ($("#select-user").val() !== '' && $("#select-user").val() > 0){ 
             
