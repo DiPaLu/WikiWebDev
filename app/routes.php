@@ -43,5 +43,5 @@ $w_routes = array(
     ['POST', '/profil/parametre/', 'Profil#parametrePost', 'profil_parametre_post'],
     ['GET', '/profil/delete/', 'Profil#delete', 'profil_delete'],
     ['POST', '/profil/delete/', 'Profil#deletePost', 'profil_delete_post'],
-    ['GET|POST', '/profil/[:pseudo]/', 'Profil#profil', 'profil_profil'],
+    ['GET', '/profil/[:pseudo]/', 'Profil#profil', 'profil_profil'],
 );

@@ -133,29 +133,39 @@ class ProfilController extends Controller{
     }
 
     public function profil($pseudo){
+        $profModel = new UsersModel();
+        $termModel = new \Model\TermsModel();
+        $prof=$profModel->getUserByUsernameOrEmail($pseudo);
+        $connected = $this->getUser();
+        
         if($pseudo != '[:pseudo]'){
-            $profModel = new UsersModel();
-            $prof=$profModel->getUserByUsernameOrEmail($pseudo);
+            $id = $connected['usr_id'];
             $pseudo = $prof['usr_pseudo'];
             $dateInscription = $prof['usr_insert_date'];
             $dateDerniereConnection = $prof['usr_last_connected'];
             $avatar = $prof['usr_avatar'];
             $pseudoUtilisateur = 'no';
         } else {
-            $connected = $this->getUser();
+            $id = $connected['usr_id'];
             $pseudo = $connected['usr_pseudo'];
             $dateInscription = $connected['usr_insert_date'];
             $dateDerniereConnection = $connected['usr_last_connected'];
             $avatar = $connected['usr_avatar'];
             $pseudoUtilisateur = 'yes';
         }
+        $nbMot = $termModel->getNombreMot($id);
+       
+        
+
+        
         
         $this->show('profil/profil', array(
             'pseudo' => $pseudo,
             'dateInscription' => $dateInscription,
             'dateDerniereConnection' => $dateDerniereConnection,
             'avatar' => $avatar,
-            'pseudoUtilisateur' => $pseudoUtilisateur
+            'pseudoUtilisateur' => $pseudoUtilisateur,
+            'nbMot' => $nbMot
         ));
     }
 }

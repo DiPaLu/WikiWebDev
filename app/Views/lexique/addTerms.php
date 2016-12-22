@@ -31,8 +31,6 @@ $this->start('main_content');
                             <?= $w_user['usr_pseudo'] ?><br/><br/> 
                             <label>Mot à définir</label><br/>
                             <input name="mot" class="form_control"/><br/><br/>
-                            <label>Tags</label><br/>
-                            <input name="tags" class="form_control"/><br/><br/>
                             <label>Définition</label><br/>
                             <textarea name="definition" class="form-control" rows="4"></textarea>
                             <br/>   
