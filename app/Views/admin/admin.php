@@ -55,7 +55,7 @@ if ($w_user['usr_role'] == 2) :
                                 <?php if ($currentUser['usr_role'] == 1) : ?>
 
                                     <li class="ui-widget-content">
-                                        <a herf="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a>                                        
+                                        <a href="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a>                                        
                                     </li>
 
                                 <?php endif; ?>
