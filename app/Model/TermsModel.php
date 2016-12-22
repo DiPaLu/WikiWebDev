@@ -204,7 +204,10 @@ class TermsModel extends \W\Model\Model {
 		} else {
 			return true;
 		}
-                return false;               
+                return false;
+                
+        }
+        
         public function getNombreMot($id){
             
             $sql = '
