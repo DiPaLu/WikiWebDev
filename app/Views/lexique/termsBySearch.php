@@ -20,7 +20,7 @@ $this->start('main_content');
 			  <h3>Liste des mots :</h3>
 			  <ul>
 				<?php foreach ($searchResult as $result) : ?>
-					<li><a href="<?= $this->url('terms_get_terms_details', array('termsId' => $result['ter_id'], 'terms' => $result['ter_name'])) ?>"><?= $result['ter_name'] ?></a><br><?= $result['def_description'] ?></li><?php if ($result['ter_tags']): ?>Tags: <?= $result['ter_tags'] ?></li>
+					<li><a href="<?= $this->url('terms_get_terms_details', array('termsId' => $result['ter_id'], 'terms' => $result['ter_name'])) ?>"><?= $result['ter_name'] ?></a><br><?= $result['def_description'] ?></li><?php if ($result['ter_tags']): ?>Tags: <?= $result['ter_tags'] ?>
 						<?php endif; ?><br><br>
 				<?php endforeach; ?>
 			  </ul>

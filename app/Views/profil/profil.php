@@ -20,9 +20,13 @@ $this->start('main_content');
 				</div>
 				<div class="col-lg-9 col-md-9 col-sm-8">
 				    <h2><?= $pseudo ?></h2>
-				    <div class="">
+                                    <div class="">
+                                    <?php if($nbMot == 0) :?>
 					  <p>Pas de mots en rédaction</p>
-				    </div>
+                                    <?php else  : ?>
+                                          <p>Nombre de mots ajoutés: <?= $nbMot ?></p>
+                                    <?php endif ;?> 
+                                    </div>
 				    <p>Date d'inscription : <?= $dateInscription ?></p>
 				    <p>Dernière connexion: <?= $dateDerniereConnection ?></p>
 				    <br/>

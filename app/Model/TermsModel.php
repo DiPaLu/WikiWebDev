@@ -205,6 +205,26 @@ class TermsModel extends \W\Model\Model {
 			return true;
 		}
                 return false;               
+        public function getNombreMot($id){
+            
+            $sql = '
+		SELECT COUNT( ter_name ) AS nbMot
+                FROM '.$this->table.'
+                WHERE users_usr_id = :id';
+
+            //debug($sql);
+		$stmt = $this->dbh->prepare($sql);
+		$stmt->bindValue(':id', $id /*,PDO::PARAM_INT*/);
+
+		if ($stmt->execute() === false) {
+			debug($stmt->errorInfo());
+		} else {
+			$nbMot = $stmt->fetch();
+                        //debug($nbMot);
+                        return  $nbMot['nbMot'];
+		}
+		return false;
+            
         }
 	
         

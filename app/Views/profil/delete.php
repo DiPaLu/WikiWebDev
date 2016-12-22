@@ -6,6 +6,7 @@ $this->layout('layoutBootstrap', ['title' => 'Profil']);
 // Début du bloc d'affichage
 $this->start('main_content');
 ?>
+
 <div class="row">
     <div class="col-xs-12">
 	  <div class="panel panel-primary">
@@ -36,7 +37,8 @@ $this->start('main_content');
 				    <form action="" method="post">
 					  <label>Password</label><br/>
 					  <input type="text" name="password" class="form-control" value=""><br/>
-					  <input type="submit" class="btn pull-right" value="Supprimer" />
+					  <input type="submit" class="btn btn-primary pull-right" value="Supprimer" />
+                                          <a href="<?= $this->url('profil_parametre') ?>" class="btn btn-primary">Annuler</a>
 				    </form>
 				</div>
 			  </div>
