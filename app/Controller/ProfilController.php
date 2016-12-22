@@ -59,6 +59,7 @@ public function parametrePost(){
 
             $auth = new AuthentificationModel();
             $auth->refreshUser();
+            $successList[] = 'La modification a été faite';
         }
     }
     //avatar
@@ -90,6 +91,7 @@ public function parametrePost(){
 
             $auth = new AuthentificationModel();
             $auth->refreshUser();
+            $successList[] = 'la modification a été faite';
 
                 if(!$resultat){
                     $formOk = false;
