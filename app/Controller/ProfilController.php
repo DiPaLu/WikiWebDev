@@ -186,6 +186,7 @@ public function parametrePost(){
         if (empty($password)) {
             $errorList[] = 'Password vide<br>';
             $formOk = false;
+
         } 
 
         if($formOk){
@@ -199,6 +200,14 @@ public function parametrePost(){
         }else{
             $errorList[] = 'Mot de passe incorrect<br/>';
         }
+            if($userId > 0){
+                $usersModel = new UsersModel();
+                $usersModel->delete($userId);
+                $sucessList[] = 'Votre compte a été supprimé';
+                $this->redirect('default_home');
+            }else{
+                $errorList[] = 'Mot de passe incorrect<br/>';
+            }
             $sucessList[] = 'Compte supprimé avec succes';
             $auth->logUserOut();
         }

@@ -14,10 +14,7 @@ if ($w_user['usr_role'] == 2) :
     <h2>Welcome: Admin</h2>
 
     <p><i>Espace administrateur</i></p>
-    <!-- affiche la liste des utilisateurs (clickable) dans troi colonnes, par role: utilsateur, moderateur, admin -->
-
-    <button type="radio" class="btn btn-primary btn-sm" id="button-validate-definition">Ajax Test</button>
-    <div id="show_date"></div>
+    <!-- affiche la liste des utilisateurs (clickable) dans troi colonnes, par role: utilsateur, moderateur, admin -->    
 
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -88,7 +85,7 @@ if ($w_user['usr_role'] == 2) :
                 </div>
 
                 <div class="row">
-                    <h3>Pour modifier les permissions d'un membre, changez son role:</h3><br/>
+                    <h4>Pour modifier les permissions d'un membre, changez son role:</h4><br/>
                     
                     <div class="col-sm-4">                  
                                            
@@ -104,11 +101,18 @@ if ($w_user['usr_role'] == 2) :
 
                         </select>
                     </div>
-                    <div class="col-sm-4">                               
-
-                        <button type="button" class="btn btn-warning btn-sm" id="move-to-moderator">Move to Mod</button>
-                        <button type="button" class="btn btn-danger btn-sm" id="move-to-admin">Move to Admin</button>
-                        <button type="button" class="btn btn-success btn-sm" id="move-to-user">Move to User</button>
+                    <div class="col-sm-8"></div>
+                    
+                </div>
+                <br />
+                <div class="row">                
+                    
+                    <div class="col-sm-12">                     
+                        <button type="button" class="btn btn-warning btn-md" id="move-to-moderator">Move to Mod</button>
+                    
+                        <button type="button" class="btn btn-danger btn-md" id="move-to-admin">Move to Admin</button>    
+                    
+                        <button type="button" class="btn btn-success btn-md" id="move-to-user">Move to User</button>
                     </div>
 
                 </div>
@@ -119,7 +123,7 @@ if ($w_user['usr_role'] == 2) :
     </div>
 
     <script type="text/javascript">
-        //alert('jgdfhgdhd2222');
+        
         $("#move-to-user").click(function () {
 
             if ($("#select-user").val() !== '' && $("#select-user").val() > 0) {
@@ -133,7 +137,7 @@ if ($w_user['usr_role'] == 2) :
                         id: $("#select-user").val()
                     }
                 }).done(function (data) {
-                    alert('L\'utilisateur ' + $("#select-user").val() + ' mis-à-jour. Rôle = User');
+                    alert('L\'utilisateur ' + $("#select-user").val() + ' mis-à-jour. Rôle = utilisateur');
                 });
             }    
             else {
@@ -154,7 +158,7 @@ if ($w_user['usr_role'] == 2) :
                         id: $("#select-user").val()
                         }
                 }).done(function (data) {
-                alert('L\'utilisateur ' + $("#select-user").val() + ' mis-à-jour. Rôle = User');
+                alert('L\'utilisateur ' + $("#select-user").val() + ' mis-à-jour. Rôle = modérateur');
                 });
             }
             else {
@@ -175,18 +179,15 @@ if ($w_user['usr_role'] == 2) :
                             id: $("#select-user").val()
                         }
                     }).done(function (data) {
-                        //alert('L\'utilisateur ' + $("#select-user").val() + ' mis-à-jour. Rôle = User');
-                        alert('');
+                        alert('L\'utilisateur ' + $("#select-user").val() + ' mis-à-jour. Rôle = administrateur');                        
                     });
             }
             
             else {
                 alert('Pas d\'utilisateur selectionné');
             }         
-        });
+        });  
     
-    
-
     </script>
 
 
@@ -216,35 +217,13 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
     <div class="panel-body">
         <div class="tab-content">
 
-            <!-- comments afficher crectement des colonnes titre en responsives
-
-            <div class="row">
-                <div class="col-sm-8">
-                    <h4 class="panel-title"><i>Terme et définition</i></h4>
-                </div>
-                <div class="col-sm-1"> 
-                    <i>membre</i>                  
-                </div>
-                <div class="col-sm-1">
-                    <i>date</i>
-                </div>
-
-                <div class="col-sm-2">
-                    <i>Action</i>
-                </div>
-            </div>
-            
-            -->
-
-
-
             <?php foreach ($termsList as $term) : ?>
 
                 <?php if ($term['ter_status'] == 'Pending') : ?>
 
 
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <ul>
                                 <li>
                                     <b><?= $term['ter_name'] ?></b><br />
@@ -261,7 +240,7 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
                             </ul>
                         </div>
 
-                        <div class="col-sm-1">  
+                        <div class="col-sm-2">  
                             <ul>
                                 <li><br />
                                     <?= $term['ter_add_date'] ?>
@@ -304,7 +283,7 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
 
 
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <ul>
                                 <li>
                                     <strong>Terme: <?= $definition['ter_name'] ?></strong><br />
@@ -322,7 +301,7 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
                             </ul>
                         </div>
 
-                        <div class="col-sm-1" name="date">  
+                        <div class="col-sm-2" name="date">  
                             <ul>
                                 <li><br />
                                     <?= $definition['def_add_date'] // changer!!! ajouter en BDD champe def_add_date?>
