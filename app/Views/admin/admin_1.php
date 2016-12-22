@@ -3,11 +3,7 @@
 $this->layout('layoutBootstrap', ['title' => 'Admin']);
 ?>
 
-
-
 <?php $this->start('main_content') ?>
-
-
 
 <style>
   #sortable1, #sortable2 {
@@ -27,6 +23,7 @@ $this->layout('layoutBootstrap', ['title' => 'Admin']);
     width: 120px;
   }
   </style>
+  
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
@@ -47,6 +44,9 @@ if ($w_user['usr_role'] == 2) :
     <p><i>Espace administrateur</i></p>
     <!-- affiche la liste des utilisateurs (clickable) dans troi colonnes, par role: utilsateur, moderateur, admin -->
 
+    <button type="button" class="btn btn-primary btn-sm" id="button-validate-definition">Ajax Test</button>
+    <div id="show_date"></div>
+    
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Liste des utiisateurs</h3>
@@ -191,17 +191,20 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
                                 </li>
                             </ul>
                         </div>
-
-                        <div class="col-sm-2"><br />  
-                            <button type="button" class="btn btn-primary btn-sm" type="submit" id="button-validate-term">Valider</button>                            
-                            <button type="button" class="btn btn-primary btn-sm" type="submit" id="button-refuse-term">Refuser</button>
-                        </div>
+                        <form method="post" action="">
+                            <div class="col-sm-2"><br />
+                                <input type="submit" class="btn btn-primary btn-sm"name="validate-term" value="Valider">
+                            </div>
+                        
+                            <div class="col-sm-2"><br />                                                        
+                                <input type="submit" class="btn btn-warning btn-sm" name="delete-term" value="Supprimer">
+                            </div>
+                        </form>
                     </div>
 
                 <?php endif; ?>
             <?php endforeach; ?>
-
-
+            
         </div>
     </div>
 </div>
@@ -248,7 +251,7 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
                             </ul>
                         </div>
                         
-                        <div class="col-sm-1">  
+                        <div class="col-sm-1" name="utilisateur">  
                             <ul>
                                 <li><br />
                                     <?= $definition['usr_pseudo'] ?>
@@ -256,15 +259,15 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
                             </ul>
                         </div>
 
-                        <div class="col-sm-1">  
+                        <div class="col-sm-1" name="date">  
                             <ul>
                                 <li><br />
-                                    <?= $definition['ter_add_date'] // changer!!! ajouter en BDD champe def_add_date?>
+                                    <?= $definition['def_add_date'] // changer!!! ajouter en BDD champe def_add_date?>
                                 </li>
                             </ul>
                         </div>
 
-                        <div class="col-sm-2"><br />  
+                        <div class="col-sm-2" name="action"><br/>  
                             <button type="button" class="btn btn-primary btn-sm" id="button-validate-definition">Valider</button>                            
                             <button type="button" class="btn btn-primary btn-sm" id="button-refuse-definition">Refuser</button>
                         </div>

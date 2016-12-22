@@ -2,7 +2,6 @@
 
 namespace Model;
 
-
 /**
  * Description of LexiqueModel
  *
@@ -10,18 +9,18 @@ namespace Model;
  */
 class TermsModel extends \W\Model\Model {
 
-	// Je surcharge le constructeur pour définir le nom du champ PK
-	public function __construct() {
-		parent::__construct();
-		$this->setPrimaryKey('ter_id');
-	}
+    // Je surcharge le constructeur pour définir le nom du champ PK
+    public function __construct() {
+        parent::__construct();
+        $this->setPrimaryKey('ter_id');
+    }
 
-	/**
-	 * recupere tous les mots
-	 * @return boolean
-	*/
-	public function getTerms() {
-		$sql = '
+    /**
+     * recupere tous les mots
+     * @return boolean
+     */
+    public function getTerms() {
+        $sql = '
 		SELECT *
 		FROM ' . $this->table . '
 		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
@@ -31,24 +30,24 @@ class TermsModel extends \W\Model\Model {
 		ORDER BY terms.ter_name
 		';
 
-		$stmt = $this->dbh->prepare($sql);
-		$stmt->bindValue(':Validated', 'Validated');
-		
-		if ($stmt->execute() === false) {
-			debug($stmt->errorInfo());
-		} else {
-			return $stmt->fetchAll();
-		}
-		return false;
-	}
-	
-	/**
-	 * recupere un mot en detail et ses définitions
-	 * @return boolean
-	*/
-	public function getTermsDetails($termsId) {
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':Validated', 'Validated');
 
-		$sql = '
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        } else {
+            return $stmt->fetchAll();
+        }
+        return false;
+    }
+
+    /**
+     * recupere un mot en detail et ses définitions
+     * @return boolean
+     */
+    public function getTermsDetails($termsId) {
+
+        $sql = '
 		SELECT *
 		FROM ' . $this->table . '
 		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
@@ -56,29 +55,26 @@ class TermsModel extends \W\Model\Model {
 		WHERE terms.ter_id = :termsId
 		AND definition.def_status = :Validated
 		';
-		
-		$stmt = $this->dbh->prepare($sql);
-		$stmt->bindValue(':termsId', $termsId);
-		$stmt->bindValue(':Validated', 'Validated');
 
-		if ($stmt->execute() === false) {
-			debug($stmt->errorInfo());
-		} else {
-			return $stmt->fetchAll();
-		}
-		return false;
-	}
-        
-        
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':termsId', $termsId);
+        $stmt->bindValue(':Validated', 'Validated');
 
-	
-	/**
-	 * recupere le resultat de la recherche
-	 * @return boolean
-	*/
-	public function getTermsBySearch($search) {
-		
-		$sql = '
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        } else {
+            return $stmt->fetchAll();
+        }
+        return false;
+    }
+
+    /**
+     * recupere le resultat de la recherche
+     * @return boolean
+     */
+    public function getTermsBySearch($search) {
+
+        $sql = '
 		SELECT *
 		FROM ' . $this->table . '
 		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
@@ -86,25 +82,25 @@ class TermsModel extends \W\Model\Model {
 		OR definition.def_description LIKE :search
 		OR terms.ter_tags LIKE :search
 		';
-		
-		$stmt = $this->dbh->prepare($sql);
-		$stmt->bindValue(':search', '%'.$search.'%');
 
-		if ($stmt->execute() === false) {
-			debug($stmt->errorInfo());
-		} else {
-			return $stmt->fetchAll();
-		}
-		return false;
-	}
-	
-	/**
-	 * recupere le resultat du select category
-	 * @return boolean
-	*/
-	public function getTermsByCategory($catId) {
-		
-		$sql = '
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':search', '%' . $search . '%');
+
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        } else {
+            return $stmt->fetchAll();
+        }
+        return false;
+    }
+
+    /**
+     * recupere le resultat du select category
+     * @return boolean
+     */
+    public function getTermsByCategory($catId) {
+
+        $sql = '
 		SELECT *
 		FROM ' . $this->table . '
 		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
@@ -114,18 +110,98 @@ class TermsModel extends \W\Model\Model {
 		GROUP BY terms.ter_id
 		ORDER BY terms.ter_name
 		';
-		//INNER JOIN terms.category_cat_id = catergory.cat_id
-		
-		$stmt = $this->dbh->prepare($sql);
-		$stmt->bindValue(':catId', $catId);
-		$stmt->bindValue(':Validated', 'Validated');
+        //INNER JOIN terms.category_cat_id = catergory.cat_id
 
-		if ($stmt->execute() === false) {
-			debug($stmt->errorInfo());
-		} else {
-			return( $stmt->fetchAll());
-		}
-		return false;
-	}
-	
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':catId', $catId);
+        $stmt->bindValue(':Validated', 'Validated');
+
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        } else {
+            return( $stmt->fetchAll());
+        }
+        return false;
+    }
+
+    public function validateTerm($terId) {
+
+        $sql = "UPDATE `terms` SET `ter_status`= 1 
+            WHERE ter_id = :terId                
+        "; // 1 = Validate
+        
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':terId', $terId);
+        $stmt->execute();
+        /*
+        if ($stmt->execute() === false) {
+            //debug($stmt->errorInfo());
+        } else {
+            return( $stmt->fetchAll());
+        }
+        */
+        
+        return false;         
+    }
+    
+    public function deleteTerm($terId) {
+
+        $sql = "UPDATE `terms` SET `ter_status`= 1 
+            WHERE ter_id = :terId                
+        "; // 1 = Validate
+        
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':terId', $terId);
+        $stmt->execute();
+        /*
+        if ($stmt->execute() === false) {
+            //debug($stmt->errorInfo());
+        } else {
+            return( $stmt->fetchAll());
+        }
+        */
+        
+        return false;         
+    }
+    
+    public function validateTerm($terId) {
+
+        $sql = "UPDATE `terms` SET `ter_status`= 1 
+            WHERE ter_id = :terId                
+        "; // 1 = Validate
+        
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':terId', $terId);
+        $stmt->execute();
+        /*
+        if ($stmt->execute() === false) {
+            //debug($stmt->errorInfo());
+        } else {
+            return( $stmt->fetchAll());
+        }
+        */
+        
+        return false;         
+    }
+    
+    public function deleteDefinition($terId) {
+
+        $sql = "UPDATE `terms` SET `ter_status`= 1 
+            WHERE ter_id = :terId                
+        "; // 1 = Validate
+        
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':terId', $terId);
+        $stmt->execute();
+        /*
+        if ($stmt->execute() === false) {
+            //debug($stmt->errorInfo());
+        } else {
+            return( $stmt->fetchAll());
+        }
+        */
+        
+        return false;         
+    }
+    
 }
