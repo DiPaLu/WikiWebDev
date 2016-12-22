@@ -20,6 +20,7 @@ public function parametrePost(){
 
     $connected = $this->getUser();
     $id = $connected['usr_id'];
+    $auth = new \W\Security\AuthentificationModel();
     //initialisation des tableau d'erreur ou de reussite
     $errorList = array();
     $successList = array();
@@ -127,6 +128,37 @@ public function parametrePost(){
     }
 
 
+    //password
+    if(empty($ancienPassword)){
+        $errorList[] = 'Ancien password vide';
+        $formOk = false;
+        if(empty($password)){
+            $errorList[] = 'Password vide';
+            $formOk = false;
+            if(empty($confirmPassword)){
+                $errorList[] = 'Confirmation de password vide';
+                $formOk = false;
+            }
+            
+            if($password != $confirmPassword){
+                $errorList[] = 'Les passwords ne sont pas identiques';
+                $formOk = false;
+            }
+        }
+    }
+    
+    if($formOk){
+        $data = $usersModel->update(array(
+            'usr_password' => $auth->hashPassword($password)
+        ), $id);
+        
+        if($data !== FALSE){
+            $successList[] =  'Le mot de passe a été changé';
+        }
+    }
+    
+    
+    
 
     $this->show('profil/parametre', array(
         'errorList' => $errorList,
