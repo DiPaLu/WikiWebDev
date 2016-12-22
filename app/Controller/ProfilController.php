@@ -17,6 +17,10 @@ class ProfilController extends Controller{
     }
 
     public function parametrePost(){
+        
+        $connected = $this->getUser(); 
+        $id = $connected['usr_id'];
+        
         $errorList = array();
         $successList = array();
 
@@ -38,26 +42,30 @@ class ProfilController extends Controller{
             $formOk = false;
         }
         
-        if(sizeof($_FILES['file'])){
+        if(sizeof($_FILES['file']) > 0){
             $file = $_FILES['file'];
             $extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
-           
-            $extension_upload = strtolower(substr(strrchr($file['name'], '.') ,1));
+            
+            $extension = strtolower(substr(strrchr($file['name'], '.') ,1));
             //strrchr renvoie l'extension avec le point '.'
             //substr(chaine, 1) ignore le premier caractère de chaine, cest a dire le point
             //strotolower met l'extension en minuscules
-            if(!in_array($extension_upload, $extensions_valides)){
+            if(!in_array($extension, $extensions_valides)){
                 $formOk = false;
                 $errorList[] = 'Extension incorrecte';
             }
-            debug($file);
+            //debug($file);
+            $chemin =' __AVATAR_UPLOAD_DIR__.$id.'.'.$extension';
             
-            if(!move_uploaded_file($file['tmp_name'], 'img/avatar' .$extension_upload)){
+            $resultat = move_uploaded_file($file['tmp_name'], __AVATAR_UPLOAD_DIR__.$id.'.'.$extension);
+            
+            $img = substr(strrchr($chemin, 'public/') ,1);
+            
+                
+            if(!$resultat){
                 $formOk = false;
                 $errorList[] = 'erreur lors du transfert';
-            } else if($file['size'] > $maxsize){
-                $errorList[] = 'fichier est trop gros';
-            }
+            } 
         }
 
         $usersModel = new UsersModel();
@@ -72,7 +80,7 @@ class ProfilController extends Controller{
             $formOk = false;
         }
 
-        $connected = $this->getUser();
+       
 
         if($formOk){
             $auth = new AuthentificationModel();
@@ -154,10 +162,6 @@ class ProfilController extends Controller{
             $pseudoUtilisateur = 'yes';
         }
         $nbMot = $termModel->getNombreMot($id);
-       
-        
-
-        
         
         $this->show('profil/profil', array(
             'pseudo' => $pseudo,

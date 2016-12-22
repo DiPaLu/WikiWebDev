@@ -31,15 +31,15 @@ $this->start('main_content');
 			  </ul>
 
 
-    <form action="" method="post" enctype="multipart/form-data"/>
-        <label>Avatar</label><br/>
-			  <input type="file" name="file"/>
-        <input type="hidden" name="MAX_FILE_SIZE" value="1"/>
-        <p class="help-block">extentions autorisées: .png, .jpeg, .jpg </p>
-    <br/>
-    <img class="img-circle" src="<?= $this->assetUrl('img/avatar/avatar_defaut.png'); ?>"/>
+                            <form name='modifAvatar' action="" method="post" enctype="multipart/form-data"/>
+                                <label>Avatar</label><br/>
+                                                  <input type="file" name="file"/>
+                                <input type="hidden" name="MAX_FILE_SIZE" value="1"/>
+                                <p class="help-block">extentions autorisées: .png, .jpeg, .jpg et .gif </p>
+                            <br/>
+                            <img class="img-circle" src="<?= $this->assetUrl('img/avatar/avatar_defaut.png'); ?>"/>
 
-    <form action="" method="post">
+                            <form name='modifPseudo' action="" method="post">
 				<label>Pseudo</label><br/>
 				Pseudo actuel<input type="text" class="form-control input-sm" name="pseudo" value="<?= $w_user['usr_pseudo'] ?>"/>
 				<input type="submit" class="pull-right btn" value="Modifier" />
@@ -47,14 +47,14 @@ $this->start('main_content');
 			  </form>
 			  <br/>
 			  <br/>
-			  <form action="" method="post">
+			  <form name='modifEmail' action="" method="post">
 				<label>Votre email</label><br/>
 				Adresse e-mail actuelle <input type="text" name="email" class="form-control input-sm" name="email" value="<?= $w_user['usr_email'] ?>">
 				<input type="submit" class="pull-right btn" value="Modifier" />
 			  </form>
 			  <br/>
 			  <br/>
-			  <form action="" method="post">
+			  <form name='modifPassword'action="" method="post">
 				<label>Changer votre mot de passe</label><br/>
 				Ancien mot de passe <input type="password" class="form-control input-sm" name="ancienPassword">
 				Nouveau mot de passe <input type="password" class="form-control input-sm"name="password">
