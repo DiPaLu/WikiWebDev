@@ -24,7 +24,7 @@ $this->start('main_content');
 <p>Vous voulez vraiment nous quitter? WikiWebDev va être triste de ne plus vous voir</p>
 <form action="" method="post">
     <label>Password</label><br/>
-    <input type="text" name="password" class="form-control" value=""><br/>
+    <input type="password" name="password" class="form-control" value=""><br/>
     <input type="submit" class="btn pull-right" value="Supprimer" />
 </form>
 </div>

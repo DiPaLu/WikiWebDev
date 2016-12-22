@@ -125,9 +125,11 @@ class ProfilController extends Controller{
             }else{
                 $errorList[] = 'Mot de passe incorrect<br/>';
             }
+            $sucessList[] = 'Compte supprimé avec succes';
+            $auth->logUserOut();
         }
         
-        $this->show('profil/delete');
+        $this->show('lexique/terms');
     }
 
     public function profil($pseudo){
