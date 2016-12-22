@@ -39,6 +39,9 @@ $w_routes = array(
     // Page admin
     ['GET', '/admin/', 'Admin#getAdmin', 'admin_get_admin'],
     ['POST', '/admin/', 'Admin#getAdminPost', 'admin_get_admin_post'],
+    ['POST', '/admin/roleChange/Moderator/', 'Admin#moveToModerator', 'admin_move_to_moderator' ],
+    ['POST', '/admin/roleChange/Admin/', 'Admin#moveToAdmin', 'admin_move_to_admin' ],
+    ['POST', '/admin/roleChange/User/', 'Admin#moveToUser', 'admin_move_to_user' ],
     
     
     //Profil
