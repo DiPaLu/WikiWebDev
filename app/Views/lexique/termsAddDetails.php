@@ -10,7 +10,7 @@ $this->start('main_content');
     <div class="col-xs-12"> 
 	  <div class="panel panel-primary">
 		<div class="panel-heading">
-		    <h3 class="panel-title">Proposer une autre définition</h3>
+		    <h3 class="panel-title">Proposer une autre définition pour le mot <?= $nom ?></h3>
 		</div>
               <?php if (sizeof($errorList) > 0) : ?>
                   <?php foreach ($errorList as $currentError) : ?>
@@ -34,7 +34,7 @@ $this->start('main_content');
                             <label>Définition</label><br/>
                             <textarea name="definition" class="form-control" rows="4"></textarea>
                             <br/>
-                            <input type="submit" class="btn" value="Envoyer"/>
+                            <input type="submit" class="btn btn-primary" value="Envoyer"/>
                         </form>
 		    </div>
 		</div>

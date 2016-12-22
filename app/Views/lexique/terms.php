@@ -35,10 +35,11 @@ $this->start('main_content');
 		<div class="panel-body">
 		    <div class="tab-content">
 			  <div class="row">
-				<div class="col-xs-10">
+				<div class="col-xs-12">
 				    <form action="" method="post" id="selectForm">
 					  <div class="form-group">
-						<select name="selCat" id="selCat">
+						<label for="selCat">Selectionnez une Catégorie: </label>
+						<select class="form-control" name="selCat" id="selCat">
 						    <option value="0">Catégories</option>
 						    <!-- je remplis le menu déroulant des catégories -->
 						    <?php foreach ($categoryList as $catList) : ?>
@@ -58,7 +59,6 @@ $this->start('main_content');
 					<?php endforeach; ?>
 				    </ul>
 				</div>
-				<div class="col-xs-2"></div>
 			  </div>
 		    </div>
 		</div>

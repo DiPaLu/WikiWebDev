@@ -34,7 +34,7 @@ $this->start('main_content');
                             <label>Définition</label><br/>
                             <textarea name="definition" class="form-control" rows="4"></textarea>
                             <br/>   
-                            <input type="submit" class="btn" value="Envoyer"/>
+                            <input type="submit" class="btn btn-primary" value="Envoyer"/>
                         </form>
 		    </div>
 		</div>

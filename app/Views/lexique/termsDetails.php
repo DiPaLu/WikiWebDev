@@ -10,10 +10,11 @@ $this->start('main_content');
     <div class="col-xs-12">
 	  <div class="panel panel-primary">
 		<div class="panel-heading">
-		    <h3 class="panel-title">Lexique pour développeur</h3>
+		    <h3 class="panel-title">Détail du mot <?= $detailsTerms[0]['ter_name'] ?> avec ses définitions</h3>
 		</div>
 		<div class="panel-body">
 		    <div class="tab-content">
+			  <a href="<?= $this->url('default_home') ?>" id='proposition'>Retour</a>
 			  <ul>
 				<li><span class="termsFont"><?= $detailsTerms[0]['ter_name'] ?></span><br>
 				<?php foreach ($detailsTerms as $details) : ?>

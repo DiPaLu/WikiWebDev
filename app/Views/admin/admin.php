@@ -11,9 +11,8 @@ $this->layout('layoutBootstrap', ['title' => 'Admin']);
 if ($w_user['usr_role'] == 2) :
     ?>
 
-    <h2>Welcome: Admin</h2>
+<h2>Espace administrateur</h2><br>
 
-    <p><i>Espace administrateur</i></p>
     <!-- affiche la liste des utilisateurs (clickable) dans troi colonnes, par role: utilsateur, moderateur, admin -->    
 
     <div class="panel panel-primary">
@@ -197,9 +196,8 @@ if ($w_user['usr_role'] == 2) :
 if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
     ?>
 
-    <h2>Welcome: Moderator</h2>
+    <h2>Espace moderateur</h2><br>
 
-    <p><i>Espace moderateur</i></p>
 
 <?php endif; ?>
 

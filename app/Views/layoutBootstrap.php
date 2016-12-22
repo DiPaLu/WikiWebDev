@@ -5,13 +5,12 @@
 	  <meta charset="utf-8">
 	  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 	  <link rel="stylesheet" href="<?= $this->assetUrl('css/bootstrap.min.css') ?>">
-	  <link rel="stylesheet" href="<?= $this->assetUrl('css/cat.css') ?>">
 	  <link rel="stylesheet" href="<?= $this->assetUrl('css/style.css') ?>">
 
 	  <!-- Optional theme -->
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-          <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" async></script>
+	  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     </head>
     <body>
 	  <div class="container">
@@ -34,9 +33,9 @@
 					    <li><a href="<?= $this->url('user_login') ?>">Se connecter</a></li>
 					    <li><a href="<?= $this->url('user_signup') ?>">S'incrire</a></li>
 				    <?php else : ?>
-					    <li><a href="<?= $this->url('terms_add_terms') ?>">Proposer un mot</a></li>
-					    <li><a href="<?= $this->url('profil_profil') ?>">Espace Membre</a></li>
-					    <li><a href="<?= $this->url('admin_get_admin') ?>">Espace Admin</a></li>
+					    <li><a href="<?= $this->url('terms_add_terms') ?>">Proposer un mot et une définition </a></li>
+					    <li><a href="<?= $this->url('profil_profil') ?>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Espace Membre</a></li>
+					    <li><a href="<?= $this->url('admin_get_admin') ?>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Espace Admin</a></li>
 					    <li><a href="<?= $this->url('user_logout') ?>">Se déconnecter</a></li>
 				    <?php endif ?>
 				</ul>
@@ -49,7 +48,7 @@
 		<!-- CONTENU SPÉCIFIQUE À CHAQUE PAGE ICI -->
 		<?= $this->section('main_content') ?></div>
 	  <div class="container">
-		<div id="returnOnTop" title="Retour en haut"><img src="<?= $this->assetUrl('img/return_on_top.png')?>" alt=""></div>
+		<div id="returnOnTop" title="Retour en haut"><img src="<?= $this->assetUrl('img/return_on_top.png') ?>" alt=""></div>
 		<footer>
 		    <div class="panel panel-primary">
 			  <div class="panel-body text-center">&copy; Wiki Web Dev - Webforce3</div>
@@ -57,12 +56,12 @@
 		</footer>
 	  </div>
 
-	  
+
 	  <!-- Latest compiled and minified JavaScript -->
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	  <script src='https://www.google.com/recaptcha/api.js'></script>
           <!--<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>-->
-		
+
 	  <script type="text/javascript" src="<?= $this->assetUrl('js/choixPageParCategory.js') ?>"></script>
 	  <script type="text/javascript" src="<?= $this->assetUrl('js/front.js') ?>"></script>
 	  <script type="text/javascript" src="<?= $this->assetUrl('js/retourhaut.js') ?>"></script>
