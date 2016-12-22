@@ -5,34 +5,6 @@ $this->layout('layoutBootstrap', ['title' => 'Admin']);
 
 <?php $this->start('main_content') ?>
 
-<style>
-    #sortable1, #sortable2 {
-        border: 1px solid #eee;
-        width: 142px;
-        min-height: 20px;
-        list-style-type: none;
-        margin: 0;
-        padding: 5px 0 0 0;
-        float: left;
-        margin-right: 10px;
-    }
-    #sortable1 li, #sortable2 li {
-        margin: 0 5px 5px 5px;
-        padding: 5px;
-        font-size: 1.2em;
-        width: 120px;
-    }
-</style>
-
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script>
-    $(function () {
-        $("#sortable1, #sortable2").sortable({
-            connectWith: ".connectedSortable"
-        }).disableSelection();
-    });
-</script>
 
 <?php
 // pour permettre d'afficher le code suivant (la liste des utilisatuers) uniqeument a l'utilisateur avec role ADMIN
@@ -44,7 +16,7 @@ if ($w_user['usr_role'] == 2) :
     <p><i>Espace administrateur</i></p>
     <!-- affiche la liste des utilisateurs (clickable) dans troi colonnes, par role: utilsateur, moderateur, admin -->
 
-    <button type="button" class="btn btn-primary btn-sm" id="button-validate-definition">Ajax Test</button>
+    <button type="radio" class="btn btn-primary btn-sm" id="button-validate-definition">Ajax Test</button>
     <div id="show_date"></div>
 
     <div class="panel panel-primary">
@@ -59,16 +31,16 @@ if ($w_user['usr_role'] == 2) :
 
                     <div class="col-sm-4">                                
                         <h4>Utilisateurs</h4>
-                        <ul id="sortable1" class="connectedSortable">
+                        <ul id="selectable">
                             <?php foreach ($usersList as $currentUser) : ?>
 
                                 <?php if ($currentUser['usr_role'] == 0) : ?>
 
-                                    <li class="ui-state-default">
-                                        <!--
+                                    <li class="ui-widget-content">
+
                                         <a href="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a>
-                                        -->
-                                        <?= $currentUser['usr_pseudo'] ?>
+
+
                                     </li>
 
                                 <?php endif; ?>
@@ -80,12 +52,12 @@ if ($w_user['usr_role'] == 2) :
 
                     <div class="col-sm-4">
                         <h4>Moderateurs</h4>
-                        <ul id="sortable2" class="connectedSortable">
+                        <ul id="selectable">
                             <?php foreach ($usersList as $currentUser) : ?>
 
                                 <?php if ($currentUser['usr_role'] == 1) : ?>
 
-                                    <li class="ui-state-highlight">
+                                    <li class="ui-widget-content">
                                         <!--    
                                             <a href="<?= $this->url('profil_profil', ['pseudo' => $currentUser['usr_pseudo']]) ?>"><?= $currentUser['usr_pseudo'] ?></a> -->
                                         <?= $currentUser['usr_pseudo'] ?>
@@ -114,9 +86,110 @@ if ($w_user['usr_role'] == 2) :
                         </ul>
                     </div>
                 </div>
+
+                <div class="row">
+                    <h3>Pour modifier les permissions d'un membre, changez son role:</h3><br/>
+                    
+                    <div class="col-sm-4">                  
+                                           
+                        <label for="sel1">Membres:</label> 
+                        <select class="form-control" id="select-user">
+                            <option  value="0">Choose</option>
+
+                            <?php foreach ($usersList as $currentUser) : ?>
+
+                                <option value="<?= $currentUser['usr_id'] ?>"><?= $currentUser['usr_pseudo'] ?></option>
+
+                            <?php endforeach; ?>                     
+
+                        </select>
+                    </div>
+                    <div class="col-sm-4">                               
+
+                        <button type="button" class="btn btn-warning btn-sm" id="move-to-moderator">Move to Mod</button>
+                        <button type="button" class="btn btn-danger btn-sm" id="move-to-admin">Move to Admin</button>
+                        <button type="button" class="btn btn-success btn-sm" id="move-to-user">Move to User</button>
+                    </div>
+
+                </div>
+
+
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        //alert('jgdfhgdhd2222');
+        $("#move-to-user").click(function () {
+
+            if ($("#select-user").val() !== '' && $("#select-user").val() > 0) {
+
+                $.ajax({
+                    url: '<?= $this->url('admin_move_to_user') ?>',
+                    dataType: 'json',
+                    method: 'post',
+                    cache: false,
+                    data: {
+                        id: $("#select-user").val()
+                    }
+                }).done(function (data) {
+                    alert('L\'utilisateur ' + $("#select-user").val() + ' mis-à-jour. Rôle = User');
+                });
+            }    
+            else {
+                alert('Pas d\'utilisateur selectionné');
+            }
+        });
+        
+        $("#move-to-moderator").click(function () {
+
+            if ($("#select-user").val() !== '' && $("#select-user").val() > 0){           
+
+                $.ajax({
+                url: '<?= $this->url('admin_move_to_moderator') ?>',
+                        dataType: 'json',
+                        method: 'post',
+                        cache: false,
+                        data: {
+                        id: $("#select-user").val()
+                        }
+                }).done(function (data) {
+                alert('L\'utilisateur ' + $("#select-user").val() + ' mis-à-jour. Rôle = User');
+                });
+            }
+            else {
+                alert('Pas d\'utilisateur selectionné');
+            }
+        });
+        
+        $("#move-to-mod").click(function () {
+                                   
+            if ($("#select-user").val() !== '' && $("#select-user").val() > 0){ 
+            
+                    $.ajax({
+                        url: '<?= $this->url('admin_move_to_admin') ?>',
+                        dataType: 'json',
+                        method: 'post',
+                        cache: false,
+                        data: {
+                            id: $("#select-user").val()
+                        }
+                    }).done(function (data) {
+                        //alert('L\'utilisateur ' + $("#select-user").val() + ' mis-à-jour. Rôle = User');
+                        alert('');
+                    });
+            }
+            
+            else {
+                alert('Pas d\'utilisateur selectionné');
+            }         
+        });
+    
+    
+
+    </script>
+
+
 
 <?php endif; ?>
 
@@ -136,12 +209,14 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">Nouveau termes</h3>        
+        <h3 class="panel-title"><strong>Nouveau termes à valider:</strong> propositions d'ajouts de <strong>termes et définitions</strong> en attente de validation</h3>   
     </div>
 
 
     <div class="panel-body">
         <div class="tab-content">
+
+            <!-- comments afficher crectement des colonnes titre en responsives
 
             <div class="row">
                 <div class="col-sm-8">
@@ -158,6 +233,8 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
                     <i>Action</i>
                 </div>
             </div>
+            
+            -->
 
 
 
@@ -194,7 +271,8 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
 
                         <div class="col-sm-2"><br />
                             <form method="post" action="">
-                                <input type="submit" class="btn btn-primary btn-sm"name="validate-term" value="Valider">      
+                                <input type="hidden" name="ter-id" value="<?= $term['ter_id'] ?>">
+                                <input type="submit" class="btn btn-primary btn-sm" name="validate-term" value="Valider">      
                                 <input type="submit" class="btn btn-warning btn-sm" name="delete-term" value="Supprimer">
                             </form>
                         </div>
@@ -212,26 +290,11 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">Nouvelles définitions (pour termes existant): </h3>        
+        <h3 class="panel-title"><strong>Nouvelles définitions à valider:</strong> propositions d'ajouts de <strong>définition supplémentaires</strong> pour termes déja existant</h3>        
     </div>
 
     <div class="panel-body">
-        <div class="tab-content">
-
-            <div class="row">
-                <div class="col-sm-8">
-                    <h4 class="panel-title"><i>Définition</i></h4>
-                </div>
-                <div class="col-sm-1">
-                    <i>membre</i>                  
-                </div>
-                <div class="col-sm-1">
-                    <i>date</i>
-                </div>
-                <div class="col-sm-2">
-                    <i> Action</i>
-                </div>
-            </div>
+        <div class="tab-content">         
 
 
 
@@ -244,8 +307,9 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
                         <div class="col-sm-8">
                             <ul>
                                 <li>
-                                    <b>Pour terme: <?= $definition['ter_name'] ?></b><br />
-                                    <?= $definition['def_description'] ?>
+                                    <strong>Terme: <?= $definition['ter_name'] ?></strong><br />
+                                    <strong>Définition: </strong>
+                                    <?= $definition['def_description'] ?><br />
                                 </li>
                             </ul>
                         </div>
@@ -268,8 +332,9 @@ if ($w_user['usr_role'] == 1) : // usr_role == 1 (role Admin)
 
                         <div class="col-sm-2" name="action"><br/> 
                             <form method="post" action="">
-                            <input type="submit" class="btn btn-primary btn-sm" name="validate-definition" value="Valider">                            
-                            <input type="submit" class="btn btn-warning btn-sm" name="delete-definition" value="Supprimer">
+                                <input type="hidden" name="def-id" value="<?= $definition['def_id'] ?>">
+                                <input type="submit" class="btn btn-primary btn-sm" name="validate-definition" value="Valider">                            
+                                <input type="submit" class="btn btn-warning btn-sm" name="delete-definition" value="Supprimer">
                             </form>
                         </div>
                     </div>

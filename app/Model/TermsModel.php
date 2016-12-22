@@ -150,5 +150,62 @@ class TermsModel extends \W\Model\Model {
 		}
 		return false;
 	}
+        
+        public function getAllTerms() {
+		$sql = '
+		SELECT *
+		FROM ' . $this->table . '
+		INNER JOIN definition ON terms.ter_id = definition.terms_ter_id
+		INNER JOIN users ON terms.users_usr_id = users.usr_id		
+		GROUP BY terms.ter_id
+		ORDER BY terms.ter_name
+		';
+
+		$stmt = $this->dbh->prepare($sql);		
+		
+		if ($stmt->execute() === false) {
+			debug($stmt->errorInfo());
+		} else {
+			return $stmt->fetchAll();
+		}
+                return false;
+	}
+        
+        public function validateTerm($terId){
+                $sql = '
+		UPDATE terms
+                SET ter_status=1
+                WHERE ter_id = :terId;
+                ';
+                
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindValue(':terId', $terId);
+		
+		if ($stmt->execute() === false) {
+			debug($stmt->errorInfo());
+		} else {
+			return true;
+		}
+                return false;
+                
+        }
+        
+        public function deleteTerm($terId){
+                $sql = '
+		DELETE FROM terms
+                WHERE ter_id = :terId;
+                ';
+                
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindValue(':terId', $terId);
+		
+		if ($stmt->execute() === false) {
+			debug($stmt->errorInfo());
+		} else {
+			return true;
+		}
+                return false;               
+        }
 	
+        
 }

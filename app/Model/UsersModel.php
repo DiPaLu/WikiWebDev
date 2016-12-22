@@ -91,5 +91,62 @@ class UsersModel extends \W\Model\UsersModel {
         return false;
            
     }
+    
+    public function moveToModerator ($userId){
+        
+       $sql = '
+		UPDATE users
+                SET usr_role = 1
+                WHERE usr_id = :userId;
+                ';
+                
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindValue(':userId', $userId);
+		
+		if ($stmt->execute() === false) {
+			debug($stmt->errorInfo());
+		} else {
+			return true;
+		}
+                return false;
+    }
+    
+    public function moveToAdmin ($userId){
+        
+       $sql = '
+		UPDATE users
+                SET usr_role = 2
+                WHERE usr_id = :userId;
+                ';
+                
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindValue(':userId', $userId);
+		
+		if ($stmt->execute() === false) {
+			debug($stmt->errorInfo());
+		} else {
+			return true;
+		}
+                return false;
+    }
+    
+    public function moveToUser ($userId){
+        
+       $sql = '
+		UPDATE users
+                SET usr_role = 0
+                WHERE usr_id = :userId;
+                ';
+                
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindValue(':userId', $userId);
+		
+		if ($stmt->execute() === false) {
+			debug($stmt->errorInfo());
+		} else {
+			return true;
+		}
+                return false;
+    }
 
 }

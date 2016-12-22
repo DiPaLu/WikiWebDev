@@ -18,13 +18,14 @@ class AdminController extends Controller {
 
     public function getAdmin() {
         $loggedUser = $this->getUser();
-//debug($loggedUser);
+        //debug($loggedUser);
         $usersModel = new UsersModel();
         $usersList = $usersModel->getAllUsers();
         $termsModel = new TermsModel();
-        $termsList = $termsModel->getTerms();    
+        $termsList = $termsModel->getAllTerms();
+        //debug($termsList);
         $definitionModel = new DefinitionModel();
-        $definitionsList = $definitionModel->getDefinition();
+        $definitionsList = $definitionModel->getPendingDefinition();    
  
         $this->allowTo(array('1', '2'));
 
@@ -36,7 +37,12 @@ class AdminController extends Controller {
         ));
     }
     
-    public function getAdminPost() {     
+    public function getAdminPost() { 
+        
+        $this->allowTo(array('1', '2'));
+        
+        debug($_POST);
+        //exit;
         
         $loggedUser = $this->getUser();
         //debug($loggedUser);
@@ -44,62 +50,106 @@ class AdminController extends Controller {
         $usersList = $usersModel->getAllUsers();
         
         $termsModel = new TermsModel();
-        $termsList = $termsModel->getTerms();
-        
-        $terId=0;
-        $validateTerm = $termsModel->validateTerm($terId);    
-        
-        //debug($validateTerm);
-        
+        $termsList = $termsModel->getAllTerms();
+           
+                    
         $definitionModel = new DefinitionModel();
-        $definitionsList = $definitionModel->getDefinition();
+        $definitionsList = $definitionModel->getPendingDefinition();
         
         if (!empty($_POST['validate-term'])) {
         
         //Valider term
-        echo 'button validate ok';                                
-        
+        $terId = $_POST['ter-id'];
+        $validateTerm = $termsModel->validateTerm($terId);
+               
         }
         if (!empty($_POST['delete-term'])) {
             
         //Supprimer terme
-            echo 'button delete ok';            
+        $terId = $_POST['ter-id'];
+        $deleteTerm = $termsModel->deleteTerm($terId);  
+                
         }
         if (!empty($_POST['validate-definition'])) {
         
         //Valider definition
-        echo 'button validate ok';                                
+        $defId = $_POST['def-id'];
+        $validateDefinition = $definitionModel->validateDefinition($defId);                         
         
         }
         if (!empty($_POST['delete-definition'])) {
             
         //Supprimer definition
-            echo 'button delete ok';            
+        $defId = $_POST['def-id'];
+        $deleteDefinition = $definitionModel->deleteDefinition($defId);             
         }
+        
+        
+        /*
+         * methodes pour les requetes AJAX * 
+        */
+        /*
+        if (!empty($_POST[''])) {
+        
+        //move to moderator
+        $userId = $_POST[''];
+        
+        $moveToModerator = $usersModel->moveModerator($userId);
                
-        $this->allowTo(array('1', '2'));
+        }
+        
+        if (!empty($_POST[''])) {
+        
+        //move to moderator
+        $userId = $_POST[''];
+        $moveToAdmin = $usersModel->moveAdmin($userId);
+               
+        }
+        
+        if (!empty($_POST[''])) {
+        
+        //move to user
+        $userId = $_POST[''];
+        $moveToUser = $usersModel->moveUser($userId);
+               
+        }
+        */         
+              
 
         $this->show('admin/admin', array(
             'usersList' => $usersList,
             'termsList' => $termsList,
             'definitionsList' => $definitionsList,
-            'validateTerm' => $validateTerm
-        ));    
+            //'validateTerm' => $validateTerm,
+            //'deleteTerm' => $deleteTerm
+        )); 
+        
+    }   
     
+    public function moveToUser(){
+        //debug($_POST);
+        $userId = $_POST['id'];
+        $usersModel = new UsersModel;
+        $moveToUser = $usersModel->moveToUser($userId);
+        
+        $this->showJson(1);
     }
     
-    
-
-    /*
-      public function validateTerm($terId){
-      $termsModel = new TermsModel();
-      $validateTerm = $termsModel->validateTerm($terId);
-      debug($validateTerm);
-      exit;
-
-      $this->show('admin/admin', array(
-      'validateTerm' => $validateTerm
-      ));
-      }
-     */
+    public function moveToModerator(){
+        //debug($_POST);
+        $userId = $_POST['id'];
+        $usersModel = new UsersModel;
+        $moveToModerator = $usersModel->moveToModerator($userId);
+        
+        $this->showJson(1);
+    }
+    public function moveToAdmin(){
+        //debug($_POST);
+        $userId = $_POST['id'];
+        $usersModel = new UsersModel;
+        $moveToAdmin = $usersModel->moveToAdmin($userId);
+        
+        $this->showJson(1);
+    }
+   
 }
