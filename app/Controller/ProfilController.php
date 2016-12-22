@@ -4,7 +4,7 @@ namespace Controller;
 
 use \W\Controller\Controller;
 use \Model\UsersModel;
-use \W\Security\AuthentificationModel;
+use \Security\AuthentificationModel;
 
 class ProfilController extends Controller{
 
@@ -25,28 +25,24 @@ class ProfilController extends Controller{
         $successList = array();
         //ce que je recois en post
         $pseudoFormulaire = isset($_POST['pseudoFormulaire']) ? trim(strip_tags($_POST['pseudoFormulaire'])) : '';
+        $emailFormulaire = isset($_POST['pseudoFormulaire']) ? trim(strip_tags($_POST['pseudoFormulaire'])) : '';
+        $passwordFormulaire = isset($_POST['pseudoFormulaire']) ? trim(strip_tags($_POST['pseudoFormulaire'])) : '';
         $pseudo = isset($_POST['pseudo']) ? trim(strip_tags($_POST['pseudo'])) : '';
         $email = isset($_POST['email']) ? trim($_POST['email']) : '';
         $password = isset($_POST['password']) ? trim(strip_tags($_POST['password'])) : '';
         $ancienPassword = isset($_POST['ancienPassword']) ? trim(strip_tags($_POST['ancienPassword'])) : '';
         $confirmPassword = isset($_POST['confirmPassword']) ? trim(strip_tags($_POST['confirmPassword'])) : '';
         $formOk = true;
+        $usersModel = new UsersModel();
 
-        if(empty($pseudo)){
+        //pseudo
+        if($pseudoFormulaire){
+            if(empty($pseudo)){
             $errorList[] = 'Pseudo vide<br/>';
             $formOk = false;
-        }
-
-        if(empty($email)){
-            $errorList[] = 'Email vide<br/>';
-            $formOk = false;
-        }
-        else if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            $errorList[] = 'Email invalide<br>';
-            $formOk = false;
-        }
-        
-        if(sizeof($_FILES['file']) > 0){
+            }
+            //avatar
+            if(sizeof($_FILES['file']) > 0){
             $file = $_FILES['file'];
             $extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
             
@@ -54,38 +50,58 @@ class ProfilController extends Controller{
             //strrchr renvoie l'extension avec le point '.'
             //substr(chaine, 1) ignore le premier caractère de chaine, cest a dire le point
             //strotolower met l'extension en minuscules
-            if(!in_array($extension, $extensions_valides)){
-                $formOk = false;
-                $errorList[] = 'Extension incorrecte';
-            }
+                if(!in_array($extension, $extensions_valides)){
+                    $formOk = false;
+                    $errorList[] = 'Extension incorrecte';
+                }
             //debug($file);
-            $chemin =' __AVATAR_UPLOAD_DIR__.$id.'.'.$extension';
-            
             $resultat = move_uploaded_file($file['tmp_name'], __AVATAR_UPLOAD_DIR__.$id.'.'.$extension);
+           // debug($extension);
+            $chemin = __AVATAR_UPLOAD_DIR__.$id.'.'.$extension;
             
-            $img = substr(strrchr($chemin, 'public/') ,1);
-            debug($img);
+            //debug($chemin);
+           // $img = strrchr($chemin, '/');
+           $avatar =  substr(strrchr($chemin, "s"),2);
             
-                
-            if(!$resultat){
+            $usersModel->update(array(
+                'usr_avatar' => $avatar
+            ), $id);
+            
+            $auth = new AuthentificationModel();
+            $auth->refreshUser();
+            
+            
+            
+         
+            //debug($_SESSION);
+            //debug($data);
+
+                if(!$resultat){
+                    $formOk = false;
+                    $errorList[] = 'erreur lors du transfert';
+                } 
+            }
+            if($usersModel->getUserByUsernameOrEmail($pseudo)){
+                $errorList[] = 'Pseudo déjà utilisé <br/>';
                 $formOk = false;
-                $errorList[] = 'erreur lors du transfert';
-            } 
+            }
         }
-
-        $usersModel = new UsersModel();
-
-        if($usersModel->emailExists($email)){
-            $errorList[] = 'L\'email existe déjà dans la base de données <br/>';
-            $formOk = false;
+        
+        //email
+        if($emailFormulaire){
+            if(empty($email)){
+                $errorList[] = 'Email vide<br/>';
+                $formOk = false;
+            }else if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                $errorList[] = 'Email invalide<br>';
+                $formOk = false;
+            }
+            
+            if($usersModel->emailExists($email)){
+                $errorList[] = 'L\'email existe déjà dans la base de données <br/>';
+                $formOk = false;
+            }
         }
-
-        if($usersModel->getUserByUsernameOrEmail($pseudo)){
-            $errorList[] = 'Pseudo déjà utilisé <br/>';
-            $formOk = false;
-        }
-
-       
 
         if($formOk){
             $auth = new AuthentificationModel();
@@ -96,17 +112,17 @@ class ProfilController extends Controller{
 
             if($userData !== false){
                 $successList = 'La modification a bien été faite!';
-                $auth->refreshUser();
+                debug($auth->refreshUser());
             }
         }
         
-        debug($_POST);
+        //debug($_POST);
         
         $this->show('profil/parametre', array(
             'errorList' => $errorList,
             'pseudo' => $pseudo,
             'email' => $email,
-            'successList' => $successList
+            'successList' => $successList,
         ));
     }
 
@@ -118,7 +134,6 @@ class ProfilController extends Controller{
     }
     
     public function deletePost(){
-        echo "malika";
         $loggedUser = $this->getUser();
         $email = $loggedUser['usr_email'];
         $password = isset($_POST['password']) ? trim(strip_tags($_POST['password'])) : '';
