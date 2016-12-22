@@ -35,6 +35,7 @@ $this->start('main_content');
                                 <input type="hidden" name="MAX_FILE_SIZE" value="1"/>
                                 <p class="help-block">extentions autorisées: .png, .jpeg, .jpg et .gif </p>
                                 <img class="img-circle" src="<?= $this->assetUrl($w_user['usr_avatar'] ); ?>"/>
+                                <input type="submit" class="pull-right btn" value="Modifier"/>
                                 <br/>
                                 
 				<br/>

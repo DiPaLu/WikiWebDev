@@ -41,52 +41,48 @@ class ProfilController extends Controller{
             $errorList[] = 'Pseudo vide<br/>';
             $formOk = false;
             }
-            //avatar
-            if(sizeof($_FILES['file']) > 0){
-            $file = $_FILES['file'];
-            $extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
             
-            $extension = strtolower(substr(strrchr($file['name'], '.') ,1));
-            //strrchr renvoie l'extension avec le point '.'
-            //substr(chaine, 1) ignore le premier caractère de chaine, cest a dire le point
-            //strotolower met l'extension en minuscules
-                if(!in_array($extension, $extensions_valides)){
-                    $formOk = false;
-                    $errorList[] = 'Extension incorrecte';
-                }
-            //debug($file);
-            $resultat = move_uploaded_file($file['tmp_name'], __AVATAR_UPLOAD_DIR__.$id.'.'.$extension);
-           // debug($extension);
-            $chemin = __AVATAR_UPLOAD_DIR__.$id.'.'.$extension;
-            
-            //debug($chemin);
-           // $img = strrchr($chemin, '/');
-           $avatar =  substr(strrchr($chemin, "s"),2);
-            
-            $usersModel->update(array(
-                'usr_avatar' => $avatar
-            ), $id);
-            
-            $auth = new AuthentificationModel();
-            $auth->refreshUser();
-            
-            
-            
-         
-            //debug($_SESSION);
-            //debug($data);
-
-                if(!$resultat){
-                    $formOk = false;
-                    $errorList[] = 'erreur lors du transfert';
-                } 
-            }
             if($usersModel->getUserByUsernameOrEmail($pseudo)){
                 $errorList[] = 'Pseudo déjà utilisé <br/>';
                 $formOk = false;
             }
         }
         
+        //avatar
+        if(sizeof($_FILES['file']) > 0){
+            $file = $_FILES['file'];
+            $extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
+
+            $extension = strtolower(substr(strrchr($file['name'], '.'), 1));
+            //strrchr renvoie l'extension avec le point '.'
+            //substr(chaine, 1) ignore le premier caractère de chaine, cest a dire le point
+            //strotolower met l'extension en minuscules
+            if(!in_array($extension, $extensions_valides)){
+                $formOk = false;
+                $errorList[] = 'Extension incorrecte';
+            }
+            //debug($file);
+            $resultat = move_uploaded_file($file['tmp_name'], __AVATAR_UPLOAD_DIR__.$id.'.'.$extension);
+            // debug($extension);
+            $chemin = __AVATAR_UPLOAD_DIR__.$id.'.'.$extension;
+
+            //debug($chemin);
+            // $img = strrchr($chemin, '/');
+            $avatar = substr(strrchr($chemin, "s"), 2);
+
+            $usersModel->update(array(
+            'usr_avatar' => $avatar
+            ), $id);
+
+            $auth = new AuthentificationModel();
+            $auth->refreshUser();
+            
+            if(!$resultat){
+                $formOk = false;
+                $errorList[] = 'erreur lors du transfert';
+            }
+        }
+
         //email
         if($emailFormulaire){
             if(empty($email)){
@@ -111,8 +107,8 @@ class ProfilController extends Controller{
             ), $connected['usr_id']);
 
             if($userData !== false){
-                $successList = 'La modification a bien été faite!';
-                debug($auth->refreshUser());
+                $successList[] = 'La modification a bien été faite!';
+                $auth->refreshUser();
             }
         }
         
