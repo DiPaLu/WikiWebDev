@@ -20,12 +20,16 @@ class ProfilController extends Controller{
         
         $connected = $this->getUser(); 
         $id = $connected['usr_id'];
-        
+        //initialisation des tableau d'erreur ou de reussite
         $errorList = array();
         $successList = array();
-
+        //ce que je recois en post
+        $pseudoFormulaire = isset($_POST['pseudoFormulaire']) ? trim(strip_tags($_POST['pseudoFormulaire'])) : '';
         $pseudo = isset($_POST['pseudo']) ? trim(strip_tags($_POST['pseudo'])) : '';
         $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+        $password = isset($_POST['password']) ? trim(strip_tags($_POST['password'])) : '';
+        $ancienPassword = isset($_POST['ancienPassword']) ? trim(strip_tags($_POST['ancienPassword'])) : '';
+        $confirmPassword = isset($_POST['confirmPassword']) ? trim(strip_tags($_POST['confirmPassword'])) : '';
         $formOk = true;
 
         if(empty($pseudo)){
@@ -60,6 +64,7 @@ class ProfilController extends Controller{
             $resultat = move_uploaded_file($file['tmp_name'], __AVATAR_UPLOAD_DIR__.$id.'.'.$extension);
             
             $img = substr(strrchr($chemin, 'public/') ,1);
+            debug($img);
             
                 
             if(!$resultat){
@@ -94,6 +99,8 @@ class ProfilController extends Controller{
                 $auth->refreshUser();
             }
         }
+        
+        debug($_POST);
         
         $this->show('profil/parametre', array(
             'errorList' => $errorList,

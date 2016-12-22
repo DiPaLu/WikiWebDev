@@ -42,6 +42,7 @@ $this->start('main_content');
                             <form name='modifPseudo' action="" method="post">
 				<label>Pseudo</label><br/>
 				Pseudo actuel<input type="text" class="form-control input-sm" name="pseudo" value="<?= $w_user['usr_pseudo'] ?>"/>
+                                <input type="hidden" name='pseudoFormulaire' value='1'/>
 				<input type="submit" class="pull-right btn" value="Modifier" />
 				<br/>
 			  </form>
@@ -58,7 +59,7 @@ $this->start('main_content');
 				<label>Changer votre mot de passe</label><br/>
 				Ancien mot de passe <input type="password" class="form-control input-sm" name="ancienPassword">
 				Nouveau mot de passe <input type="password" class="form-control input-sm"name="password">
-				Réécrire nouveau mot de passe <input type="password" class="form-control input-sm" name="ConfirmPassword">
+				Réécrire nouveau mot de passe <input type="password" class="form-control input-sm" name="confirmPassword">
 				<input type="submit" class="pull-right btn" value="Modifier" />
 			  </form>
 			  <br/>
