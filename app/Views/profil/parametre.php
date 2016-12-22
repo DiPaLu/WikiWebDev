@@ -40,7 +40,7 @@ $this->start('main_content');
                                 
 				<br/>
 			  </form>
-                            <form action="" method=post"">
+                            <form action="" method="post">
                                 <label>Pseudo</label><br/>
 				Pseudo actuel<input type="text" class="form-control input-sm" name="pseudo" value="<?= $w_user['usr_pseudo'] ?>"/>
                                 <input type="hidden" name='pseudoFormulaire' value='1'/>
