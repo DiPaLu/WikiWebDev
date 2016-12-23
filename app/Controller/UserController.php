@@ -220,7 +220,7 @@ class UserController extends Controller {
                     'token' => $token // token => [:token] in routes.php
                 ));
                 // Texte HTML à envoyer par e-mail
-                $html = '<p>Une demande de reset de votre mot de passe nous a &eacute;t&eacute; demand&eacute;e. Veuillez utiliser le lien suivant pour valider :<a href="' . 'http://localhost' . $resetUrl . '">Changer mot de passe</a></p>';
+                $html = '<p>Une demande de reset de votre mot de passe nous a &eacute;t&eacute; demand&eacute;e. Veuillez utiliser le lien suivant pour valider :<a href="' . 'http://localhost/final/' . $resetUrl . '">Changer mot de passe</a></p>';
                 //$successList[] = $html;
 
                 $subject = "Votre demande de changement mot de passe";

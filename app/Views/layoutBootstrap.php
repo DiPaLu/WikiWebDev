@@ -35,7 +35,9 @@
 				    <?php else : ?>
 					    <li><a href="<?= $this->url('terms_add_terms') ?>">Proposer un mot et une définition </a></li>
 					    <li><a href="<?= $this->url('profil_profil') ?>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Espace Membre</a></li>
+                                    <?php if ($w_user['usr_role'] > 0 ) : ?>
 					    <li><a href="<?= $this->url('admin_get_admin') ?>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Espace Admin</a></li>
+                                    <?php endif ?>
 					    <li><a href="<?= $this->url('user_logout') ?>">Se déconnecter</a></li>
 				    <?php endif ?>
 				</ul>
