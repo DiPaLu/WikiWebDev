@@ -31,7 +31,7 @@
 				<ul class="nav navbar-nav navbar-right">
 				    <?php if (!isset($w_user)) : ?>
 					    <li><a href="<?= $this->url('user_login') ?>">Se connecter</a></li>
-					    <li><a href="<?= $this->url('user_signup') ?>">S'incrire</a></li>
+					    <li><a href="<?= $this->url('user_signup') ?>">S'inscrire</a></li>
 				    <?php else : ?>
 					    <li><a href="<?= $this->url('terms_add_terms') ?>">Proposer un mot et une définition </a></li>
 					    <li><a href="<?= $this->url('profil_profil') ?>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Espace Membre</a></li>
